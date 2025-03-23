@@ -30,7 +30,7 @@ export const ForgotEmailInput = () => {
       >
         <h1 className="forgot-password_title">QUÊN MẬT KHẨU</h1>
         <p className="forgot-password_sub">
-          Vui lòng nhập tài khoản email đã đăng nhập ở trang web này
+          Vui lòng nhập tài khoản email của bạn!
         </p>
         <div className="forgot-password_email-input">
           <p className="forgot-password_label">Địa chỉ email</p>

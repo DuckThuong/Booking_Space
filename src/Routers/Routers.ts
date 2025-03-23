@@ -7,36 +7,32 @@ export const ACTION = {
 export const CUSTOMER_ROUTE_NAME = {
   //Log_In
   LOG_IN: "",
+  //Register
+  REGISTER: "register",
   //Forgot_password
   FORGOT_EMAIL_INPUT: "forgot-email-input",
   FORGOT_CODE_INPUT: "forgot-code-input",
   FORGOT_EDIT_PASSWORD: "forgot-edit-password",
   FORGOT_SUCCESS: "forgot-success",
-  //List_Students
-  TRANG_CHU: "trang-chu",
+  //Home
+  HOME: "home",
   //Catergories
   CATERGORIES: "catergories",
-  //Product_Detail:
-  PRODUCT_DETAIL: "trang-chu/:id",
-  // Order
-  ORDER_LIST: "order",
-  ORDER_DETAIL: "order/:id",
+  //Default_user
+  DEFAULT_USER: "default-user",
 };
 export const CUSTOMER_ROUTER_PATH = {
   //Log_In
   LOG_IN: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.LOG_IN}`,
+  //Register
+  REGISTER: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.REGISTER}`,
   //Forgot_password
   FORGOT_EMAIL_INPUT: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.FORGOT_EMAIL_INPUT}`,
   FORGOT_CODE_INPUT: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.FORGOT_CODE_INPUT}`,
   FORGOT_EDIT_PASSWORD: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.FORGOT_EDIT_PASSWORD}`,
   FORGOT_SUCCESS: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.FORGOT_SUCCESS}`,
-  //List_students
-  TRANG_CHU: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.TRANG_CHU}`,
-  //Catergories
-  CATERGORIES: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.CATERGORIES}`,
-  //Product_detail
-  PRODUCT_DETAIL: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.PRODUCT_DETAIL}`,
-  // Order
-  ORDER_LIST: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.ORDER_LIST}`,
-  ORDER_DETAIL: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.ORDER_DETAIL}`,
+  //Home
+  HOME: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.HOME}`,
+  //Default_user
+  DEFAULT_USER: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.DEFAULT_USER}`,
 };

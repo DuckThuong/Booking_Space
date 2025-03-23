@@ -1,6 +1,10 @@
 import { useForm } from "antd/es/form/Form";
 import { useEffect, useState } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+import { SvgDone } from "../../@svg/Icon/Done/SvgDone";
+import { SvgGoogle } from "../../@svg/Icon/Google/SvgGoogle";
+import { SvgRegister } from "../../@svg/Icon/SvgRegister";
+import { CustomButton } from "../../Components/buttons/CustomButton";
 import { FormButtonSubmit } from "../../Components/Form/FormButtonSubmit";
 import { FormCheckbox } from "../../Components/Form/FormCheckbox";
 import { FormInput } from "../../Components/Form/FormInput";
@@ -8,31 +12,10 @@ import FormWrap from "../../Components/Form/FormWrap";
 import { LogoForm } from "../../Components/LogoForm/LogoForm";
 import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
 import { ValidateLibrary } from "../../validate";
-import NotificationPopup from "../../LayoutOption/Notification";
 import "./login.scss";
-import { HeaderNavBar } from "../../LayoutOption/HeaderNavBar";
-import { CustomButton } from "../../Components/buttons/CustomButton";
-import { SvgGoogle } from "../../@svg/Icon/Google/SvgGoogle";
-import { SvgDone } from "../../@svg/Icon/Done/SvgDone";
-import { SvgRegister } from "../../@svg/Icon/SvgRegister";
 const Login = () => {
   const [form] = useForm();
   const navigate = useNavigate();
-
-  const [notification, setNotification] = useState<{
-    message: string;
-    type: "success" | "error";
-  } | null>(null);
-
-  useEffect(() => {
-    if (notification) {
-      const timer = setTimeout(() => {
-        setNotification(null);
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [notification]);
-
   const handleForgotPassword = () => {
     navigate(CUSTOMER_ROUTER_PATH.FORGOT_EMAIL_INPUT);
   };
@@ -44,7 +27,7 @@ const Login = () => {
   };
 
   const onFinish = () => {
-    navigate(CUSTOMER_ROUTER_PATH.TRANG_CHU);
+    navigate(CUSTOMER_ROUTER_PATH.HOME);
   };
 
   const onClickRegister = () => {
@@ -53,10 +36,6 @@ const Login = () => {
 
   return (
     <div className="login">
-      <NotificationPopup
-        message={notification?.message}
-        type={notification?.type}
-      />
       <div>
         <LogoForm />
       </div>

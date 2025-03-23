@@ -7,6 +7,8 @@ import Login from "../Layout/Login/login";
 import { SuspenseWrapper } from "../SuspenseWrapper";
 import { CUSTOMER_ROUTER_PATH } from "./Routers";
 import { Home } from "../Layout/Home/home";
+import { Register } from "../Layout/Register";
+import { DefaultUser } from "../Layout/User/DefaultUser";
 
 export const CustomerRouter = () => (
   <Routes>
@@ -14,6 +16,11 @@ export const CustomerRouter = () => (
     <Route
       path={CUSTOMER_ROUTER_PATH.LOG_IN}
       element={<SuspenseWrapper component={<Login />} />}
+    ></Route>
+    {/* Register */}
+    <Route
+      path={CUSTOMER_ROUTER_PATH.REGISTER}
+      element={<SuspenseWrapper component={<Register />} />}
     ></Route>
     {/* Forgot_Password */}
     <Route>
@@ -34,11 +41,18 @@ export const CustomerRouter = () => (
         element={<SuspenseWrapper component={<ForgotSuccess />} />}
       ></Route>
     </Route>
-
+    {/* TrangChu */}
     <Route>
       <Route
-        path={CUSTOMER_ROUTER_PATH.TRANG_CHU}
+        path={CUSTOMER_ROUTER_PATH.HOME}
         element={<SuspenseWrapper component={<Home />} />}
+      />
+    </Route>
+    {/* User */}
+    <Route>
+      <Route
+        path={CUSTOMER_ROUTER_PATH.DEFAULT_USER}
+        element={<SuspenseWrapper component={<DefaultUser />} />}
       />
     </Route>
   </Routes>

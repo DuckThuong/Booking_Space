@@ -2,8 +2,9 @@ export const SvgRegister = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 24 24"
-    width="21px"
-    height="21px"
+    width="18px"
+    fill="#ffffff"
+    height="18px"
     fill-rule="evenodd"
   >
     <path

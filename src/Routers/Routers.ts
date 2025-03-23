@@ -7,6 +7,8 @@ export const ACTION = {
 export const CUSTOMER_ROUTE_NAME = {
   //Log_In
   LOG_IN: "",
+  //Register
+  REGISTER: "register",
   //Forgot_password
   FORGOT_EMAIL_INPUT: "forgot-email-input",
   FORGOT_CODE_INPUT: "forgot-code-input",
@@ -25,6 +27,8 @@ export const CUSTOMER_ROUTE_NAME = {
 export const CUSTOMER_ROUTER_PATH = {
   //Log_In
   LOG_IN: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.LOG_IN}`,
+  //Register
+  REGISTER: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.REGISTER}`,
   //Forgot_password
   FORGOT_EMAIL_INPUT: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.FORGOT_EMAIL_INPUT}`,
   FORGOT_CODE_INPUT: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.FORGOT_CODE_INPUT}`,

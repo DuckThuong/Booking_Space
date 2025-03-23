@@ -1,63 +1,26 @@
-import { useQuery } from "@tanstack/react-query";
 import { useForm } from "antd/es/form/Form";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux"; // Import useDispatch
-import { useNavigate } from "react-router-dom";
-import { userApi } from "../../api/api";
-import { QUERY_KEY } from "../../api/apiConfig";
+import { Link, useNavigate } from "react-router-dom";
 import { FormButtonSubmit } from "../../Components/Form/FormButtonSubmit";
 import { FormCheckbox } from "../../Components/Form/FormCheckbox";
 import { FormInput } from "../../Components/Form/FormInput";
 import FormWrap from "../../Components/Form/FormWrap";
 import { LogoForm } from "../../Components/LogoForm/LogoForm";
 import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
-import { setAuthUser } from "../../store/authSlice"; // Import action
 import { ValidateLibrary } from "../../validate";
-import NotificationPopup from "../Notification";
+import NotificationPopup from "../../LayoutOption/Notification";
 import "./login.scss";
-import { login } from "../../api/authApi";
+import { HeaderNavBar } from "../../LayoutOption/HeaderNavBar";
+import { CustomButton } from "../../Components/buttons/CustomButton";
+import { SvgGoogle } from "../../@svg/Icon/Google/SvgGoogle";
 const Login = () => {
   const [form] = useForm();
   const navigate = useNavigate();
-  const dispatch = useDispatch();
+
   const [notification, setNotification] = useState<{
     message: string;
     type: "success" | "error";
   } | null>(null);
-
-  const { data: loginApi } = useQuery({
-    queryKey: [QUERY_KEY.GET_USER],
-    queryFn: userApi.getAllUsers,
-  });
-  const onFinish = () => {
-    const email = form.getFieldValue("email");
-    const password = form.getFieldValue("password");
-
-    const userExists = loginApi?.userList?.some(
-      (user) => user.Email === email && user.PasswordHash === password
-    );
-    if (userExists) {
-      const userData = loginApi.userList.find((user) => user.Email === email);
-      if (userData) {
-        dispatch(
-          setAuthUser({
-            id: userData.UserID,
-            email: userData.Email,
-            fullName: userData.Username,
-          })
-        );
-      }
-      login(email, password);
-      navigate(CUSTOMER_ROUTER_PATH.TRANG_CHU);
-      setNotification({ message: "Thành Công", type: "success" });
-    } else {
-      setNotification({
-        message: "Sai tài khoản hoặc mật khẩu",
-        type: "error",
-      });
-      form.setFieldsValue("e");
-    }
-  };
 
   useEffect(() => {
     if (notification) {
@@ -78,12 +41,16 @@ const Login = () => {
     }
   };
 
+  const onFinish = () => {
+    navigate(CUSTOMER_ROUTER_PATH.TRANG_CHU);
+  };
+
+  const onClickRegister = () => {
+    navigate(CUSTOMER_ROUTER_PATH.REGISTER);
+  };
+
   return (
     <div className="login">
-      {/* <video autoPlay muted loop id="loginVideo">
-        <source src="/112722-695433093.mp4" type="video/mp4" />
-      </video> */}
-
       <NotificationPopup
         message={notification?.message}
         type={notification?.type}
@@ -142,40 +109,35 @@ const Login = () => {
                 type: "default",
               }}
             />
+            <span className="login_form-login-or">Hoặc</span>
+            <CustomButton
+              content=""
+              buttonProps={{
+                className: "login_form-login-google",
+                onClick: onFinish,
+                type: "default",
+                icon: <SvgGoogle />,
+              }}
+            />
           </div>
-
-          {/* <div className="login_form-privacy">
-            <span>●●● of </span>
-            <Link className="login_form-privacy-link" to={"/"}>
-              Terms of service
-            </Link>
-            <span> and </span>
-            <Link className="login_form-privacy-link" to={"/"}>
-              I agree to the privacy terms.
-            </Link>
-            <span> Place where you can get it. </span>
-            <span>If so, please log in.</span>
-          </div> */}
-
-          <div className="login_form-checkbox ">
+          <div className="login_form-signIn">
+            <CustomButton
+              content="Đăng ký"
+              buttonProps={{
+                className: "login_form-signIn-button",
+                onClick: onClickRegister,
+              }}
+            />
+          </div>
+          <div className="login_form-privacy">
             <FormCheckbox
               name={"submit"}
-              content={"Lưu mật khẩu"}
+              content={"Đồng ý với các điều khoản dịch vụ"}
               formItemProps={{
                 className: "login_form-checkbox-sumit",
               }}
             />
           </div>
-
-          {/* <div className="login_form-signIn">
-            <CustomButton
-              content="Register Now"
-              buttonProps={{
-                className: "login_form-signIn-button",
-                onFinish: handleRegister,
-              }}
-            />
-          </div> */}
         </FormWrap>
       </div>
     </div>

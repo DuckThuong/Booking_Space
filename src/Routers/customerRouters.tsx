@@ -1,15 +1,12 @@
 import { Route, Routes } from "react-router-dom";
-import { Cartergories } from "../Layout/Cart";
 import { ForgotCodeInput } from "../Layout/ForgotPassword/ForgotCodeInput";
 import { ForgotEditPassword } from "../Layout/ForgotPassword/ForgotEditPassword";
 import { ForgotEmailInput } from "../Layout/ForgotPassword/ForgotEmailInput";
 import { ForgotSuccess } from "../Layout/ForgotPassword/ForgotSuccess";
 import Login from "../Layout/Login/login";
-import { ProductDetail } from "../Layout/Products/ProductDetail";
-import { Home } from "../Layout/TrangChu";
 import { SuspenseWrapper } from "../SuspenseWrapper";
 import { CUSTOMER_ROUTER_PATH } from "./Routers";
-import { Order } from "../Layout/Order";
+import { Home } from "../Layout/Home/home";
 
 export const CustomerRouter = () => (
   <Routes>
@@ -37,35 +34,12 @@ export const CustomerRouter = () => (
         element={<SuspenseWrapper component={<ForgotSuccess />} />}
       ></Route>
     </Route>
-    {/* Trang Chủ */}
+
     <Route>
       <Route
         path={CUSTOMER_ROUTER_PATH.TRANG_CHU}
         element={<SuspenseWrapper component={<Home />} />}
-      ></Route>
-    </Route>
-    {/* Giỏ hàng */}
-    <Route>
-      <Route
-        path={CUSTOMER_ROUTER_PATH.CATERGORIES}
-        element={<SuspenseWrapper component={<Cartergories />} />}
-      ></Route>
-    </Route>
-    <Route>
-      <Route
-        path={CUSTOMER_ROUTER_PATH.PRODUCT_DETAIL}
-        element={<SuspenseWrapper component={<ProductDetail />} />}
-      ></Route>
-    </Route>
-    <Route>
-      <Route
-        path={CUSTOMER_ROUTER_PATH.ORDER_LIST}
-        element={<SuspenseWrapper component={<Order />} />}
-      ></Route>
-      <Route
-        path={CUSTOMER_ROUTER_PATH.ORDER_DETAIL}
-        element={<SuspenseWrapper component={<Order />} />}
-      ></Route>
+      />
     </Route>
   </Routes>
 );

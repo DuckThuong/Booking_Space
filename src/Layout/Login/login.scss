@@ -108,6 +108,15 @@
         border: #007bff !important;
         width: 424px;
         height: 48px;
+        position: relative;
+        overflow: hidden;
+        .ant-btn-icon {
+          position: absolute;
+          right: 130px;
+          left: 10px;
+          opacity: 0;
+          transition: opacity 0.3s ease, left 0.3s ease;
+        }
         @include sm {
           width: 100%;
         }
@@ -118,6 +127,16 @@
           font-weight: 700;
           line-height: 24px;
           text-align: center;
+          transition: margin-left 0.3s ease;
+        }
+        &:hover {
+          .ant-btn-icon {
+            opacity: 1;
+            left: 20px;
+          }
+          span {
+            margin-left: 20px;
+          }
         }
       }
       &-or {
@@ -166,6 +185,8 @@
         background-color: $light_color;
         border: 1px solid $border_color_1;
         box-shadow: -2px 2px 20px 0px #0000001f;
+        position: relative;
+        overflow: hidden;
         @include sm {
           width: 100%;
         }
@@ -176,6 +197,23 @@
           line-height: 24px;
           text-align: center;
           color: #343434 !important;
+          transition: margin-left 0.3s ease;
+        }
+        .ant-btn-icon {
+          position: absolute;
+          right: 110px;
+          left: 10px;
+          opacity: 0;
+          transition: opacity 0.3s ease, left 0.3s ease;
+        }
+        &:hover {
+          .ant-btn-icon {
+            opacity: 1;
+            left: 20px;
+          }
+          span {
+            margin-left: 20px;
+          }
         }
       }
     }

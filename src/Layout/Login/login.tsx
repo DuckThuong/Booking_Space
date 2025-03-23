@@ -13,6 +13,8 @@ import "./login.scss";
 import { HeaderNavBar } from "../../LayoutOption/HeaderNavBar";
 import { CustomButton } from "../../Components/buttons/CustomButton";
 import { SvgGoogle } from "../../@svg/Icon/Google/SvgGoogle";
+import { SvgDone } from "../../@svg/Icon/Done/SvgDone";
+import { SvgRegister } from "../../@svg/Icon/SvgRegister";
 const Login = () => {
   const [form] = useForm();
   const navigate = useNavigate();
@@ -107,6 +109,7 @@ const Login = () => {
                 className: "login_form-login-button",
                 onClick: onFinish,
                 type: "default",
+                icon: <SvgDone />,
               }}
             />
             <span className="login_form-login-or">Hoặc</span>
@@ -126,6 +129,7 @@ const Login = () => {
               buttonProps={{
                 className: "login_form-signIn-button",
                 onClick: onClickRegister,
+                icon: <SvgRegister />,
               }}
             />
           </div>

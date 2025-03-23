@@ -7,8 +7,8 @@ export const LogoForm: React.FC = () => {
     <div className="logo-form__container">
       <Image
         preview={false}
-        width={500}
-        height={240}
+        width={330}
+        height={180}
         className="my-auto"
         src={
           "https://cafefcdn.com/thumb_w/640/203337114487263232/2022/3/23/photo1648012210921-16480122111121649082453.jpg"

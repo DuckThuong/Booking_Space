@@ -125,4 +125,20 @@
       }
     }
   }
+  &__dropdown {
+    .ant-dropdown-menu {
+      width: 220px !important;
+      height: fit-content !important;
+      padding: 0px !important;
+      border-radius: 0px !important;
+      &-item {
+        height: 48px !important;
+        border-bottom: 1px solid $border_color_2 !important;
+        border-radius: 0px !important;
+        &:last-child {
+          border-bottom: none !important;
+        }
+      }
+    }
+  }
 }

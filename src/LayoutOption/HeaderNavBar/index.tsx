@@ -2,15 +2,22 @@ import { SolutionOutlined } from "@ant-design/icons";
 import { faListUl, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Dropdown, Menu, Tabs } from "antd";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { SvgLogo } from "../../@svg/Logo/SvgLogo";
 import ColWrap from "../../Components/ColWrap";
 import FormWrap from "../../Components/Form/FormWrap";
 import RowWrap from "../../Components/RowWrap";
 import "./headerNavBar.scss";
 
-export const HeaderNavBar = () => {
-  const [isLogin, setIsLogin] = useState<boolean>(true);
+interface HeaderNavBarProps {
+  isLogin: boolean;
+  onTabChange?: (key: string) => void;
+}
+
+export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
+  onTabChange,
+  isLogin,
+}) => {
   const [tabKey, setTabKey] = useState<string>("1");
 
   const tabItems = [
@@ -47,11 +54,14 @@ export const HeaderNavBar = () => {
     ),
   };
 
-  const onTabChange = (key: string) => {
+  const onTabChangeHandler = (key: string) => {
     setTabKey(key);
   };
 
-  console.log(tabKey, "tabKey");
+  useEffect(() => {
+    onTabChange?.(tabKey);
+  }, [tabKey]);
+
   return (
     <div className="header">
       <FormWrap layout="horizontal" className="header__form">
@@ -62,12 +72,13 @@ export const HeaderNavBar = () => {
             </div>
             {isLogin ? (
               <div className="header__tab">
-                <Tabs activeKey={tabKey} onChange={onTabChange}>
+                <Tabs activeKey={tabKey} onChange={onTabChangeHandler}>
                   {tabItems.map((tab) => {
                     const tabContent = tab.hasDropdown ? (
                       <Dropdown
                         overlay={dropdownMenus[tab.key]}
                         trigger={["hover"]}
+                        overlayClassName="header__dropdown"
                       >
                         <div
                           style={{

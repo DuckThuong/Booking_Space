@@ -2,7 +2,7 @@ import { SolutionOutlined } from "@ant-design/icons";
 import { faListUl, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Button, Dropdown, Menu, Tabs } from "antd";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { SvgLogo } from "../../@svg/Logo/SvgLogo";
 import ColWrap from "../../Components/ColWrap";
 import FormWrap from "../../Components/Form/FormWrap";
@@ -19,6 +19,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
   isLogin,
 }) => {
   const [tabKey, setTabKey] = useState<string>("1");
+  const [dropdownKey, setDropdownKey] = useState<string>("");
 
   const tabItems = [
     { key: "1", label: "Trang chủ" },
@@ -31,8 +32,11 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
   const dropdownMenus: Record<string, JSX.Element> = {
     "2": (
       <Menu
-        onClick={(e) => setTabKey(e.key)}
-        selectedKeys={[tabKey]}
+        onClick={(e) => {
+          setDropdownKey(e.key);
+          onTabChange?.(e.key);
+        }}
+        selectedKeys={[dropdownKey]}
         items={[
           { key: "2.1", label: "Lập hóa đơn thanh toán" },
           { key: "2.2", label: "Tài liệu" },
@@ -43,8 +47,11 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
     ),
     "3": (
       <Menu
-        onClick={(e) => setTabKey(e.key)}
-        selectedKeys={[tabKey]}
+        onClick={(e) => {
+          setDropdownKey(e.key);
+          onTabChange?.(e.key);
+        }}
+        selectedKeys={[dropdownKey]}
         items={[
           { key: "3.1", label: "Nhóm của bạn" },
           { key: "3.2", label: "Người liên hệ chính" },
@@ -56,11 +63,10 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
 
   const onTabChangeHandler = (key: string) => {
     setTabKey(key);
+    if (!tabItems.find((tab) => tab.key === key)?.hasDropdown) {
+      onTabChange?.(key);
+    }
   };
-
-  useEffect(() => {
-    onTabChange?.(tabKey);
-  }, [tabKey]);
 
   return (
     <div className="header">

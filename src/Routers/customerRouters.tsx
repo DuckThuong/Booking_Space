@@ -47,6 +47,10 @@ export const CustomerRouter = () => (
         path={CUSTOMER_ROUTER_PATH.HOME}
         element={<SuspenseWrapper component={<Home />} />}
       />
+      <Route
+        path={CUSTOMER_ROUTER_PATH.HOME_CONTAINER}
+        element={<SuspenseWrapper component={<Home />} />}
+      />
     </Route>
     {/* User */}
     <Route>

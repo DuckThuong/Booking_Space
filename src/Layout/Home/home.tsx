@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import FormWrap from "../../Components/Form/FormWrap";
 import { HeaderNavBar } from "../../LayoutOption/HeaderNavBar";
 import "./home.scss";
+import { ContentRouter } from "./contentRoter";
 
 export const Home = () => {
   const [form] = useForm();
@@ -23,6 +24,9 @@ export const Home = () => {
       <FormWrap form={form} onFinish={onFinish} className="home_form">
         <div className="home__header">
           <HeaderNavBar onTabChange={handleTabChange} isLogin={true} />
+        </div>
+        <div className="content">
+          <ContentRouter tabKey={currentTab} />
         </div>
       </FormWrap>
     </div>

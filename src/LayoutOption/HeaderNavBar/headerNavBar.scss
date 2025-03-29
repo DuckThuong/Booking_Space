@@ -3,16 +3,14 @@
 
 .header {
   font-family: $font_family_1 !important;
-  border: 1px solid $background_color_2;
   width: 100% !important;
-  height: 150px !important;
+  height: fit-content !important;
   display: inline-flex;
   justify-content: center;
   align-items: center;
   flex-direction: row !important;
-  padding: 0px 240px !important;
+  padding: 0px 40px !important;
   &__form {
-    padding: 12px 32px;
     width: 100%;
   }
   &__row {
@@ -30,36 +28,26 @@
           justify-content: flex-end;
         }
       }
-    }
-    &-button {
-      width: 140px;
-      height: 45px;
-      padding: 12px 32px !important;
-      border-radius: 0px !important;
-      -webkit-border-radius: 0px !important;
-      -moz-border-radius: 0px !important;
-      -ms-border-radius: 0px !important;
-      -o-border-radius: 0px !important;
-      border: 1px solid $border_color_2 !important;
-      margin: 0px 8px !important;
+      .row-first-left {
+        display: flex;
+        justify-content: flex-start;
+        flex-direction: row;
+        align-items: center;
+        column-gap: 21px;
+      }
     }
     &-account {
       width: 80px;
       height: 50px;
-      border-radius: 45%;
-      -webkit-border-radius: 45%;
-      -moz-border-radius: 45%;
-      -ms-border-radius: 45%;
-      -o-border-radius: 45%;
       box-shadow: $box_shadow_1;
-      border: 1px solid $border_color_1 !important;
+      border-radius: 0px !important;
       color: $text_secondary_color_2 !important;
     }
     &-contact {
       width: 220px !important;
       height: 50px !important;
       padding: 12px 32px !important;
-      border-radius: 24px !important;
+      border-radius: 0px !important;
       border: 1px solid $border_color_2 !important;
       background-color: $background_color_1 !important;
       span {
@@ -67,6 +55,73 @@
         font-family: $font_family_1 !important;
         font-weight: bold;
         font-size: 16px;
+      }
+    }
+    &-item {
+      &-login {
+        width: 140px;
+        height: 45px;
+        padding: 12px 32px !important;
+        background-color: $background_color_1 !important;
+        color: $text_secondary_color_1 !important;
+        font-size: 16px !important;
+        font-weight: 500 !important;
+        font-family: $font_family_1 !important;
+        text-align: center !important;
+        border-radius: 0px !important;
+        -webkit-border-radius: 0px !important;
+        -moz-border-radius: 0px !important;
+        -ms-border-radius: 0px !important;
+        -o-border-radius: 0px !important;
+        border: 1px solid $border_color_2 !important;
+        margin: 0px 8px !important;
+      }
+      &-register {
+        width: 140px;
+        height: 45px;
+        padding: 12px 32px !important;
+        color: $text_secondary_color_2 !important;
+        font-size: 16px !important;
+        font-weight: 500 !important;
+        font-family: $font_family_1 !important;
+        text-align: center !important;
+        border-radius: 0px !important;
+        -webkit-border-radius: 0px !important;
+        -moz-border-radius: 0px !important;
+        -ms-border-radius: 0px !important;
+        -o-border-radius: 0px !important;
+        border: 1px solid $border_color_2 !important;
+        margin: 0px 8px !important;
+      }
+    }
+  }
+  &__tab {
+    .ant-tabs {
+      .ant-tabs-ink-bar {
+        background-color: $background_color_1 !important;
+      }
+      &-nav {
+        margin-bottom: 0px !important;
+      }
+      &-tab {
+        color: $text_secondary_color_2 !important;
+        font-family: $font_family_1;
+        font-weight: 500;
+        font-size: 14px;
+        &-active {
+          .ant-dropdown-trigger {
+            color: $text_secondary_color_3 !important;
+            font-family: $font_family_1 !important;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+          }
+          .ant-tabs-tab-btn {
+            color: $text_secondary_color_3 !important;
+            font-family: $font_family_1 !important;
+            font-weight: 500 !important;
+            font-size: 14px !important;
+          }
+        }
       }
     }
   }

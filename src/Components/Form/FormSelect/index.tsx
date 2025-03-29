@@ -32,9 +32,6 @@ export const FormSelect: React.FC<Props> = ({ ...props }) => {
           placeholder={
             placeholder || (
               <div className="select-checkbox__placeholder">
-                <div className="select-checkbox__placeholder-setting">
-                  Không có dữ liệu để hiển thị
-                </div>
                 <div className="select-checkbox__placeholder-hide">
                   Vui lòng chọn một mục
                 </div>

@@ -8,6 +8,7 @@ import "./home.scss";
 import { TabsProps } from "antd/lib";
 import { useNavigate } from "react-router-dom";
 import { useForm } from "antd/es/form/Form";
+import { HeaderNavBar } from "../../LayoutOption/HeaderNavBar";
 
 export const Home = () => {
   const [form] = useForm();
@@ -40,42 +41,9 @@ export const Home = () => {
   ];
   return (
     <div className="home">
-      <FormWrap form={form} onFinish={onFinish} className="home_header">
-        <div className="home_header">
-          <div className="home_header-top">
-            <RowWrap className="home_header-top-head" gutter={[16, 16]}>
-              <ColWrap colProps={{ span: 12 }}>
-                <a href="/">Booking.com</a>
-              </ColWrap>
-              <ColWrap colProps={{ span: 12 }}>
-                <RowWrap gutter={[16, 16]}>
-                  <ColWrap colProps={{ span: 4 }}>
-                    <FormSelect name={"money_type"}></FormSelect>
-                  </ColWrap>
-                  <ColWrap colProps={{ span: 4 }}>
-                    <div className="top-header-icon">Icon</div>
-                  </ColWrap>
-                  <ColWrap colProps={{ span: 4 }}>
-                    <div className="top-header-icon">
-                      <AboutSvg />
-                    </div>
-                  </ColWrap>
-                  <ColWrap colProps={{ span: 4 }}>
-                    <Button>Đăng chỗ nghỉ của quý vị</Button>
-                  </ColWrap>
-                  <ColWrap colProps={{ span: 4 }}>
-                    <Button>Đăng ký</Button>
-                  </ColWrap>
-                  <ColWrap colProps={{ span: 4 }}>
-                    <Button>Đăng nhập</Button>
-                  </ColWrap>
-                </RowWrap>
-              </ColWrap>
-            </RowWrap>
-            <RowWrap className="home_header-top-body">
-              <Tabs defaultActiveKey="1" items={items} onChange={onChange} />
-            </RowWrap>
-          </div>
+      <FormWrap form={form} onFinish={onFinish} className="home_form">
+        <div className="home__header">
+          <HeaderNavBar />
         </div>
       </FormWrap>
     </div>

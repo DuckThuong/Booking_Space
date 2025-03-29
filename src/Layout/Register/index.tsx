@@ -9,6 +9,7 @@ import FormWrap from "../../Components/Form/FormWrap";
 import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
 import { ValidateLibrary } from "../../validate";
 import "./register.scss";
+import { HeaderNavBar } from "../../LayoutOption/HeaderNavBar";
 
 export const Register = () => {
   const [form] = useForm();
@@ -47,9 +48,6 @@ export const Register = () => {
   };
   return (
     <div className="register">
-      {/* <div>
-        <LogoForm />
-      </div> */}
       <FormWrap
         form={form}
         name="forgot"

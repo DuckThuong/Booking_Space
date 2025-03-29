@@ -8,7 +8,6 @@ import ColWrap from "../../Components/ColWrap";
 import FormWrap from "../../Components/Form/FormWrap";
 import RowWrap from "../../Components/RowWrap";
 import "./headerNavBar.scss";
-import { set } from "lodash";
 
 export const HeaderNavBar = () => {
   const [isLogin, setIsLogin] = useState<boolean>(true);

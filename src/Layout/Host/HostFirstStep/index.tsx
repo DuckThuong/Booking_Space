@@ -5,9 +5,10 @@ import { QUERY_KEY } from "../../../api/apiConfig";
 import FormWrap from "../../../Components/Form/FormWrap";
 import RowWrap from "../../../Components/RowWrap";
 import { FC } from "react";
+import { CreateVenueEnum } from "../../../api/constants";
 
 interface FirstStepProps {
-  onNext: () => void;
+  onNext: (data: Partial<CreateVenueEnum>) => void;
 }
 
 export const HostFirstStep: FC<FirstStepProps> = ({ onNext }) => {
@@ -15,6 +16,12 @@ export const HostFirstStep: FC<FirstStepProps> = ({ onNext }) => {
     queryKey: [QUERY_KEY.GET_VENUE],
     queryFn: () => venueApi.doGetListVenues(),
   });
+
+  const handleSelectVenue = (type: number) => {
+    onNext({
+      venueTypeId: type,
+    });
+  };
 
   return (
     <div className="step_first">
@@ -29,7 +36,10 @@ export const HostFirstStep: FC<FirstStepProps> = ({ onNext }) => {
           </p>
         </RowWrap>
         <RowWrap className="step_first__content-container">
-          <div className="step_first__card" onClick={onNext}>
+          <div
+            className="step_first__card"
+            onClick={() => handleSelectVenue(1)}
+          >
             <Image
               preview={false}
               className="step_first__card-image"

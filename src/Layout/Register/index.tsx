@@ -4,7 +4,7 @@ import { useForm } from "antd/es/form/Form";
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { userApi } from "../../api/api";
-import { RegisterPayload } from "../../api/Constants";
+import { RegisterPayload } from "../../api/constants";
 import { FormButtonSubmit } from "../../Components/Form/FormButtonSubmit";
 import { FormCheckbox } from "../../Components/Form/FormCheckbox";
 import { FormInput } from "../../Components/Form/FormInput";

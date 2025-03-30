@@ -1,6 +1,7 @@
-import { FC } from "react";
+import { FC, useState } from "react";
 import { HostFirstStep } from "./HostFirstStep";
 import { HostSecondStep } from "./HostSecondStep";
+import { CreateVenueEnum } from "../../api/constants";
 
 interface StepProps {
   step: number;
@@ -8,7 +9,12 @@ interface StepProps {
 }
 
 export const HostRouter: FC<StepProps> = ({ step, onStepChange }) => {
-  const handleNext = () => {
+  const [data, setData] = useState<CreateVenueEnum>();
+  const handleNext = (newData: Partial<CreateVenueEnum>) => {
+    setData({
+      ...data,
+      ...newData,
+    });
     onStepChange(step + 1);
   };
 
@@ -16,7 +22,7 @@ export const HostRouter: FC<StepProps> = ({ step, onStepChange }) => {
     case 1:
       return <HostFirstStep onNext={handleNext} />;
     case 2:
-      return <HostSecondStep onNext={handleNext} />;
+      return <HostSecondStep onNext={handleNext} data={data} />;
     case 3:
       return <div>Step 3</div>;
     default:

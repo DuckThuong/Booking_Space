@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL, API_KEY } from "./apiConfig";
-import { LoginPayload, RegisterPayload } from "./Constants";
+import { LoginPayload, RegisterPayload } from "./constants";
 
 const apiRequest = async (
   endpoint: string,

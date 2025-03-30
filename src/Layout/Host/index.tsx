@@ -5,12 +5,19 @@ import { Button } from "antd";
 import { ArrowLeftOutlined, CloseOutlined } from "@ant-design/icons";
 import { HostRouter } from "./hostRoter";
 import "./host.scss";
+import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
+import { useNavigate } from "react-router-dom";
 
 export const Host = () => {
   const [step, setStep] = useState(1);
+  const navigate = useNavigate();
 
   const handleStepChange = (newStep: number) => {
     setStep(newStep);
+  };
+
+  const handleCancel = () => {
+    navigate(CUSTOMER_ROUTER_PATH.HOME);
   };
 
   return (
@@ -32,6 +39,7 @@ export const Host = () => {
             <Button
               className="host__modal-header-close"
               icon={<CloseOutlined />}
+              onClick={handleCancel}
             ></Button>
           </ColWrap>
         </RowWrap>

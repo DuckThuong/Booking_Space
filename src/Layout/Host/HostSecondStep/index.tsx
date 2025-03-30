@@ -1,19 +1,22 @@
 import { FC, useState } from "react";
-import { Button, Upload } from "antd";
+import { Button, Upload, Form } from "antd";
 import FormWrap from "../../../Components/Form/FormWrap";
 import RowWrap from "../../../Components/RowWrap";
 import { PlusOutlined } from "@ant-design/icons";
 import { RcFile, UploadProps } from "antd/es/upload";
 import { FormInput } from "../../../Components/Form/FormInput";
 import ColWrap from "../../../Components/ColWrap";
+import { CreateVenueEnum } from "../../../api/constants";
 
 interface SecondStepProps {
-  onNext: () => void;
+  onNext: (data: Partial<CreateVenueEnum>) => void;
+  data: CreateVenueEnum | undefined;
 }
 
-export const HostSecondStep: FC<SecondStepProps> = ({ onNext }) => {
+export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
   const [infoState, setInfoState] = useState<number>(0);
   const [imageUrl, setImageUrl] = useState<string>();
+  const [form] = Form.useForm();
 
   const handleChange: UploadProps["onChange"] = async (info) => {
     if (info.file.status === "uploading") {
@@ -44,9 +47,23 @@ export const HostSecondStep: FC<SecondStepProps> = ({ onNext }) => {
     }
     return true;
   };
+
+  const handleFinish = (formData: any) => {
+    onNext({
+      ...data,
+      avartar: imageUrl,
+      phoneNumber: form.getFieldValue("phone"),
+    });
+  };
+
+  console.log(data);
   return (
     <div className="step_second">
-      <FormWrap className="step_second__content">
+      <FormWrap
+        form={form}
+        className="step_second__content"
+        onFinish={handleFinish}
+      >
         <RowWrap className="step_second__content-text">
           <h1 className="step_second__content-title">
             Thông tin cá nhân cơ bản
@@ -136,9 +153,7 @@ export const HostSecondStep: FC<SecondStepProps> = ({ onNext }) => {
         </RowWrap>
 
         <RowWrap className="step_second__actions">
-          <Button type="primary" onClick={onNext}>
-            Xác nhận
-          </Button>
+          <Button htmlType="submit">Xác nhận</Button>
         </RowWrap>
       </FormWrap>
     </div>

@@ -15,3 +15,16 @@ export interface VenuePayload {
   description: string;
   image: string;
 }
+
+export interface CreateVenueEnum {
+  step?: number;
+  venueTypeId?: number;
+  avartar?: string;
+  phoneNumber?: number;
+  companyLogo?: string;
+  companyName?: string;
+  companyDescription?: string;
+  companyLocation?: string;
+  companyLatitue?: string;
+  companyLongtitue?: string;
+}

@@ -1,16 +1,21 @@
+import { useQuery } from "@tanstack/react-query";
 import { Image } from "antd";
+import { venueApi } from "../../../api/api";
+import { QUERY_KEY } from "../../../api/apiConfig";
 import FormWrap from "../../../Components/Form/FormWrap";
 import RowWrap from "../../../Components/RowWrap";
-import { useQuery } from "@tanstack/react-query";
-import { QUERY_KEY } from "../../../api/apiConfig";
-import { venueApi } from "../../../api/api";
+import { FC } from "react";
 
-export const HostFirstStep = () => {
+interface FirstStepProps {
+  onNext: () => void;
+}
+
+export const HostFirstStep: FC<FirstStepProps> = ({ onNext }) => {
   const { data: venueData } = useQuery({
     queryKey: [QUERY_KEY.GET_VENUE],
     queryFn: () => venueApi.doGetListVenues(),
   });
-  console.log(venueData?.value);
+
   return (
     <div className="step_first">
       <FormWrap className="step_first__content">
@@ -24,7 +29,7 @@ export const HostFirstStep = () => {
           </p>
         </RowWrap>
         <RowWrap className="step_first__content-container">
-          <div className="step_first__card">
+          <div className="step_first__card" onClick={onNext}>
             <Image
               preview={false}
               className="step_first__card-image"

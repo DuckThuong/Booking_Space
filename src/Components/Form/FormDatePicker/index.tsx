@@ -1,13 +1,12 @@
-import { DatePicker, DatePickerProps, Form, FormItemProps } from 'antd';
-import React, { ReactNode, useEffect, useState } from 'react';
-import { SvgDatePicker } from '../../@svg/SvgDatePicker';
-import './datePickerCustom.scss';
-import { NamePath } from 'antd/es/form/interface';
-import 'dayjs/locale/ja';
-import 'dayjs/locale/en';
-import localeJa from 'antd/es/date-picker/locale/ja_JP';
-import localeEn from 'antd/es/date-picker/locale/en_US';
-import { useIntl } from 'react-intl';
+import { DatePicker, DatePickerProps, Form, FormItemProps } from "antd";
+import React, { ReactNode, useEffect, useState } from "react";
+import { SvgDatePicker } from "../../@svg/SvgDatePicker";
+import "./datePickerCustom.scss";
+import { NamePath } from "antd/es/form/interface";
+import "dayjs/locale/vi";
+import "dayjs/locale/en";
+import localeVi from "antd/es/date-picker/locale/vi_VN";
+import localeEn from "antd/es/date-picker/locale/en_US";
 
 type Props = {
   name: NamePath;
@@ -15,35 +14,48 @@ type Props = {
   datePickerProps?: DatePickerProps;
   datePickerIcon?: ReactNode;
   formItemProps?: FormItemProps;
+  locale?: "vi" | "en"; // Hỗ trợ 'vi' (tiếng Việt) và 'en' (tiếng Anh)
 };
 
-export const FormDatePicker: React.FC<Props> = ({ datePickerProps, datePickerIcon, name, label, formItemProps }) => {
-  const { locale: intlLocale } = useIntl();
-  const [locale, setLocale] = useState(localeEn);
+export const FormDatePicker: React.FC<Props> = ({
+  datePickerProps,
+  datePickerIcon,
+  name,
+  label,
+  formItemProps,
+  locale = "vi",
+}) => {
+  const [datePickerLocale, setDatePickerLocale] = useState(localeVi);
+
   useEffect(() => {
-    if (intlLocale === 'ja-JP') {
-      setLocale(localeJa);
-    } else {
-      setLocale(localeEn);
-    }
-  }, [intlLocale]);
+    setDatePickerLocale(locale === "en" ? localeEn : localeVi);
+  }, [locale]);
 
   return (
     <div className="form-date-picker__container">
-      {label ? (
-        <label htmlFor={name} className="p-b-8 form-date-picker__label-container">
+      {label && (
+        <label
+          htmlFor={String(name)}
+          className="p-b-8 form-date-picker__label-container"
+        >
           {label}
-          {formItemProps?.required ? <span className="form-date-picker__label">*</span> : ''}
+          {formItemProps?.required ? (
+            <span className="form-date-picker__label">*</span>
+          ) : (
+            ""
+          )}
         </label>
-      ) : (
-        <></>
       )}
-      <Form.Item name={name} {...formItemProps} className={`form-date-picker__item ${formItemProps?.className ?? ''}`}>
+      <Form.Item
+        name={name}
+        {...formItemProps}
+        className={`form-date-picker__item ${formItemProps?.className ?? ""}`}
+      >
         <DatePicker
           {...datePickerProps}
           suffixIcon={datePickerIcon ?? <SvgDatePicker />}
           allowClear={false}
-          locale={locale}
+          locale={datePickerLocale}
         />
       </Form.Item>
     </div>

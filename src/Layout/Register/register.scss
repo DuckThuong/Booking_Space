@@ -5,9 +5,12 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  height: 100vh;
+  height: fit-content;
   justify-content: center;
-  margin-top: 32px;
+  padding: 64px 32px;
+  background-image: url("../../background.webp");
+  background-size: cover;
+  background-position: center;
   @include sm {
     width: 100%;
     justify-content: unset;
@@ -22,7 +25,7 @@
     font-weight: 600;
     line-height: 22px;
     text-align: left;
-    color: #161617;
+    color: rgb(22, 24, 73) !important;
     margin-bottom: 8px !important;
   }
   &_title {
@@ -31,7 +34,7 @@
     font-weight: 600;
     line-height: 48px;
     text-align: center;
-    color: #161617;
+    color: rgb(22, 24, 73) !important;
     margin-bottom: 12px;
   }
   &_sub {

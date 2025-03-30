@@ -1,0 +1,33 @@
+import { useState } from "react";
+import RowWrap from "../../Components/RowWrap";
+import ColWrap from "../../Components/ColWrap";
+import { Button } from "antd";
+import { ArrowLeftOutlined, CloseOutlined } from "@ant-design/icons";
+import { HostRouter } from "./hostRoter";
+import "./host.scss";
+export const Host = () => {
+  const [step, setStep] = useState(1);
+  return (
+    <div className="host">
+      <div className="host__modal">
+        <RowWrap className="host__modal-header" gutter={[16, 16]}>
+          <ColWrap colProps={{ span: 4 }} className="host__modal-header-left">
+            <div className="host__modal-header-left-icon">
+              {step > 1 ? <ArrowLeftOutlined /> : null}
+              <span>{step} / 5</span>
+            </div>
+          </ColWrap>
+          <ColWrap colProps={{ span: 4 }} className="host__modal-header-right">
+            <Button
+              className="host__modal-header-close"
+              icon={<CloseOutlined />}
+            ></Button>
+          </ColWrap>
+        </RowWrap>
+        <RowWrap className="host__modal-body" gutter={[16, 16]}>
+          <HostRouter step={step} />
+        </RowWrap>
+      </div>
+    </div>
+  );
+};

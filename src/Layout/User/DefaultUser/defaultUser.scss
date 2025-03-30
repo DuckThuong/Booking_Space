@@ -1,2 +1,125 @@
 @import "../../../styles/mixins.scss";
 @import "../../../styles/color.scss";
+
+.user_default {
+  display: flex;
+  justify-content: center;
+  padding: 64px 32px;
+  background-image: url("../../../background.webp");
+  background-size: cover;
+  background-position: center;
+  &-form {
+    width: 80%;
+    height: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 78px 58px 24px 58px;
+    border-radius: 20px;
+    background-color: #ffffff;
+    box-shadow: -2px 2px 20px 0px #0000001f !important;
+  }
+  &-row {
+    width: 100% !important;
+    &-three {
+      .ant-row {
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+    .form_select {
+      .ant-select-selector {
+        border-radius: 12px !important;
+        height: 48px !important;
+      }
+    }
+    .form-date-picker__item {
+      width: 100% !important;
+      height: 48px !important;
+      border-radius: 8px !important;
+      border: 1px solid $border_color_3 !important;
+      .ant-row {
+        .ant-form-item-control-input {
+          height: 48px !important;
+        }
+      }
+    }
+  }
+  &-lastRow {
+    display: flex;
+    flex-direction: row;
+    justify-content: end;
+    height: 80px;
+    .ant-row {
+      align-items: center;
+      column-gap: 16px !important;
+    }
+  }
+  &-button {
+    &-cancel {
+      width: 210px;
+      background-color: $background_color_3;
+      border-radius: 12px;
+      font-family: $font_family_1;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      color: $text_secondary_color_2;
+      height: 48px;
+      &:hover {
+        background-color: darken($background_color_2, 10%);
+      }
+    }
+    &-submit {
+      width: 310px;
+      background-color: $primary_color;
+      border: none;
+      border-radius: 12px;
+      font-family: $font_family_1;
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 24px;
+      color: $text_secondary_color_1;
+      height: 48px;
+      &:hover {
+        background-color: darken($primary_color, 10%);
+      }
+    }
+    .form-button__submit {
+      margin-bottom: 0px !important;
+    }
+  }
+  &-col {
+    .ant-upload-wrapper {
+      width: 90%;
+      height: 100%;
+      display: flex;
+      border-radius: 12px;
+      justify-content: center;
+      align-items: center;
+      padding: 24px 24px;
+      box-shadow: -2px 2px 20px 0px #0000001f !important;
+      background-color: #ffffff;
+      .ant-upload {
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 12px !important;
+        img {
+          width: 100%;
+          height: 100%;
+          border-radius: 12px !important;
+        }
+      }
+    }
+  }
+  &-title {
+    font-family: $font_family_1;
+    font-size: 36px;
+    font-weight: 600;
+    line-height: 48px;
+    text-align: center;
+    color: rgb(22, 24, 73) !important;
+    margin-bottom: 12px;
+    padding: 0px 320px 24px 320px;
+  }
+}

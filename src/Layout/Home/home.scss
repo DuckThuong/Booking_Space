@@ -1,7 +1,9 @@
 .home {
   height: 100vh;
-  &_header {
-    padding: 0px 200px 0px 200px;
-    background-color: #003b95 !important;
+  &__header {
+    border-bottom: 2px solid #dcdcdc !important;
+  }
+  &_form {
+    width: 100%;
   }
 }

@@ -56,7 +56,29 @@ export const Register = () => {
         onFinish={onFinish}
       >
         <h1 className="register_title">Đăng ký</h1>
-        <p className="register_sub">Nhập tài khoản email của bạn</p>
+        <p className="register_sub">Nhập thông tin tài khoản của bạn</p>
+        <div className="register_email-input">
+          <p className="register_label">Tên tài khoản</p>
+          <FormInput
+            name="userName"
+            formItemProps={{
+              className: "register_email-input-confirm",
+              rules: [
+                {
+                  required: true,
+                  message: "Vui lòng nhập tên tài khoản!",
+                },
+                {
+                  min: 6,
+                  message: "Tên tài khoản phải có ít nhất 6 ký tự!",
+                },
+              ],
+            }}
+            inputProps={{
+              placeholder: "Tên tài khoản",
+            }}
+          />
+        </div>
         <div className="register_email-input">
           <p className="register_label">Email</p>
           <FormInput

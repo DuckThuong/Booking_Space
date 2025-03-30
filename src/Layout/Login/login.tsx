@@ -16,6 +16,7 @@ import "./login.scss";
 const Login = () => {
   const [form] = useForm();
   const navigate = useNavigate();
+
   const handleForgotPassword = () => {
     navigate(CUSTOMER_ROUTER_PATH.FORGOT_EMAIL_INPUT);
   };

@@ -12,11 +12,13 @@ import FormWrap from "../../../Components/Form/FormWrap";
 import RowWrap from "../../../Components/RowWrap";
 import "./defaultUser.scss";
 import { CustomButton } from "../../../Components/buttons/CustomButton";
+import { useNavigate } from "react-router-dom";
+import { CUSTOMER_ROUTER_PATH } from "../../../Routers/Routers";
 
 export const DefaultUser = () => {
   const [form] = useForm();
   const [imageUrl, setImageUrl] = useState<string>();
-
+  const navigate = useNavigate();
   const handleChange: UploadProps["onChange"] = async (info) => {
     if (info.file.status === "uploading") {
       return;
@@ -48,8 +50,9 @@ export const DefaultUser = () => {
   };
 
   const onFinish = () => {
-    console.log("Forgot");
+    navigate(CUSTOMER_ROUTER_PATH.DEFAULT_USER);
   };
+
   const genderOptions = [
     {
       label: "Nam",
@@ -217,6 +220,9 @@ export const DefaultUser = () => {
               content={"Hủy bỏ"}
               buttonProps={{
                 className: "user_default-button-cancel",
+                onClick: () => navigate(CUSTOMER_ROUTER_PATH.LOG_IN),
+                type: "default",
+                htmlType: "button",
               }}
             ></CustomButton>
           </div>

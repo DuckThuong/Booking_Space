@@ -131,7 +131,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                   <span>
                     <SolutionOutlined />
                   </span>
-                  <span> Cập nhật thông tin </span>
+                  <span>Become a Host</span>
                 </Button>
                 <Button className="header__row-account">
                   <FontAwesomeIcon icon={faUser} />

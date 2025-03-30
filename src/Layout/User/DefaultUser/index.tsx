@@ -19,6 +19,7 @@ export const DefaultUser = () => {
   const [form] = useForm();
   const [imageUrl, setImageUrl] = useState<string>();
   const navigate = useNavigate();
+
   const handleChange: UploadProps["onChange"] = async (info) => {
     if (info.file.status === "uploading") {
       return;

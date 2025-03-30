@@ -8,6 +8,8 @@ import ColWrap from "../../Components/ColWrap";
 import FormWrap from "../../Components/Form/FormWrap";
 import RowWrap from "../../Components/RowWrap";
 import "./headerNavBar.scss";
+import { useNavigate } from "react-router-dom";
+import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
 
 interface HeaderNavBarProps {
   isLogin: boolean;
@@ -20,7 +22,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
 }) => {
   const [tabKey, setTabKey] = useState<string>("1");
   const [dropdownKey, setDropdownKey] = useState<string>("");
-
+  const navigate = useNavigate();
   const tabItems = [
     { key: "1", label: "Trang chủ" },
     { key: "2", label: "Tài khoản", hasDropdown: true },
@@ -127,7 +129,12 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
               </div>
             ) : (
               <div className="right_content">
-                <Button className="header__row-contact">
+                <Button
+                  className="header__row-contact"
+                  onClick={() => {
+                    navigate(CUSTOMER_ROUTER_PATH.HOST);
+                  }}
+                >
                   <span>
                     <SolutionOutlined />
                   </span>

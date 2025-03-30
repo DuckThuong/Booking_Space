@@ -17,7 +17,8 @@ export const CUSTOMER_ROUTE_NAME = {
   //Home
   HOME: "home",
   HOME_CONTAINER: "home-container",
-  //Products
+  //Host
+  HOST: "host",
   //Catergories
   CATERGORIES: "catergories",
   //Default_user
@@ -36,6 +37,8 @@ export const CUSTOMER_ROUTER_PATH = {
   //Home
   HOME: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.HOME}`,
   HOME_CONTAINER: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.HOME_CONTAINER}`,
+  //Host
+  HOST: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.HOST}`,
   //Default_user
   DEFAULT_USER: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.DEFAULT_USER}`,
 };

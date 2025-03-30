@@ -8,3 +8,10 @@ export interface LoginPayload {
   userName: string;
   password: string;
 }
+
+export interface VenuePayload {
+  venueTypeId: number;
+  name: string;
+  description: string;
+  image: string;
+}

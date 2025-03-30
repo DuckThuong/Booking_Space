@@ -4,7 +4,10 @@
 .user_default {
   display: flex;
   justify-content: center;
-  margin-top: 32px;
+  padding: 64px 32px;
+  background-image: url("../../../background.webp");
+  background-size: cover;
+  background-position: center;
   &-form {
     width: 80%;
     height: auto;
@@ -115,7 +118,7 @@
     font-weight: 600;
     line-height: 48px;
     text-align: center;
-    color: #161617;
+    color: rgb(22, 24, 73) !important;
     margin-bottom: 12px;
     padding: 0px 320px 24px 320px;
   }

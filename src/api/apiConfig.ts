@@ -1,7 +1,7 @@
-export const API_BASE_URL = "http://localhost:8080/api";
+export const API_BASE_URL = "https://noted-rhino-humbly.ngrok-free.app";
 
 export const API_KEY = {
-  USER: "users",
+  USER: "Authentication",
   IMAGE: "images",
   PRODUCTS: "products",
   CART: "cart",

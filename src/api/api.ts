@@ -1,5 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL, API_KEY } from "./apiConfig";
+import { LoginPayload, RegisterPayload } from "./Constants";
 
 const apiRequest = async (
   endpoint: string,
@@ -27,13 +28,10 @@ export enum OrderStateEnum {
 }
 
 export const userApi = {
-  getAllUsers: () => apiRequest(API_KEY.USER),
-  getUserByIds: (id: string) => apiRequest(`${API_KEY.USER}/${id}`),
-  confirmreateUser: (userData: any) =>
-    apiRequest(API_KEY.USER, "POST", userData),
-  updateUser: (id: string, userData: any) =>
-    apiRequest(`${API_KEY.USER}/${id}`, "PATCH", userData),
-  deleteUser: (id: string) => apiRequest(`${API_KEY.USER}/${id}`, "DELETE"),
+  doCreateUserByUserNameAndPassword: (userData: RegisterPayload) =>
+    apiRequest(`${API_KEY.USER}/Register`, "POST", userData),
+  doUserSubmitLogin: (userData: LoginPayload) =>
+    apiRequest(`${API_KEY.USER}/Login`, "POST", userData),
 };
 
 export const imageApi = {

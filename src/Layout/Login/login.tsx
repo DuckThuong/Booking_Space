@@ -13,6 +13,11 @@ import { LogoForm } from "../../Components/LogoForm/LogoForm";
 import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
 import { ValidateLibrary } from "../../validate";
 import "./login.scss";
+import { login } from "./../../api/authApi";
+import { useMutation } from "@tanstack/react-query";
+import { userApi } from "../../api/api";
+import { LoginPayload } from "../../api/Constants";
+import { notification } from "antd";
 const Login = () => {
   const [form] = useForm();
   const navigate = useNavigate();
@@ -27,8 +32,44 @@ const Login = () => {
     }
   };
 
+  const loginMutation = useMutation({
+    mutationFn: (payload: LoginPayload) => userApi.doUserSubmitLogin(payload),
+    onSuccess: (data) => {
+      notification.open({
+        message: "Thông báo!",
+        description: "Đăng nhập thành công.",
+        placement: "topRight",
+        showProgress: true,
+        pauseOnHover: true,
+        style: {
+          backgroundColor: "#ffffff",
+          borderLeft: "4px solid #007bff",
+        },
+      });
+      localStorage.setItem("accessToken", data.accessToken);
+      navigate(CUSTOMER_ROUTER_PATH.HOME);
+    },
+    onError: (error) => {
+      notification.open({
+        message: "Thông báo!",
+        description: "Đăng nhập thất bại.",
+        placement: "topRight",
+        showProgress: true,
+        pauseOnHover: true,
+        style: {
+          backgroundColor: "#ffffff",
+          borderLeft: "4px solid #007bff",
+        },
+      });
+    },
+  });
+
   const onFinish = () => {
-    navigate(CUSTOMER_ROUTER_PATH.HOME);
+    const payload: LoginPayload = {
+      userName: form.getFieldValue("userName"),
+      password: form.getFieldValue("password"),
+    };
+    loginMutation.mutate(payload);
   };
 
   const onClickRegister = () => {
@@ -48,14 +89,14 @@ const Login = () => {
           <div className="login_form-email">
             <p className="login_form-label">Email</p>
             <FormInput
-              name={"email"}
+              name={"userName"}
               formItemProps={{
                 className: "login_form-input",
-                rules: ValidateLibrary().email,
+                rules: ValidateLibrary().required,
               }}
               inputProps={{
                 onKeyPress: handleKeyPress,
-                placeholder: "Email@gmail.com",
+                placeholder: "Tên người dùng",
               }}
             />
           </div>

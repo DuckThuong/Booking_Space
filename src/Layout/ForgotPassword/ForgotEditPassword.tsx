@@ -29,7 +29,6 @@ export const ForgotEditPassword = () => {
     message.success("Mật khẩu đã được cập nhật thành công!");
     navigate(CUSTOMER_ROUTER_PATH.FORGOT_SUCCESS);
   };
-  console.log(emailParam);
   return (
     <div className="forgot-password_edit">
       <FormWrap

@@ -52,6 +52,7 @@ export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
     onNext({
       ...data,
       avartar: imageUrl,
+      fullName: formData.fullName,
       phoneNumber: form.getFieldValue("phone"),
     });
   };
@@ -68,20 +69,17 @@ export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
             Thông tin cá nhân cơ bản
           </h1>
           <p className="step_second__content-desc">
-            Hãy điền các thông tin cơ bản về của bạn
+            Hãy điền các thông tin cơ bản của bạn
           </p>
         </RowWrap>
 
         <RowWrap className="step_second__form">
           {infoState > 0 ? (
             <RowWrap className="step_second__form-row">
-              <ColWrap
-                colProps={{ span: 12 }}
-                className="step_second__form-col"
-              >
+              <ColWrap colProps={{ span: 8 }} className="step_second__form-col">
                 <Upload
                   name="avatar"
-                  listType="picture-circle"
+                  listType="picture-card"
                   className="avatar-uploader"
                   showUploadList={false}
                   action="/api/upload"
@@ -112,23 +110,42 @@ export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
                 colProps={{ span: 12 }}
                 className="step_second__form-col"
               >
-                <p className="register_label">Họ và tên</p>
-                <FormInput
-                  name="phone"
-                  formItemProps={{
-                    className: "user_default-input-confirm",
-                    rules: [
-                      {
-                        required: true,
-                        message: "Nhập số điện thoại của bạn",
-                      },
-                    ],
-                  }}
-                  inputProps={{
-                    placeholder: "Số điện thoại",
-                    maxLength: 255,
-                  }}
-                />
+                <div>
+                  <p className="register_label">Họ và tên</p>
+                  <FormInput
+                    name="fullName"
+                    formItemProps={{
+                      rules: [
+                        {
+                          required: true,
+                          message: "Vui lòng nhập họ tên!",
+                        },
+                      ],
+                    }}
+                    inputProps={{
+                      placeholder: "Họ tên",
+                      maxLength: 255,
+                    }}
+                  />
+                </div>
+                <div>
+                  <p className="register_label">Số điện thoại</p>
+                  <FormInput
+                    name="phone"
+                    formItemProps={{
+                      rules: [
+                        {
+                          required: true,
+                          message: "Nhập số điện thoại của bạn",
+                        },
+                      ],
+                    }}
+                    inputProps={{
+                      placeholder: "Số điện thoại",
+                      maxLength: 255,
+                    }}
+                  />
+                </div>
               </ColWrap>
             </RowWrap>
           ) : (
@@ -152,7 +169,9 @@ export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
         </RowWrap>
 
         <RowWrap className="step_second__actions">
-          <Button htmlType="submit">Xác nhận</Button>
+          <Button disabled={infoState === 0} htmlType="submit">
+            Xác nhận
+          </Button>
         </RowWrap>
       </FormWrap>
     </div>

@@ -20,6 +20,7 @@ export interface CreateVenueEnum {
   step?: number;
   venueTypeId?: number;
   avartar?: string;
+  fullName?: string;
   phoneNumber?: number;
   companyLogo?: string;
   companyName?: string;

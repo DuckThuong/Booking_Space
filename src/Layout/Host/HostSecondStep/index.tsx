@@ -56,7 +56,6 @@ export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
     });
   };
 
-  console.log(data);
   return (
     <div className="step_second">
       <FormWrap

@@ -35,6 +35,7 @@ export const userApi = {
     apiRequest(`${API_KEY.USER}/Register`, "POST", userData),
   doUserSubmitLogin: (userData: LoginPayload) =>
     apiRequest(`${API_KEY.USER}/Login`, "POST", userData),
+  doGoogleLogin: () => apiRequest(`${API_KEY.USER}/GoogleLogin`, "GET"),
 };
 
 export const venueApi = {

@@ -9,7 +9,7 @@ import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
 import { useNavigate } from "react-router-dom";
 
 export const Host = () => {
-  const [step, setStep] = useState(1);
+  const [step, setStep] = useState(4);
   const navigate = useNavigate();
 
   const handleStepChange = (newStep: number) => {

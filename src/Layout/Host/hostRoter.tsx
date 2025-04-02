@@ -3,6 +3,7 @@ import { HostFirstStep } from "./HostFirstStep";
 import { HostSecondStep } from "./HostSecondStep";
 import { HostThirdStep } from "./HostThirdStep";
 import { CreateVenueEnum } from "../../api/constants";
+import { HostFourthStep } from "./HostFourthStep";
 
 interface StepProps {
   step: number;
@@ -26,6 +27,8 @@ export const HostRouter: FC<StepProps> = ({ step, onStepChange }) => {
       return <HostSecondStep onNext={handleNext} data={data} />;
     case 3:
       return <HostThirdStep onNext={handleNext} data={data} />;
+    case 4:
+      return <HostFourthStep onNext={handleNext} data={data} />;
     default:
       return null;
   }

@@ -64,6 +64,30 @@ const Login = () => {
     },
   });
 
+  const doLoginGoogle = useMutation({
+    mutationFn: () => userApi.doGoogleLogin(),
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      notification.open({
+        message: "Thông báo!",
+        description: "Đăng nhập thất bại.",
+        placement: "topRight",
+        showProgress: true,
+        pauseOnHover: true,
+        style: {
+          backgroundColor: "#ffffff",
+          borderLeft: "4px solid #007bff",
+        },
+      });
+    },
+  });
+
+  const handleLoginGoogle = () => {
+    doLoginGoogle.mutate();
+  };
+
   const onFinish = () => {
     const payload: LoginPayload = {
       userName: form.getFieldValue("userName"),
@@ -138,7 +162,7 @@ const Login = () => {
               content=""
               buttonProps={{
                 className: "login_form-login-google",
-                onClick: onFinish,
+                onClick: handleLoginGoogle,
                 type: "default",
                 icon: <SvgGoogle />,
               }}

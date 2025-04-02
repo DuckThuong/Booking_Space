@@ -56,7 +56,6 @@ export const HostThirdStep: FC<ThirdStepProps> = ({ onNext, data }) => {
     }
     return true;
   };
-  console.log(data);
 
   return (
     <FormWrap form={form} className="step_third" onFinish={handleFinish}>

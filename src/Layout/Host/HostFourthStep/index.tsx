@@ -1,12 +1,19 @@
-import { FC, useState } from "react";
+import { FC, useState, useEffect } from "react";
 import { CreateVenueEnum } from "../../../api/constants";
 import FormWrap from "../../../Components/Form/FormWrap";
 import RowWrap from "../../../Components/RowWrap";
 import { FormInput } from "../../../Components/Form/FormInput";
-import { MapContainer, TileLayer, Marker, useMapEvents } from "react-leaflet";
+import {
+  MapContainer,
+  TileLayer,
+  Marker,
+  useMapEvents,
+  useMap,
+} from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { Button } from "antd";
+import { Button, Form } from "antd";
 import L from "leaflet";
+import { EnvironmentOutlined } from "@ant-design/icons";
 
 // Fix for default marker icon
 delete (L.Icon.Default.prototype as any)._getIconUrl;
@@ -21,7 +28,12 @@ interface FourthStepProps {
   data: CreateVenueEnum | undefined;
 }
 
-// Component to handle map clicks
+interface LocationData {
+  address: string;
+  latitude: number;
+  longitude: number;
+}
+
 const LocationMarker: FC<{
   position: { lat: number; lng: number };
   setPosition: (position: { lat: number; lng: number }) => void;
@@ -33,25 +45,21 @@ const LocationMarker: FC<{
         lng: e.latlng.lng,
       };
       setPosition(newPosition);
-
-      // Use Nominatim API for reverse geocoding
-      fetch(
-        `https://nominatim.openstreetmap.org/reverse?format=json&lat=${newPosition.lat}&lon=${newPosition.lng}`
-      )
-        .then((response) => response.json())
-        .then((data) => {
-          const address = data.display_name;
-          const addressInput = document.querySelector(
-            'input[name="address"]'
-          ) as HTMLInputElement;
-          if (addressInput) {
-            addressInput.value = address;
-          }
-        });
     },
   });
 
   return <Marker position={[position.lat, position.lng]} />;
+};
+
+const ChangeView: FC<{ center: [number, number]; zoom: number }> = ({
+  center,
+  zoom,
+}) => {
+  const map = useMap();
+  useEffect(() => {
+    map.setView(center, zoom);
+  }, [center, zoom, map]);
+  return null;
 };
 
 export const HostFourthStep: FC<FourthStepProps> = ({ onNext, data }) => {
@@ -62,14 +70,80 @@ export const HostFourthStep: FC<FourthStepProps> = ({ onNext, data }) => {
     lat: 10.762622,
     lng: 106.660172,
   });
+  const [form] = Form.useForm();
+
+  const [locationData, setLocationData] = useState<LocationData>({
+    address: "",
+    latitude: 10.762622,
+    longitude: 106.660172,
+  });
 
   const mapContainerStyle = {
     width: "100%",
     height: "400px",
   };
 
+  const updateLocationData = (lat: number, lng: number) => {
+    fetch(
+      `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
+    )
+      .then((response) => response.json())
+      .then((data) => {
+        const newLocationData = {
+          address: data.display_name,
+          latitude: lat,
+          longitude: lng,
+        };
+        setLocationData(newLocationData);
+        const addressInput = document.querySelector(
+          'input[name="address"]'
+        ) as HTMLInputElement;
+        if (addressInput) {
+          addressInput.value = data.display_name;
+        }
+      });
+  };
+
+  const getCurrentLocation = () => {
+    if ("geolocation" in navigator) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const newPosition = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+          setSelectedLocation(newPosition);
+          updateLocationData(newPosition.lat, newPosition.lng);
+        },
+        (error) => {
+          console.error("Error getting location:", error);
+          alert(
+            "Không thể lấy vị trí hiện tại của bạn. Vui lòng kiểm tra lại quyền truy cập vị trí."
+          );
+        }
+      );
+    } else {
+      alert("Trình duyệt của bạn không hỗ trợ định vị.");
+    }
+  };
+
+  const handleSubmit = () => {
+    onNext({
+      companyLocation: locationData.address,
+      companyLatitue: locationData.latitude.toString(),
+      companyLongtitue: locationData.longitude.toString(),
+    });
+  };
+  useEffect(() => {
+    if (locationData.address) {
+      form.setFieldsValue({
+        address: locationData.address,
+      });
+    }
+  }, [locationData.address]);
+  console.log(data);
   return (
-    <FormWrap className="step_fourth">
+    <FormWrap form={form} className="step_fourth">
       <RowWrap className="step_fourth__header">
         <h1 className="step_fourth__header-title">Cập nhật địa chỉ</h1>
         <p className="step_fourth__header-text">
@@ -96,24 +170,46 @@ export const HostFourthStep: FC<FourthStepProps> = ({ onNext, data }) => {
           />
         </div>
         <div className="step_fourth__content-map">
-          <MapContainer
-            center={[selectedLocation.lat, selectedLocation.lng]}
-            zoom={15}
-            style={mapContainerStyle}
-          >
-            <TileLayer
-              attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-              url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-            />
-            <LocationMarker
-              position={selectedLocation}
-              setPosition={setSelectedLocation}
-            />
-          </MapContainer>
+          <div style={{ position: "relative", width: "100%", height: "100%" }}>
+            <MapContainer
+              center={[selectedLocation.lat, selectedLocation.lng]}
+              zoom={15}
+              style={mapContainerStyle}
+            >
+              <ChangeView
+                center={[selectedLocation.lat, selectedLocation.lng]}
+                zoom={15}
+              />
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              <LocationMarker
+                position={selectedLocation}
+                setPosition={(position) => {
+                  setSelectedLocation(position);
+                  updateLocationData(position.lat, position.lng);
+                }}
+              />
+            </MapContainer>
+            <Button
+              type="primary"
+              icon={<EnvironmentOutlined />}
+              onClick={getCurrentLocation}
+              style={{
+                position: "absolute",
+                top: "10px",
+                right: "10px",
+                zIndex: 1000,
+              }}
+            >
+              Vị trí hiện tại
+            </Button>
+          </div>
         </div>
       </RowWrap>
       <RowWrap className="step_third__actions">
-        <Button htmlType="submit">Xác nhận</Button>
+        <Button onClick={handleSubmit}>Xác nhận</Button>
       </RowWrap>
     </FormWrap>
   );

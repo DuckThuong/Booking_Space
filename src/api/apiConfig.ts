@@ -8,4 +8,5 @@ export const API_KEY = {
 export const QUERY_KEY = {
   GET_USER: `${API_BASE_URL}/${API_KEY.USER}`,
   GET_VENUE: `${API_BASE_URL}/${API_KEY.VENUE}`,
+  VENUE_TYPES: `${API_BASE_URL}/${API_KEY.VENUE}/GetVenueTypes`,
 };

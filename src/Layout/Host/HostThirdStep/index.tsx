@@ -22,6 +22,7 @@ export const HostThirdStep: FC<ThirdStepProps> = ({ onNext, data }) => {
   const handleFinish = (formData: any) => {
     onNext({
       ...data,
+      venueLogo: imageUrl,
       venueName: formData.companyName,
       venueDescription: formData.companyDescription,
     });

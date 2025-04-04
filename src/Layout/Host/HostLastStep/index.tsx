@@ -36,7 +36,9 @@ export const HostLastStep: FC<LastStepProps> = ({ data }) => {
       venueLogo: data?.venueLogo,
       venueName: data?.venueName,
       venueDescription: data?.venueDescription,
-      venueLocation: data?.venueLocation,
+      venueCity: data?.venueCity,
+      venueDistrict: data?.venueDistrict,
+      venueStreet: data?.venueStreet,
       venueLatitude: data?.venueLatitude,
       venueLongtitude: data?.venueLongtitude,
     };

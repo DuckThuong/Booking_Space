@@ -41,5 +41,5 @@ export const userApi = {
 export const venueApi = {
   doGetListVenues: () => apiRequest(`${API_KEY.VENUE}/GetVenueTypes`, "GET"),
   doCreateVenue: (venueData: CreateVenueEnum) =>
-    apiRequest(`${API_KEY.VENUE}/RegisterVenue`, "POST", venueData),
+    apiRequest(`${API_KEY.VENUE}/SignUpVenue`, "POST", venueData),
 };

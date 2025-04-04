@@ -83,6 +83,53 @@ export const HostFourthStep: FC<FourthStepProps> = ({ onNext, data }) => {
     height: "400px",
   };
 
+  const splitAddress = (address: string) => {
+    const parts = address.split(",");
+
+    // Tìm thành phố (Hà Nội)
+    let city = "";
+    let district = "";
+    const streetParts: string[] = [];
+
+    // Duyệt từ cuối lên để tìm thành phố
+    for (let i = parts.length - 1; i >= 0; i--) {
+      const part = parts[i].trim();
+      if (part === "Hà Nội") {
+        city = part;
+        break;
+      }
+    }
+
+    // Nếu không tìm thấy Hà Nội, lấy phần trước mã bưu điện
+    if (!city && parts.length >= 2) {
+      city = parts[parts.length - 2]?.trim() || "";
+    }
+
+    // Tìm quận và đường
+    for (let i = 0; i < parts.length - 2; i++) {
+      const part = parts[i].trim();
+      if (part.startsWith("Quận ")) {
+        district = part;
+      } else if (part.startsWith("Phường ")) {
+        district = part;
+      } else if (part !== "Hà Nội") {
+        // Loại bỏ Hà Nội khỏi phần đường
+        streetParts.push(part);
+      }
+    }
+
+    const street = streetParts.join(", ");
+
+    console.log("Phân tách địa chỉ:", {
+      địa_chỉ_gốc: address,
+      đường: street,
+      quận: district,
+      thành_phố: city,
+    });
+
+    return { street, district, city };
+  };
+
   const updateLocationData = (lat: number, lng: number) => {
     fetch(
       `https://nominatim.openstreetmap.org/reverse?format=json&lat=${lat}&lon=${lng}`
@@ -95,6 +142,7 @@ export const HostFourthStep: FC<FourthStepProps> = ({ onNext, data }) => {
           longitude: lng,
         };
         setLocationData(newLocationData);
+
         const addressInput = document.querySelector(
           'input[name="address"]'
         ) as HTMLInputElement;
@@ -128,11 +176,16 @@ export const HostFourthStep: FC<FourthStepProps> = ({ onNext, data }) => {
   };
 
   const handleSubmit = () => {
-    onNext({
-      venueLocation: locationData.address,
+    const { street, district, city } = splitAddress(locationData.address);
+    const submitData = {
+      venueCity: city,
+      venueDistrict: district,
+      venueStreet: street,
       venueLatitude: locationData.latitude.toString(),
       venueLongtitude: locationData.longitude.toString(),
-    });
+    };
+    console.log("Dữ liệu gửi đi:", submitData);
+    onNext(submitData);
   };
   useEffect(() => {
     if (locationData.address) {

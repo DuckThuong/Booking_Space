@@ -19,13 +19,15 @@ export interface VenuePayload {
 export interface CreateVenueEnum {
   step?: number;
   venueTypeId?: number;
-  userAvatar?: string;
+  userAvatar?: File | string;
   fullName?: string;
   phoneNumber?: number;
-  venueLogo?: string;
+  venueLogo?: File | string;
   venueName?: string;
   venueDescription?: string;
-  venueLocation?: string;
+  venueStreet?: string;
+  venueCity?: string;
+  venueDistrict?: string;
   venueLatitude?: string;
   venueLongtitude?: string;
 }

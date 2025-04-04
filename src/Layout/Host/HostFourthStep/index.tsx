@@ -129,9 +129,9 @@ export const HostFourthStep: FC<FourthStepProps> = ({ onNext, data }) => {
 
   const handleSubmit = () => {
     onNext({
-      companyLocation: locationData.address,
-      companyLatitue: locationData.latitude.toString(),
-      companyLongtitue: locationData.longitude.toString(),
+      venueLocation: locationData.address,
+      venueLatitude: locationData.latitude.toString(),
+      venueLongtitude: locationData.longitude.toString(),
     });
   };
   useEffect(() => {
@@ -141,7 +141,9 @@ export const HostFourthStep: FC<FourthStepProps> = ({ onNext, data }) => {
       });
     }
   }, [locationData.address]);
+
   console.log(data);
+
   return (
     <FormWrap form={form} className="step_fourth">
       <RowWrap className="step_fourth__header">

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL, API_KEY } from "./apiConfig";
-import { LoginPayload, RegisterPayload } from "./constants";
+import { CreateVenueEnum, LoginPayload, RegisterPayload } from "./constants";
 
 const apiRequest = async (
   endpoint: string,
@@ -40,4 +40,6 @@ export const userApi = {
 
 export const venueApi = {
   doGetListVenues: () => apiRequest(`${API_KEY.VENUE}/GetVenueTypes`, "GET"),
+  doCreateVenue: (venueData: CreateVenueEnum) =>
+    apiRequest(`${API_KEY.VENUE}/RegisterVenue`, "POST", venueData),
 };

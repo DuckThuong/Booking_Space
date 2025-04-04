@@ -8,9 +8,10 @@
   background-image: url("../../../background.webp");
   background-size: cover;
   background-position: center;
+  height: 100vh;
   &-form {
     width: 80%;
-    height: auto;
+    height: fit-content !important;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -51,7 +51,7 @@ export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
   const handleFinish = (formData: any) => {
     onNext({
       ...data,
-      avartar: imageUrl,
+      userAvatar: imageUrl,
       fullName: formData.fullName,
       phoneNumber: form.getFieldValue("phone"),
     });

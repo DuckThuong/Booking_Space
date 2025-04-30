@@ -27,9 +27,7 @@ const apiRequest = async (
       params: method === "GET" ? params : undefined,
     };
 
-    console.log("API Request Config:", config);
     const response = await axios(config);
-    console.log("API Response:", response.data);
     return response.data;
   } catch (error) {
     console.error("API Error:", error);

@@ -13,9 +13,15 @@ import { LogoForm } from "../../Components/LogoForm/LogoForm";
 import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
 import { ValidateLibrary } from "../../validate";
 import "./login.scss";
+import { login } from "./../../api/authApi";
+import { useMutation } from "@tanstack/react-query";
+import { userApi } from "../../api/api";
+import { LoginPayload } from "../../api/constants";
+import { notification } from "antd";
 const Login = () => {
   const [form] = useForm();
   const navigate = useNavigate();
+
   const handleForgotPassword = () => {
     navigate(CUSTOMER_ROUTER_PATH.FORGOT_EMAIL_INPUT);
   };
@@ -26,8 +32,70 @@ const Login = () => {
     }
   };
 
+  const loginMutation = useMutation({
+    mutationFn: (payload: LoginPayload) => userApi.doUserSubmitLogin(payload),
+    onSuccess: (data) => {
+      notification.open({
+        message: "Thông báo!",
+        description: "Đăng nhập thành công.",
+        placement: "topRight",
+        showProgress: true,
+        pauseOnHover: true,
+        style: {
+          backgroundColor: "#ffffff",
+          borderLeft: "4px solid #007bff",
+        },
+      });
+      localStorage.setItem("accessToken", data.accessToken);
+      navigate(CUSTOMER_ROUTER_PATH.HOME);
+    },
+    onError: (error) => {
+      notification.open({
+        message: "Thông báo!",
+        description: "Đăng nhập thất bại.",
+        placement: "topRight",
+        showProgress: true,
+        pauseOnHover: true,
+        style: {
+          backgroundColor: "#ffffff",
+          borderLeft: "4px solid #007bff",
+        },
+      });
+    },
+  });
+
+  const doLoginGoogle = useMutation({
+    mutationFn: () => userApi.doGoogleLogin(),
+    onSuccess: (data) => {
+      console.log(data);
+    },
+    onError: (error) => {
+      notification.open({
+        message: "Thông báo!",
+        description: "Đăng nhập thất bại.",
+        placement: "topRight",
+        showProgress: true,
+        pauseOnHover: true,
+        style: {
+          backgroundColor: "#ffffff",
+          borderLeft: "4px solid #007bff",
+        },
+      });
+    },
+  });
+
+  const handleLoginGoogle = () => {
+    // doLoginGoogle.mutate();
+    window.location.href =
+      "https://accounts.google.com/o/oauth2/auth?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=email%20profile";
+  };
+
   const onFinish = () => {
-    navigate(CUSTOMER_ROUTER_PATH.HOME);
+    const payload: LoginPayload = {
+      userName: form.getFieldValue("userName"),
+      password: form.getFieldValue("password"),
+    };
+    loginMutation.mutate(payload);
   };
 
   const onClickRegister = () => {
@@ -47,14 +115,14 @@ const Login = () => {
           <div className="login_form-email">
             <p className="login_form-label">Email</p>
             <FormInput
-              name={"email"}
+              name={"userName"}
               formItemProps={{
                 className: "login_form-input",
-                rules: ValidateLibrary().email,
+                rules: ValidateLibrary().required,
               }}
               inputProps={{
                 onKeyPress: handleKeyPress,
-                placeholder: "Email@gmail.com",
+                placeholder: "Tên người dùng",
               }}
             />
           </div>
@@ -96,7 +164,7 @@ const Login = () => {
               content=""
               buttonProps={{
                 className: "login_form-login-google",
-                onClick: onFinish,
+                onClick: handleLoginGoogle,
                 type: "default",
                 icon: <SvgGoogle />,
               }}

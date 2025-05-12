@@ -9,7 +9,7 @@ interface LoginResponse {
 export const login = async (email: string, password: string) => {
   try {
     const response = await axios.post<LoginResponse>(
-      QUERY_KEY.GET_USER + "/login",
+      QUERY_KEY.GET_USER + "/Register",
       {
         email,
         password,

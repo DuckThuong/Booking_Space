@@ -16,6 +16,9 @@ export const CUSTOMER_ROUTE_NAME = {
   FORGOT_SUCCESS: "forgot-success",
   //Home
   HOME: "home",
+  HOME_CONTAINER: "home-container",
+  //Host
+  HOST: "host",
   //Catergories
   CATERGORIES: "catergories",
   //Default_user
@@ -33,6 +36,9 @@ export const CUSTOMER_ROUTER_PATH = {
   FORGOT_SUCCESS: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.FORGOT_SUCCESS}`,
   //Home
   HOME: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.HOME}`,
+  HOME_CONTAINER: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.HOME_CONTAINER}`,
+  //Host
+  HOST: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.HOST}`,
   //Default_user
   DEFAULT_USER: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.DEFAULT_USER}`,
 };

@@ -1,7 +1,7 @@
 import { FC, useState } from "react";
 import { Button, Form, Upload } from "antd";
 import FormWrap from "../../../Components/Form/FormWrap";
-import { CreateVenueEnum } from "../../../api/constants";
+import { CreateVenueEnum } from "../../../api/itemApi";
 import RowWrap from "../../../Components/RowWrap";
 import ColWrap from "../../../Components/ColWrap";
 import { PlusOutlined } from "@ant-design/icons";

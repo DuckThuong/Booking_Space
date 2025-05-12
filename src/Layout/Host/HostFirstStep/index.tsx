@@ -1,7 +1,7 @@
 import { Image, Spin } from "antd";
 import { FC } from "react";
 import { useLocation } from "react-router-dom";
-import { CreateVenueEnum } from "../../../api/constants";
+import { CreateVenueEnum } from "../../../api/itemApi";
 import FormWrap from "../../../Components/Form/FormWrap";
 import RowWrap from "../../../Components/RowWrap";
 import { useQuery } from "@tanstack/react-query";

@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL, API_KEY } from "./apiConfig";
-import { CreateVenueEnum, LoginPayload, RegisterPayload } from "./constants";
+import { CreateVenueEnum, LoginPayload, RegisterPayload } from "./itemApi";
 
 const apiRequest = async (
   endpoint: string,

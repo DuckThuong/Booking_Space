@@ -6,7 +6,7 @@ import { PlusOutlined } from "@ant-design/icons";
 import { RcFile, UploadProps } from "antd/es/upload";
 import { FormInput } from "../../../Components/Form/FormInput";
 import ColWrap from "../../../Components/ColWrap";
-import { CreateVenueEnum } from "../../../api/constants";
+import { CreateVenueEnum } from "../../../api/itemApi";
 
 interface SecondStepProps {
   onNext: (data: Partial<CreateVenueEnum>) => void;

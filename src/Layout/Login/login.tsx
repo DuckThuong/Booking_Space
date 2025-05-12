@@ -16,7 +16,7 @@ import "./login.scss";
 import { login } from "./../../api/authApi";
 import { useMutation } from "@tanstack/react-query";
 import { userApi } from "../../api/api";
-import { LoginPayload } from "../../api/constants";
+import { LoginPayload } from "../../api/itemApi";
 import { notification } from "antd";
 const Login = () => {
   const [form] = useForm();

@@ -2,7 +2,7 @@ import { FC, useState } from "react";
 import { HostFirstStep } from "./HostFirstStep";
 import { HostSecondStep } from "./HostSecondStep";
 import { HostThirdStep } from "./HostThirdStep";
-import { CreateVenueEnum } from "../../api/constants";
+import { CreateVenueEnum } from "../../api/itemApi";
 import { HostFourthStep } from "./HostFourthStep";
 import { HostLastStep } from "./HostLastStep";
 

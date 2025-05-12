@@ -1,6 +1,6 @@
 import { Button, notification } from "antd";
 import { FC } from "react";
-import { CreateVenueEnum } from "../../../api/constants";
+import { CreateVenueEnum } from "../../../api/itemApi";
 import RowWrap from "../../../Components/RowWrap";
 import { useMutation } from "@tanstack/react-query";
 import { venueApi } from "../../../api/api";

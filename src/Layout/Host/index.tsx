@@ -3,7 +3,7 @@ import RowWrap from "../../Components/RowWrap";
 import ColWrap from "../../Components/ColWrap";
 import { Button } from "antd";
 import { ArrowLeftOutlined, CloseOutlined } from "@ant-design/icons";
-import { HostRouter } from "./hostRoter";
+import { HostRouter } from "./hostRouter";
 import "./host.scss";
 import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
 import { useNavigate } from "react-router-dom";

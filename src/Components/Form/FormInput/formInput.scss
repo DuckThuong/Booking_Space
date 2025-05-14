@@ -6,10 +6,9 @@
 
   .ant-input {
     height: 48px;
-    //28737
     padding: 10px 20px !important;
     border-radius: 8px;
-    border: 1px solid $border_color;
+    border: 1px solid $gray-color !important;
     font-size: 16px;
     color: $text_title_color !important;
     @include sm {
@@ -22,11 +21,11 @@
 
     &:focus {
       box-shadow: unset;
-      //border-color: $blue-color;
+      border-color: #4096ff;
     }
 
     &::placeholder {
-      color: $disable_color !important;
+      color: $gray-color  !important;
       font-size: 16px;
       font-style: normal;
       font-weight: 400;
@@ -53,7 +52,7 @@
 
   .ant-form-item-has-error {
     .ant-input-status-error {
-      //border-color: $error_color !important;
+      border-color: $error_color !important;
       outline: none !important;
     }
   }
@@ -77,7 +76,7 @@
   //  gap: 12px;
   //}
   .ant-input-affix-wrapper-focused {
-    //border-color: $blue-color !important;
+    border-color: #4096ff !important;
     box-shadow: unset !important;
   }
 
@@ -85,16 +84,19 @@
     height: 48px;
     padding: 0 12px 0 0;
     border-radius: 8px;
-    border: 1px solid $border_color;
+    border: 1px solid $gray-color !important;
 
     &:hover {
-      //border-color: $gray-color;
+      border-color: #4096ff;
     }
+     input {
+      border: none !important;
+     }
 
     .ant-input {
       height: 100% !important;
       border-radius: 8px;
-      color: $disable_color;
+      color: $gray-color ;
       font-size: 16px;
 
       &:focus,
@@ -104,7 +106,7 @@
       }
 
       &::placeholder {
-        color: $disable_color !important;
+        color: $gray-color  !important;
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
@@ -118,19 +120,19 @@
 
   &-read-only {
     .ant-input {
-      color: $disable_color !important;
+      color: $gray-color  !important;
 
       &::placeholder {
-        color: $disable_color !important;
+        color: $gray-color  !important;
       }
     }
 
     .ant-input-password {
-      color: $disable_color !important;
-      border-color: $disable_color !important;
+      color: $gray-color  !important;
+      border-color: $gray-color  !important;
 
       &::placeholder {
-        color: $disable_color !important;
+        color: $gray-color  !important;
       }
     }
 

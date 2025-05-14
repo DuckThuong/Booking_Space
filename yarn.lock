@@ -7477,7 +7477,6 @@ multicast-dns@^7.2.5:
     antd "^5.24.3"
     axios "^1.7.9"
     bootstrap "^5.3.3"
-    caniuse-lite "^1.0.30001717"
     dayjs "^1.11.13"
     install "^0.13.0"
     isemail "^3.2.0"

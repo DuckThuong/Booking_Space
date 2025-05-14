@@ -1,4 +1,4 @@
-export const API_BASE_URL = "https://noted-rhino-humbly.ngrok-free.app";
+export const API_BASE_URL = "https://coworkingspace-production-1d94.up.railway.app";
 
 export const API_KEY = {
   USER: "Authentication",

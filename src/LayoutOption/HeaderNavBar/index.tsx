@@ -32,6 +32,8 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
   useEffect(() => {
     if (window.location.href !== CUSTOMER_ROUTER_PATH.HOME) {
       setTabKey("0");
+    } else {
+      setTabKey("1");
     }
   }, [window.location.href]);
 

@@ -1,8 +1,8 @@
 import { SolutionOutlined } from "@ant-design/icons";
 import { faListUl, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Col, Dropdown, Image, Menu, Row, Tabs } from "antd";
-import { useState } from "react";
+import { Button, Col, Dropdown, Image, Row, Tabs } from "antd";
+import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SvgLogo } from "../../@svg/Logo/SvgLogo";
 import ColWrap from "../../Components/ColWrap";
@@ -21,54 +21,27 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
   isLogin,
 }) => {
   const [tabKey, setTabKey] = useState<string>("1");
-  const [dropdownKey, setDropdownKey] = useState<string>("");
   const [showAccount, setShowAccount] = useState<boolean>(false);
   const navigate = useNavigate();
   const tabItems = [
-    { key: "1", label: "Trang chủ" },
-    { key: "2", label: "Tài khoản", hasDropdown: true },
-    { key: "3", label: "Nhóm của bạn", hasDropdown: true },
-    { key: "4", label: "Truy cập nhanh" },
-    { key: "5", label: "Trợ giúp" },
+    { key: "1", label: "Doanh nghiệp" },
+    { key: "2", label: "Giá cả" },
+    { key: "3", label: "Tài nguyên" },
   ];
 
-  const dropdownMenus: Record<string, JSX.Element> = {
-    "2": (
-      <Menu
-        onClick={(e) => {
-          setDropdownKey(e.key);
-          onTabChange?.(e.key);
-        }}
-        selectedKeys={[dropdownKey]}
-        items={[
-          { key: "2.1", label: "Lập hóa đơn thanh toán" },
-          { key: "2.2", label: "Tài liệu" },
-          { key: "2.3", label: "Thiết bị mạng" },
-          { key: "2.4", label: "Hãy giới thiệu" },
-        ]}
-      />
-    ),
-    "3": (
-      <Menu
-        onClick={(e) => {
-          setDropdownKey(e.key);
-          onTabChange?.(e.key);
-        }}
-        selectedKeys={[dropdownKey]}
-        items={[
-          { key: "3.1", label: "Nhóm của bạn" },
-          { key: "3.2", label: "Người liên hệ chính" },
-          { key: "3.3", label: "Yêu cầu quyền truy cập" },
-        ]}
-      />
-    ),
-  };
+  useEffect(() => {
+    if (window.location.href !== CUSTOMER_ROUTER_PATH.HOME) {
+      setTabKey("0");
+    }
+  }, [window.location.href]);
 
   const onTabChangeHandler = (key: string) => {
     setTabKey(key);
-    if (!tabItems.find((tab) => tab.key === key)?.hasDropdown) {
-      onTabChange?.(key);
+    navigate(CUSTOMER_ROUTER_PATH.HOME);
+    if (onTabChange) {
+      onTabChange(key);
     }
+    console.log(tabKey);
   };
 
   return (
@@ -76,36 +49,18 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
       <FormWrap layout="horizontal" className="header__form">
         <RowWrap gutter={[16, 16]} className="header__row-first ">
           <ColWrap className="row-first-left" colProps={{ span: 18 }}>
-            <div className="header__row-logo">
+            <div
+              className="header__row-logo"
+              onClick={() => navigate(CUSTOMER_ROUTER_PATH.HOME)}
+            >
               <SvgLogo />
             </div>
             {isLogin ? (
               <div className="header__tab">
                 <Tabs activeKey={tabKey} onChange={onTabChangeHandler}>
-                  {tabItems.map((tab) => {
-                    const tabContent = tab.hasDropdown ? (
-                      <Dropdown
-                        overlay={dropdownMenus[tab.key]}
-                        trigger={["hover"]}
-                        overlayClassName="header__dropdown"
-                      >
-                        <div
-                          style={{
-                            width: "100%",
-                            display: "block",
-                            cursor: "pointer",
-                          }}
-                          onClick={(e) => e.preventDefault()}
-                        >
-                          {tab.label}
-                        </div>
-                      </Dropdown>
-                    ) : (
-                      tab.label
-                    );
-
-                    return <Tabs.TabPane key={tab.key} tab={tabContent} />;
-                  })}
+                  {tabItems.map((tab) => (
+                    <Tabs.TabPane key={tab.key} tab={tab.label} />
+                  ))}
                 </Tabs>
               </div>
             ) : (

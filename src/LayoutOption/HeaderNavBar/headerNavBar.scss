@@ -95,6 +95,9 @@
         margin: 0px 8px !important;
       }
     }
+    &-logo {
+      cursor: pointer;
+    }
   }
   &__tab {
     .ant-tabs {
@@ -105,22 +108,25 @@
         margin-bottom: 0px !important;
       }
       &-tab {
-        color: $text_secondary_color_2 !important;
-        font-family: $font_family_1;
-        font-weight: 500;
-        font-size: 14px;
+        color: black !important;
+        font-family: $font_family_1 !important;
+        font-size: 22px !important;
+        font-weight: 600 !important;
+        font-family: "DM Sans", "system-ui", sans-serif !important;
         &-active {
           .ant-dropdown-trigger {
-            color: $text_secondary_color_3 !important;
+            color: #00609c !important;
             font-family: $font_family_1 !important;
-            font-weight: 500 !important;
-            font-size: 14px !important;
+            font-size: 22px !important;
+            font-weight: 600 !important;
+            font-family: "DM Sans", "system-ui", sans-serif !important;
           }
           .ant-tabs-tab-btn {
-            color: $text_secondary_color_3 !important;
+            color: #00609c !important;
             font-family: $font_family_1 !important;
-            font-weight: 500 !important;
-            font-size: 14px !important;
+            font-size: 22px !important;
+            font-weight: 600 !important;
+            font-family: "DM Sans", "system-ui", sans-serif !important;
           }
         }
       }

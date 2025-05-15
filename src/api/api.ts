@@ -2,7 +2,7 @@ import axios from "axios";
 import { API_BASE_URL, API_KEY } from "./apiConfig";
 import { CreateVenueEnum, LoginPayload, RegisterPayload } from "./itemApi";
 
-const apiRequest = async (
+export const apiRequest = async (
   endpoint: string,
   method: "GET" | "POST" | "PUT" | "DELETE" | "PATCH" = "GET",
   data?: any,
@@ -45,8 +45,6 @@ export enum OrderStateEnum {
 export const userApi = {
   doCreateUserByUserNameAndPassword: (userData: RegisterPayload) =>
     apiRequest(`${API_KEY.USER}/Register`, "POST", userData),
-  doUserSubmitLogin: (userData: LoginPayload) =>
-    apiRequest(`${API_KEY.USER}/Login`, "POST", userData),
   doGoogleLogin: () => apiRequest(`${API_KEY.USER}/GoogleLogin`, "GET"),
 };
 

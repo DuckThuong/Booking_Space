@@ -13,11 +13,11 @@ import { LogoForm } from "../../Components/LogoForm/LogoForm";
 import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
 import { ValidateLibrary } from "../../validate";
 import "./login.scss";
-import { login } from "./../../api/authApi";
 import { useMutation } from "@tanstack/react-query";
 import { userApi } from "../../api/api";
 import { LoginPayload } from "../../api/itemApi";
 import { notification } from "antd";
+import { doLogin } from "../../api/authApi";
 const Login = () => {
   const [form] = useForm();
   const navigate = useNavigate();
@@ -31,38 +31,6 @@ const Login = () => {
       onFinish();
     }
   };
-
-  const loginMutation = useMutation({
-    mutationFn: (payload: LoginPayload) => userApi.doUserSubmitLogin(payload),
-    onSuccess: (data) => {
-      notification.open({
-        message: "Thông báo!",
-        description: "Đăng nhập thành công.",
-        placement: "topRight",
-        showProgress: true,
-        pauseOnHover: true,
-        style: {
-          backgroundColor: "#ffffff",
-          borderLeft: "4px solid #007bff",
-        },
-      });
-      localStorage.setItem("accessToken", data.accessToken);
-      navigate(CUSTOMER_ROUTER_PATH.HOME);
-    },
-    onError: (error) => {
-      notification.open({
-        message: "Thông báo!",
-        description: "Đăng nhập thất bại.",
-        placement: "topRight",
-        showProgress: true,
-        pauseOnHover: true,
-        style: {
-          backgroundColor: "#ffffff",
-          borderLeft: "4px solid #007bff",
-        },
-      });
-    },
-  });
 
   const doLoginGoogle = useMutation({
     mutationFn: () => userApi.doGoogleLogin(),
@@ -85,17 +53,32 @@ const Login = () => {
   });
 
   const handleLoginGoogle = () => {
-    // doLoginGoogle.mutate();
-    window.location.href =
-      "https://accounts.google.com/o/oauth2/auth?client_id=YOUR_CLIENT_ID&redirect_uri=YOUR_REDIRECT_URI&response_type=code&scope=email%20profile";
+    doLoginGoogle.mutate();
   };
 
-  const onFinish = () => {
+  const onFinish = async () => {
     const payload: LoginPayload = {
       userName: form.getFieldValue("userName"),
       password: form.getFieldValue("password"),
     };
-    loginMutation.mutate(payload);
+    try {
+      const result = await doLogin(payload);
+      if (result) {
+        navigate(CUSTOMER_ROUTER_PATH.HOME);
+      }
+    } catch (error) {
+      notification.open({
+        message: "Thông báo!",
+        description: "Đăng nhập thất bại.",
+        placement: "topRight",
+        showProgress: true,
+        pauseOnHover: true,
+        style: {
+          backgroundColor: "#ffffff",
+          borderLeft: "4px solid rgb(255, 0, 0)",
+        },
+      });
+    }
   };
 
   const onClickRegister = () => {

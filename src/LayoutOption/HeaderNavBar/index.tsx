@@ -10,6 +10,8 @@ import FormWrap from "../../Components/Form/FormWrap";
 import RowWrap from "../../Components/RowWrap";
 import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
 import "./headerNavBar.scss";
+import useUser from "../../hooks/useUser";
+import { doLogOut } from "../../api/authApi";
 
 interface HeaderNavBarProps {
   isLogin: boolean;
@@ -23,6 +25,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
   const [tabKey, setTabKey] = useState<string>("1");
   const [showAccount, setShowAccount] = useState<boolean>(false);
   const navigate = useNavigate();
+  const user = useUser();
   const tabItems = [
     { key: "1", label: "Doanh nghiệp" },
     { key: "2", label: "Giá cả" },
@@ -43,7 +46,14 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
     if (onTabChange) {
       onTabChange(key);
     }
-    console.log(tabKey);
+  };
+
+  const handleLogOut = async () => {
+    const result = await doLogOut();
+    if (result === true) {
+      navigate(CUSTOMER_ROUTER_PATH.LOG_IN);
+    }
+    setShowAccount(false);
   };
 
   return (
@@ -128,8 +138,8 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                           src="https://static-cse.canva.com/blob/2008403/1600w-vkBvE1d_xYA.jpg"
                         />
                         <div className="header_profile-info">
-                          <p>Tên người dùng</p>
-                          <p>Email người dùng</p>
+                          <p>{user.fullName}</p>
+                          <p>{user.email}</p>
                         </div>
                       </div>
                       <div
@@ -175,7 +185,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                       <div
                         className="header_account-option"
                         onClick={() => {
-                          setShowAccount(false);
+                          handleLogOut();
                         }}
                       >
                         Đăng xuất

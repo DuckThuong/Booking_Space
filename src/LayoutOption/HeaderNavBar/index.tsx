@@ -1,17 +1,17 @@
 import { SolutionOutlined } from "@ant-design/icons";
 import { faListUl, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Col, Dropdown, Image, Row, Tabs } from "antd";
+import { Button, Col, Image, Row, Tabs } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SvgLogo } from "../../@svg/Logo/SvgLogo";
+import { doLogOut } from "../../api/authApi";
 import ColWrap from "../../Components/ColWrap";
 import FormWrap from "../../Components/Form/FormWrap";
 import RowWrap from "../../Components/RowWrap";
 import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
 import "./headerNavBar.scss";
-import useUser from "../../hooks/useUser";
-import { doLogOut } from "../../api/authApi";
+import { useUser } from "../../api/useHook";
 
 interface HeaderNavBarProps {
   isLogin: boolean;
@@ -138,8 +138,8 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                           src="https://static-cse.canva.com/blob/2008403/1600w-vkBvE1d_xYA.jpg"
                         />
                         <div className="header_profile-info">
-                          <p>{user.fullName}</p>
-                          <p>{user.email}</p>
+                          <p>{user?.fullName}</p>
+                          <p>{user?.email}</p>
                         </div>
                       </div>
                       <div

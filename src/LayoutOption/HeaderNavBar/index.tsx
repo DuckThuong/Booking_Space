@@ -135,7 +135,12 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                       <div className="header_profile">
                         <Image
                           preview={false}
-                          src="https://static-cse.canva.com/blob/2008403/1600w-vkBvE1d_xYA.jpg"
+                          src={
+                            typeof user?.avatarUrl === "string" &&
+                            user.avatarUrl
+                              ? user.avatarUrl
+                              : "https://static-cse.canva.com/blob/2008403/1600w-vkBvE1d_xYA.jpg"
+                          }
                         />
                         <div className="header_profile-info">
                           <p>{user?.fullName}</p>

@@ -37,6 +37,7 @@
       }
     }
     &-account {
+      position: relative;
       width: 80px;
       height: 50px;
       box-shadow: $box_shadow_1;
@@ -138,6 +139,90 @@
         &:last-child {
           border-bottom: none !important;
         }
+      }
+    }
+  }
+  &_account {
+    position: absolute;
+    z-index: 1000;
+    width: 820px;
+    height: fit-content !important;
+    top: 80px;
+    right: 0px;
+    background-color: white !important;
+    border-radius: 24px !important;
+    border: 1px solid $border_color_1 !important;
+    box-shadow: $box_shadow_1;
+    .ant-col {
+      padding: 32px 32px !important;
+    }
+    &-profile {
+      background-color: #ebeef2 !important;
+    }
+    &-title {
+      color: #00609c !important;
+      font-family: $font_family_1 !important;
+      font-family: $font_family_1 !important;
+      font-size: 22px !important;
+      font-weight: 600 !important;
+      font-family: "DM Sans", "system-ui", sans-serif !important;
+    }
+    &-venue {
+      span {
+        color: $text_secondary_color_2 !important;
+        font-family: $font_family_1 !important;
+        font-size: 22px !important;
+        font-weight: 600 !important;
+        font-family: "DM Sans", "system-ui", sans-serif !important;
+      }
+    }
+    &-option {
+      height: 48px !important;
+      padding: 8px 0px !important;
+      color: $text_secondary_color_2 !important;
+      font-family: $font_family_1 !important;
+      font-size: 22px !important;
+      font-weight: 600 !important;
+      font-family: "DM Sans", "system-ui", sans-serif !important;
+      &:focus {
+        color: #00609c !important;
+        text-decoration: none;
+        background-color: #fff !important;
+        cursor: pointer;
+      }
+      &:hover {
+        color: #00609c !important;
+        text-decoration: none;
+        background-color: #fff !important;
+        cursor: pointer;
+      }
+    }
+  }
+  &_profile {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    width: 100%;
+    height: 50px !important;
+    padding: 0px 0px 24px 0px !important;
+    border-bottom: 1px solid $border_color_2 !important;
+    .ant-image {
+      width: 40px !important;
+      height: 40px !important;
+      margin-bottom: 0px !important;
+      margin: 0px 12px !important;
+      &-img {
+        border-radius: 50% !important;
+      }
+    }
+    &-info {
+      height: 50px !important;
+      margin-left: 10px;
+      p {
+        margin-bottom: 0px !important;
+        font-family: $font_family_1 !important;
+        font-weight: 500 !important;
+        font-size: 16px !important;
       }
     }
   }

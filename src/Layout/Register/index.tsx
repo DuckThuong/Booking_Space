@@ -49,7 +49,7 @@ export const Register = () => {
           borderLeft: "4px solid #007bff",
         },
       });
-      navigate(CUSTOMER_ROUTER_PATH.DEFAULT_USER);
+      navigate(CUSTOMER_ROUTER_PATH.LOG_IN);
     },
     onError: (error) => {
       console.log(error);

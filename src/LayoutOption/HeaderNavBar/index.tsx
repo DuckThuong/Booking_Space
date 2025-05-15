@@ -1,15 +1,15 @@
 import { SolutionOutlined } from "@ant-design/icons";
 import { faListUl, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Dropdown, Menu, Tabs } from "antd";
+import { Button, Col, Dropdown, Image, Menu, Row, Tabs } from "antd";
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { SvgLogo } from "../../@svg/Logo/SvgLogo";
 import ColWrap from "../../Components/ColWrap";
 import FormWrap from "../../Components/Form/FormWrap";
 import RowWrap from "../../Components/RowWrap";
-import "./headerNavBar.scss";
-import { useNavigate } from "react-router-dom";
 import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
+import "./headerNavBar.scss";
 
 interface HeaderNavBarProps {
   isLogin: boolean;
@@ -22,6 +22,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
 }) => {
   const [tabKey, setTabKey] = useState<string>("1");
   const [dropdownKey, setDropdownKey] = useState<string>("");
+  const [showAccount, setShowAccount] = useState<boolean>(false);
   const navigate = useNavigate();
   const tabItems = [
     { key: "1", label: "Trang chủ" },
@@ -140,10 +141,91 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                   </span>
                   <span>Become a Host</span>
                 </Button>
-                <Button className="header__row-account">
+                <Button
+                  className="header__row-account"
+                  onClick={() => {
+                    setShowAccount(!showAccount);
+                  }}
+                >
                   <FontAwesomeIcon icon={faUser} />
                   <FontAwesomeIcon icon={faListUl} />
                 </Button>
+                {showAccount && (
+                  <Row className="header_account">
+                    <Col span={12} className="header_account-venue">
+                      <p className="header_account-title">Địa điểm của tôi</p>
+                      <div
+                        className="header_account-option"
+                        onClick={() => {
+                          setShowAccount(false);
+                          navigate(CUSTOMER_ROUTER_PATH.VENUE);
+                        }}
+                      >
+                        360, Giải Phóng
+                      </div>
+                    </Col>
+                    <Col span={12} className="header_account-profile">
+                      <div className="header_profile">
+                        <Image
+                          preview={false}
+                          src="https://static-cse.canva.com/blob/2008403/1600w-vkBvE1d_xYA.jpg"
+                        />
+                        <div className="header_profile-info">
+                          <p>Tên người dùng</p>
+                          <p>Email người dùng</p>
+                        </div>
+                      </div>
+                      <div
+                        className="header_account-option"
+                        onClick={() => {
+                          setShowAccount(false);
+                        }}
+                      >
+                        Địa điểm của tôi
+                      </div>
+                      <div
+                        className="header_account-option"
+                        onClick={() => {
+                          setShowAccount(false);
+                        }}
+                      >
+                        Booking
+                      </div>
+                      <div
+                        className="header_account-option"
+                        onClick={() => {
+                          setShowAccount(false);
+                        }}
+                      >
+                        Tin nhắn
+                      </div>
+                      <div
+                        className="header_account-option"
+                        onClick={() => {
+                          setShowAccount(false);
+                        }}
+                      >
+                        Cài đặt
+                      </div>
+                      <div
+                        className="header_account-option"
+                        onClick={() => {
+                          setShowAccount(false);
+                        }}
+                      >
+                        Trợ giúp
+                      </div>
+                      <div
+                        className="header_account-option"
+                        onClick={() => {
+                          setShowAccount(false);
+                        }}
+                      >
+                        Đăng xuất
+                      </div>
+                    </Col>
+                  </Row>
+                )}
               </div>
             )}
           </ColWrap>

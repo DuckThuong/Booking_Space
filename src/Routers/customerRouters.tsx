@@ -10,6 +10,7 @@ import { Register } from "../Layout/Register";
 import { DefaultUser } from "../Layout/User/DefaultUser";
 import { SuspenseWrapper } from "../SuspenseWrapper";
 import { CUSTOMER_ROUTER_PATH } from "./Routers";
+import { Venue } from "../Layout/Venue";
 
 export const CustomerRouter = () => (
   <Routes>
@@ -65,6 +66,13 @@ export const CustomerRouter = () => (
       <Route
         path={CUSTOMER_ROUTER_PATH.DEFAULT_USER}
         element={<SuspenseWrapper component={<DefaultUser />} />}
+      />
+    </Route>
+    {/* Venue */}
+    <Route>
+      <Route
+        path={CUSTOMER_ROUTER_PATH.VENUE}
+        element={<SuspenseWrapper component={<Venue />} />}
       />
     </Route>
   </Routes>

@@ -23,6 +23,8 @@ export const CUSTOMER_ROUTE_NAME = {
   CATERGORIES: "catergories",
   //Default_user
   DEFAULT_USER: "default-user",
+  //Venue
+  VENUE: "venue",
 };
 export const CUSTOMER_ROUTER_PATH = {
   //Log_In
@@ -41,4 +43,6 @@ export const CUSTOMER_ROUTER_PATH = {
   HOST: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.HOST}`,
   //Default_user
   DEFAULT_USER: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.DEFAULT_USER}`,
+  //Venue
+  VENUE: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.VENUE}`,
 };

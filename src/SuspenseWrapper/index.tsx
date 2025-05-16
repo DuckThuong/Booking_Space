@@ -1,6 +1,5 @@
 import { Spin } from "antd";
 import { random } from "lodash";
-import React from "react";
 import { Suspense } from "react";
 import RequireAuth from "../Routers/requiredAuth";
 

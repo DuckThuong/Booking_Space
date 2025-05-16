@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL, API_KEY } from "./apiConfig";
-import { CreateVenueEnum, LoginPayload, RegisterPayload } from "./itemApi";
+import { CreateVenueEnum, RegisterPayload } from "./itemApi";
 
 export const apiRequest = async (
   endpoint: string,
@@ -10,7 +10,7 @@ export const apiRequest = async (
 ) => {
   try {
     const url = `${API_BASE_URL}/${endpoint}`;
-    console.log("API Request URL:", url);
+    const accessToken = localStorage.getItem("accessToken");
 
     const config = {
       method,
@@ -18,10 +18,10 @@ export const apiRequest = async (
       headers: {
         Accept: "application/json",
         "Content-Type": "application/json",
-        "ngrok-skip-browser-warning": "true",
         "Access-Control-Allow-Origin": "*",
         "Access-Control-Allow-Methods": "GET, POST, PUT, DELETE, OPTIONS",
         "Access-Control-Allow-Headers": "Content-Type, Authorization",
+        ...(accessToken && { Authorization: `Bearer ${accessToken}` }),
       },
       data: method !== "GET" ? data : undefined,
       params: method === "GET" ? params : undefined,
@@ -30,7 +30,6 @@ export const apiRequest = async (
     const response = await axios(config);
     return response.data;
   } catch (error) {
-    console.error("API Error:", error);
     throw error;
   }
 };

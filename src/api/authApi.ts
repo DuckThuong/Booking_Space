@@ -170,7 +170,7 @@ export const doLogOut = async () => {
         localStorage.removeItem("user");
         notification.open({
           message: "Thông báo!",
-          description: "Đăng nhập thành công.",
+          description: "Đăng xuất thành công.",
           placement: "topRight",
           showProgress: true,
           pauseOnHover: true,

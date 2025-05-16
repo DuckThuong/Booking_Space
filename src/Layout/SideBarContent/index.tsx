@@ -1,14 +1,8 @@
 import { Button, Col, Menu, Row } from "antd";
-import FormWrap from "../../Components/Form/FormWrap";
-import "./sideBar.scss";
-import { AppstoreOutlined, MailOutlined } from "@ant-design/icons";
 import { MenuProps } from "antd/lib";
 import { useState } from "react";
-
-interface LevelKeysProps {
-  key?: string;
-  children?: LevelKeysProps[];
-}
+import FormWrap from "../../Components/Form/FormWrap";
+import "./sideBar.scss";
 
 type MenuItem = Required<MenuProps>["items"][number];
 
@@ -44,22 +38,6 @@ const items: MenuItem[] = [
     ],
   },
 ];
-
-const getLevelKeys = (items1: LevelKeysProps[]) => {
-  const key: Record<string, number> = {};
-  const func = (items2: LevelKeysProps[], level = 1) => {
-    items2.forEach((item) => {
-      if (item.key) {
-        key[item.key] = level;
-      }
-      if (item.children) {
-        func(item.children, level + 1);
-      }
-    });
-  };
-  func(items1);
-  return key;
-};
 
 export const SidebarContent = () => {
   const [stateOpenKeys, setStateOpenKeys] = useState(["2"]);

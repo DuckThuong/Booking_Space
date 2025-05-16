@@ -11,8 +11,9 @@ import RowWrap from "../../Components/RowWrap";
 import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
 import "./headerNavBar.scss";
 import { useUser } from "../../api/useHook";
-import { useMutation } from "@tanstack/react-query";
-import { userApi } from "../../api/api";
+import { useMutation, useQuery } from "@tanstack/react-query";
+import { userApi, venueApi } from "../../api/api";
+import { QUERY_KEY } from "../../api/apiConfig";
 
 interface HeaderNavBarProps {
   isLogin: boolean;
@@ -89,6 +90,11 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
 
   })
 
+  const { data: venueData } = useQuery({
+    queryKey: [QUERY_KEY.GET_VENUE],
+    queryFn: () => venueApi.getVenueByUser(),
+  })
+
   const handleLogOut = async () => {
     logOutMutation.mutate();
     setShowAccount(false);
@@ -159,15 +165,30 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                   <Row className="header_account">
                     <Col span={12} className="header_account-venue">
                       <p className="header_account-title">Địa điểm của tôi</p>
-                      <div
-                        className="header_account-option"
-                        onClick={() => {
-                          setShowAccount(false);
-                          navigate(CUSTOMER_ROUTER_PATH.VENUE);
-                        }}
-                      >
-                        360, Giải Phóng
-                      </div>
+                      {Array.isArray(venueData) && venueData.length > 0 ? (
+                        venueData.map((venue: any) => (
+                          <div
+                            key={venue.id}
+                            className="header_account-option"
+                            onClick={() => {
+                              setShowAccount(false);
+                              navigate(CUSTOMER_ROUTER_PATH.VENUE, { state: venue.id });
+                            }}
+                          >
+                            {venue.address || "Địa điểm chưa có địa chỉ"}
+                          </div>
+                        ))
+                      ) : (
+                        <div
+                          className="header_account-option"
+                          onClick={() => {
+                            setShowAccount(false);
+                            navigate(CUSTOMER_ROUTER_PATH.VENUE);
+                          }}
+                        >
+                          360, Giải Phóng
+                        </div>
+                      )}
                     </Col>
                     <Col span={12} className="header_account-profile">
                       <div className="header_profile">

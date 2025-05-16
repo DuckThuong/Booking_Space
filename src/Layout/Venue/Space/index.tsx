@@ -11,6 +11,8 @@ import { FormSelect } from "../../../Components/Form/FormSelect";
 
 export const Space = () => {
   const [current, setCurrent] = useState(0);
+  const spaceByDayItem = [1, 2, 3];
+  const spaceByMonthItem = [1, 2, 3];
 
   const onChange = (value: number) => {
     setCurrent(value);
@@ -52,114 +54,118 @@ export const Space = () => {
   const items: CollapseProps["items"] = [
     {
       key: "1",
-      label: `Địa điểm cho thuê theo ngày ( ${1} )`,
+      label: `Địa điểm cho thuê theo ngày ( ${spaceByDayItem.length} )`,
       children: (
         <div className="space_detail">
-          <Row className="space_detail-row">
-            <Col span={4} className="space_detail-col">
-              <Image
-                className="space_detail-item-image"
-                src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/482752AXp/anh-mo-ta.png"
-              />
-            </Col>
-            <Col span={8} className="space_detail-col">
-              <h3 className="space_detail-item-name">Tên địa điểm</h3>
-              <p className="space_detail-item-detail">
-                Thông tin tiêu biểu về địa điểm
-              </p>
-            </Col>
-            <Col span={6} className="space_detail-col">
-              <h3 className="space_detail-item-name">Giá tiền / tháng</h3>
-              <p className="space_detail-item-detail">Thời lượng thuê</p>
-            </Col>
-            <Col span={4} className="space_detail-col">
-              <FormSelect
-                name={"itemStatus"}
-                selectProps={{
-                  className: "space_detail-item-status",
-                  defaultValue: "Ẩn",
-                  value: "Ẩn",
-                  options: [
-                    {
-                      key: 1,
-                      value: "Ẩn",
-                    },
-                    {
-                      key: 1,
-                      value: "Đang thuê",
-                    },
-                    {
-                      key: 1,
-                      value: "Sẵn sàng",
-                    },
-                  ],
-                }}
-              />
-            </Col>
-            <Col span={2} className="space_detail-col">
-              <Button
-                className="space_detail-item-setup"
-                icon={<EllipsisOutlined />}
-              />
-            </Col>
-          </Row>
+          {spaceByDayItem.map((item, index) => (
+            <Row className="space_detail-row">
+              <Col span={4} className="space_detail-col">
+                <Image
+                  className="space_detail-item-image"
+                  src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/482752AXp/anh-mo-ta.png"
+                />
+              </Col>
+              <Col span={8} className="space_detail-col">
+                <h3 className="space_detail-item-name">Tên địa điểm</h3>
+                <p className="space_detail-item-detail">
+                  Thông tin tiêu biểu về địa điểm
+                </p>
+              </Col>
+              <Col span={6} className="space_detail-col">
+                <h3 className="space_detail-item-name">Giá tiền / tháng</h3>
+                <p className="space_detail-item-detail">Thời lượng thuê</p>
+              </Col>
+              <Col span={4} className="space_detail-col">
+                <FormSelect
+                  name={"itemStatus"}
+                  selectProps={{
+                    className: "space_detail-item-status",
+                    defaultValue: "Ẩn",
+                    value: "Ẩn",
+                    options: [
+                      {
+                        key: 1,
+                        value: "Ẩn",
+                      },
+                      {
+                        key: 1,
+                        value: "Đang thuê",
+                      },
+                      {
+                        key: 1,
+                        value: "Sẵn sàng",
+                      },
+                    ],
+                  }}
+                />
+              </Col>
+              <Col span={2} className="space_detail-col">
+                <Button
+                  className="space_detail-item-setup"
+                  icon={<EllipsisOutlined />}
+                />
+              </Col>
+            </Row>
+          ))}
         </div>
       ),
       extra: genExtra(),
     },
     {
       key: "2",
-      label: `Địa điểm cho thuê theo tháng ( ${1} )`,
+      label: `Địa điểm cho thuê theo tháng ( ${spaceByMonthItem.length} )`,
       children: (
         <div className="space_detail">
-          <Row className="space_detail-row">
-            <Col span={4} className="space_detail-col">
-              <Image
-                className="space_detail-item-image"
-                src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/482752AXp/anh-mo-ta.png"
-              />
-            </Col>
-            <Col span={8} className="space_detail-col">
-              <h3 className="space_detail-item-name">Tên địa điểm</h3>
-              <p className="space_detail-item-detail">
-                Thông tin tiêu biểu về địa điểm
-              </p>
-            </Col>
-            <Col span={6} className="space_detail-col">
-              <h3 className="space_detail-item-name">Giá tiền / tháng</h3>
-              <p className="space_detail-item-detail">Thời lượng thuê</p>
-            </Col>
-            <Col span={4} className="space_detail-col">
-              <FormSelect
-                name={"itemStatus"}
-                selectProps={{
-                  className: "space_detail-item-status",
-                  defaultValue: "Ẩn",
-                  value: "Ẩn",
-                  options: [
-                    {
-                      key: 1,
-                      value: "Ẩn",
-                    },
-                    {
-                      key: 1,
-                      value: "Đang thuê",
-                    },
-                    {
-                      key: 1,
-                      value: "Sẵn sàng",
-                    },
-                  ],
-                }}
-              />
-            </Col>
-            <Col span={2} className="space_detail-col">
-              <Button
-                className="space_detail-item-setup"
-                icon={<EllipsisOutlined />}
-              />
-            </Col>
-          </Row>
+          {spaceByMonthItem.map((item, index) => (
+            <Row className="space_detail-row">
+              <Col span={4} className="space_detail-col">
+                <Image
+                  className="space_detail-item-image"
+                  src="https://img.tripi.vn/cdn-cgi/image/width=700,height=700/https://gcs.tripi.vn/public-tripi/tripi-feed/img/482752AXp/anh-mo-ta.png"
+                />
+              </Col>
+              <Col span={8} className="space_detail-col">
+                <h3 className="space_detail-item-name">Tên địa điểm</h3>
+                <p className="space_detail-item-detail">
+                  Thông tin tiêu biểu về địa điểm
+                </p>
+              </Col>
+              <Col span={6} className="space_detail-col">
+                <h3 className="space_detail-item-name">Giá tiền / tháng</h3>
+                <p className="space_detail-item-detail">Thời lượng thuê</p>
+              </Col>
+              <Col span={4} className="space_detail-col">
+                <FormSelect
+                  name={"itemStatus"}
+                  selectProps={{
+                    className: "space_detail-item-status",
+                    defaultValue: "Ẩn",
+                    value: "Ẩn",
+                    options: [
+                      {
+                        key: 1,
+                        value: "Ẩn",
+                      },
+                      {
+                        key: 1,
+                        value: "Đang thuê",
+                      },
+                      {
+                        key: 1,
+                        value: "Sẵn sàng",
+                      },
+                    ],
+                  }}
+                />
+              </Col>
+              <Col span={2} className="space_detail-col">
+                <Button
+                  className="space_detail-item-setup"
+                  icon={<EllipsisOutlined />}
+                />
+              </Col>
+            </Row>
+          ))}
         </div>
       ),
       extra: genExtra(),

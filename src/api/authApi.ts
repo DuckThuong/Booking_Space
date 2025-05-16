@@ -7,6 +7,7 @@ interface LoginResponse {
   accessToken: string;
   refreshToken: string;
   user: any;
+  data: { description: string };
 }
 
 const compressImage = (file: File): Promise<File> => {
@@ -98,61 +99,35 @@ export const convertImagesToBase64 = async (
 };
 
 export const doLogin = async (data: LoginPayload) => {
-  try {
-    if (localStorage.getItem("accessToken") || localStorage.getItem("user")) {
-      localStorage.removeItem("accessToken");
-      localStorage.removeItem("refreshToken");
-      localStorage.removeItem("user");
-    }
+  if (localStorage.getItem("accessToken") || localStorage.getItem("user")) {
+    localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
+    localStorage.removeItem("user");
+  }
 
-    const response = (await apiRequest(API_KEY.USER + "/Login", "POST", {
-      username: data.userName,
-      password: data.password,
-    })) as LoginResponse;
-    if (response.accessToken && response.refreshToken && response.user) {
-      localStorage.setItem("accessToken", response.accessToken);
-      localStorage.setItem("refreshToken", response.refreshToken);
-      localStorage.setItem("user", JSON.stringify(response.user));
-      notification.open({
-        message: "Thông báo!",
-        description: "Đăng nhập thành công.",
-        placement: "topRight",
-        showProgress: true,
-        pauseOnHover: true,
-        style: {
-          backgroundColor: "#ffffff",
-          borderLeft: "4px solid #007bff",
-        },
-      });
-      console.log(response);
-      return true;
-    } else {
-      notification.open({
-        message: "Thông báo!",
-        description: "Đăng nhập thất bại.",
-        placement: "topRight",
-        showProgress: true,
-        pauseOnHover: true,
-        style: {
-          backgroundColor: "#ffffff",
-          borderLeft: "4px solid rgb(255, 0, 0)",
-        },
-      });
-      return false;
-    }
-  } catch (error) {
-    console.error("Login failed:", error);
+  const response = (await apiRequest(API_KEY.USER + "/Login", "POST", {
+    username: data.userName,
+    password: data.password,
+  })) as LoginResponse;
+
+  if (response.accessToken && response.refreshToken && response.user) {
+    localStorage.setItem("accessToken", response.accessToken);
+    localStorage.setItem("refreshToken", response.refreshToken);
+    localStorage.setItem("user", JSON.stringify(response.user));
     notification.open({
       message: "Thông báo!",
-      description: "Đăng nhập thất bại.",
+      description: "Đăng nhập thành công.",
       placement: "topRight",
       showProgress: true,
       pauseOnHover: true,
       style: {
         backgroundColor: "#ffffff",
-        borderLeft: "4px solid rgb(255, 0, 0)",
+        borderLeft: "4px solid #007bff",
       },
     });
+    console.log(response?.data?.description);
+    return true;
+  } else {
     return false;
   }
 };

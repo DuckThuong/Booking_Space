@@ -1,6 +1,6 @@
 import axios from "axios";
 import { API_BASE_URL, API_KEY } from "./apiConfig";
-import { CreateVenueEnum, RegisterPayload } from "./itemApi";
+import { CreateVenueEnum, LoginPayload, RegisterPayload } from "./itemApi";
 
 export const apiRequest = async (
   endpoint: string,
@@ -42,6 +42,8 @@ export enum OrderStateEnum {
 }
 
 export const userApi = {
+  doLogin: (data: LoginPayload) =>
+    apiRequest(`${API_KEY.USER}/Login`, "POST", data),
   doCreateUserByUserNameAndPassword: (userData: RegisterPayload) =>
     apiRequest(`${API_KEY.USER}/Register`, "POST", userData),
   doGoogleLogin: () => apiRequest(`${API_KEY.USER}/GoogleLogin`, "GET"),

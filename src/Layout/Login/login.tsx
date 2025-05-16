@@ -1,9 +1,12 @@
+import { useMutation } from "@tanstack/react-query";
+import { notification } from "antd";
 import { useForm } from "antd/es/form/Form";
-import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SvgDone } from "../../@svg/Icon/Done/SvgDone";
 import { SvgGoogle } from "../../@svg/Icon/Google/SvgGoogle";
 import { SvgRegister } from "../../@svg/Icon/SvgRegister";
+import { userApi } from "../../api/api";
+import { LoginPayload } from "../../api/itemApi";
 import { CustomButton } from "../../Components/buttons/CustomButton";
 import { FormButtonSubmit } from "../../Components/Form/FormButtonSubmit";
 import { FormCheckbox } from "../../Components/Form/FormCheckbox";
@@ -13,11 +16,6 @@ import { LogoForm } from "../../Components/LogoForm/LogoForm";
 import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
 import { ValidateLibrary } from "../../validate";
 import "./login.scss";
-import { useMutation } from "@tanstack/react-query";
-import { userApi } from "../../api/api";
-import { LoginPayload } from "../../api/itemApi";
-import { notification } from "antd";
-import { doLogin } from "../../api/authApi";
 const Login = () => {
   const [form] = useForm();
   const navigate = useNavigate();
@@ -52,6 +50,44 @@ const Login = () => {
     },
   });
 
+  const doLogin = useMutation({
+    mutationFn: (payload: LoginPayload) => userApi.doLogin(payload),
+    onSuccess: (data) => {
+      if (data) {
+        localStorage.setItem("accessToken", data.accessToken);
+        localStorage.setItem("refreshToken", data.refreshToken);
+        localStorage.setItem("user", JSON.stringify(data.user));
+        notification.open({
+          message: "Thông báo!",
+          description: "Đăng nhập thành công.",
+          placement: "topRight",
+          showProgress: true,
+          pauseOnHover: true,
+          style: {
+            backgroundColor: "#ffffff",
+            borderLeft: "4px solid #007bff",
+          },
+        });
+        navigate(CUSTOMER_ROUTER_PATH.HOME);
+      }
+    },
+    onError: (error: any) => {
+      console.log("error", error);
+      notification.open({
+        message: "Thông báo!",
+        description:
+          error?.response?.data?.description || "Đăng nhập thất bại.",
+        placement: "topRight",
+        showProgress: true,
+        pauseOnHover: true,
+        style: {
+          backgroundColor: "#ffffff",
+          borderLeft: "4px solid #007bff",
+        },
+      });
+    },
+  });
+
   const handleLoginGoogle = () => {
     doLoginGoogle.mutate();
   };
@@ -61,24 +97,7 @@ const Login = () => {
       userName: form.getFieldValue("userName"),
       password: form.getFieldValue("password"),
     };
-    try {
-      const result = await doLogin(payload);
-      if (result) {
-        navigate(CUSTOMER_ROUTER_PATH.HOME);
-      }
-    } catch (error) {
-      notification.open({
-        message: "Thông báo!",
-        description: "Đăng nhập thất bại.",
-        placement: "topRight",
-        showProgress: true,
-        pauseOnHover: true,
-        style: {
-          backgroundColor: "#ffffff",
-          borderLeft: "4px solid rgb(255, 0, 0)",
-        },
-      });
-    }
+    doLogin.mutate(payload);
   };
 
   const onClickRegister = () => {

@@ -1,5 +1,5 @@
 import { Col, Row } from "antd";
-import { SidebarContent } from "../SideBarContent";
+import { SidebarContent } from "../../LayoutOption/SideBarContent";
 import { HeaderNavBar } from "../../LayoutOption/HeaderNavBar";
 import "./style.scss";
 export const Venue = () => {

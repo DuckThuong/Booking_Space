@@ -1,11 +1,10 @@
+import { useQuery } from "@tanstack/react-query";
 import { Image, Spin } from "antd";
 import { FC } from "react";
-import { useLocation } from "react-router-dom";
+import { venueApi } from "../../../api/api";
 import { CreateVenueEnum } from "../../../api/itemApi";
 import FormWrap from "../../../Components/Form/FormWrap";
 import RowWrap from "../../../Components/RowWrap";
-import { useQuery } from "@tanstack/react-query";
-import { venueApi } from "../../../api/api";
 
 interface FirstStepProps {
   onNext: (data: Partial<CreateVenueEnum>) => void;
@@ -19,8 +18,6 @@ interface VenueType {
 }
 
 export const HostFirstStep: FC<FirstStepProps> = ({ onNext }) => {
-  const location = useLocation();
-
   const {
     data: venueTypes,
     isLoading,

@@ -13,11 +13,23 @@ export const HostLastStep: FC<LastStepProps> = ({ data }) => {
     mutationFn: (data: CreateVenueEnum) => venueApi.doCreateVenue(data),
     onSuccess: (data) => {
       console.log(data);
-    },
-    onError: (error) => {
+
       notification.open({
         message: "Thông báo!",
-        description: "Đăng ký thất bại.",
+        description: "Đăng ký thành công.",
+        placement: "topRight",
+        showProgress: true,
+        pauseOnHover: true,
+        style: {
+          backgroundColor: "#ffffff",
+          borderLeft: "4px solid #007bff",
+        },
+      });
+    },
+    onError: (error: any) => {
+      notification.open({
+        message: "Thông báo!",
+        description: error?.response?.data?.description || "Đăng ký thất bại.",
         placement: "topRight",
         showProgress: true,
         pauseOnHover: true,

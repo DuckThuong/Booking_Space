@@ -23,12 +23,12 @@ export const HostThirdStep: FC<ThirdStepProps> = ({ onNext, data }) => {
   const handleFinish = (formData: any) => {
     onNext({
       ...data,
-      venueLogo: image,
-      venueName: formData.companyName,
-      venueDescription: formData.companyDescription,
+      Logo: image,
+      Name: formData.companyName,
+      Description: formData.companyDescription,
     });
   };
-  
+
   const handleUpload: UploadProps['beforeUpload'] = (file) => {
     setImage(file);
     setPreview(URL.createObjectURL(file));

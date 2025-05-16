@@ -31,9 +31,8 @@ export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
   const handleFinish = (formData: any) => {
     onNext({
       ...data,
-      userAvatar: image,
-      fullName: formData.fullName,
-      phoneNumber: form.getFieldValue("phone"),
+      UserAvatar: image,
+      PhoneNumber: form.getFieldValue("phone"),
     });
   };
 
@@ -42,7 +41,6 @@ export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
     setPreview(URL.createObjectURL(file));
     return false;
   };
-  console.log(preview, image)
   return (
     <div className="step_second">
       <FormWrap

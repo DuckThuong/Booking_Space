@@ -30,7 +30,7 @@ export const HostFirstStep: FC<FirstStepProps> = ({ onNext }) => {
 
   const handleSelectVenue = (type: number) => {
     onNext({
-      venueTypeId: type,
+      VenueTypeId: type,
     });
   };
 

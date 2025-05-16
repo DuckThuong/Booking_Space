@@ -35,24 +35,20 @@ export const HostLastStep: FC<LastStepProps> = ({ data }) => {
         pauseOnHover: true,
         style: {
           backgroundColor: "#ffffff",
-          borderLeft: "4px solid #007bff",
+          borderLeft: "4px solid rgb(255, 0, 0)",
         },
       });
     },
   });
   const handleSubmit = () => {
     const payload: CreateVenueEnum = {
-      venueTypeId: data?.venueTypeId,
-      phoneNumber: data?.phoneNumber,
-      userAvatar: data?.userAvatar,
-      venueLogo: data?.venueLogo,
-      venueName: data?.venueName,
-      venueDescription: data?.venueDescription,
-      venueCity: data?.venueCity,
-      venueDistrict: data?.venueDistrict,
-      venueStreet: data?.venueStreet,
-      venueLatitude: data?.venueLatitude,
-      venueLongtitude: data?.venueLongtitude,
+      VenueTypeId: data?.VenueTypeId,
+      PhoneNumber: data?.PhoneNumber,
+      UserAvatar: data?.UserAvatar,
+      Logo: data?.Logo,
+      Name: data?.Name,
+      Description: data?.Description,
+      Address: data?.Address
     };
     createVenueMutate.mutate(payload);
   };

@@ -11,11 +11,10 @@ import {
   useMap,
 } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
-import { Button, Form } from "antd";
+import { Button, Form, notification } from "antd";
 import L from "leaflet";
 import { EnvironmentOutlined } from "@ant-design/icons";
 
-// Fix for default marker icon
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
   iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
@@ -86,12 +85,10 @@ export const HostFourthStep: FC<FourthStepProps> = ({ onNext, data }) => {
   const splitAddress = (address: string) => {
     const parts = address.split(",");
 
-    // Tìm thành phố (Hà Nội)
     let city = "";
     let district = "";
     const streetParts: string[] = [];
 
-    // Duyệt từ cuối lên để tìm thành phố
     for (let i = parts.length - 1; i >= 0; i--) {
       const part = parts[i].trim();
       if (part === "Hà Nội") {
@@ -100,12 +97,10 @@ export const HostFourthStep: FC<FourthStepProps> = ({ onNext, data }) => {
       }
     }
 
-    // Nếu không tìm thấy Hà Nội, lấy phần trước mã bưu điện
     if (!city && parts.length >= 2) {
       city = parts[parts.length - 2]?.trim() || "";
     }
 
-    // Tìm quận và đường
     for (let i = 0; i < parts.length - 2; i++) {
       const part = parts[i].trim();
       if (part.startsWith("Quận ")) {
@@ -113,20 +108,11 @@ export const HostFourthStep: FC<FourthStepProps> = ({ onNext, data }) => {
       } else if (part.startsWith("Phường ")) {
         district = part;
       } else if (part !== "Hà Nội") {
-        // Loại bỏ Hà Nội khỏi phần đường
         streetParts.push(part);
       }
     }
 
     const street = streetParts.join(", ");
-
-    console.log("Phân tách địa chỉ:", {
-      địa_chỉ_gốc: address,
-      đường: street,
-      quận: district,
-      thành_phố: city,
-    });
-
     return { street, district, city };
   };
 
@@ -164,27 +150,45 @@ export const HostFourthStep: FC<FourthStepProps> = ({ onNext, data }) => {
           updateLocationData(newPosition.lat, newPosition.lng);
         },
         (error) => {
-          console.error("Error getting location:", error);
-          alert(
-            "Không thể lấy vị trí hiện tại của bạn. Vui lòng kiểm tra lại quyền truy cập vị trí."
-          );
+          notification.open({
+            message: "Thông báo!",
+            description: "Không thể lấy vị trí hiện tại của bạn. Vui lòng kiểm tra lại quyền truy cập vị trí.",
+            placement: "topRight",
+            showProgress: true,
+            pauseOnHover: true,
+            style: {
+              backgroundColor: "#ffffff",
+              borderLeft: "4px solid rgb(255, 0, 0)",
+            },
+          });
         }
       );
     } else {
-      alert("Trình duyệt của bạn không hỗ trợ định vị.");
+      notification.open({
+        message: "Thông báo!",
+        description: "Trình duyệt của bạn không hỗ trợ định vị.",
+        placement: "topRight",
+        showProgress: true,
+        pauseOnHover: true,
+        style: {
+          backgroundColor: "#ffffff",
+          borderLeft: "4px solid rgb(255, 0, 0)",
+        },
+      });
     }
   };
 
   const handleSubmit = () => {
     const { street, district, city } = splitAddress(locationData.address);
-    const submitData = {
-      venueCity: city,
-      venueDistrict: district,
-      venueStreet: street,
-      venueLatitude: locationData.latitude.toString(),
-      venueLongtitude: locationData.longitude.toString(),
+    const submitData: CreateVenueEnum = {
+      Address: {
+        Street: street,
+        District: district,
+        City: city,
+        Latitude: locationData.latitude.toString(),
+        Longitude: locationData.longitude.toString(),
+      },
     };
-    console.log("Dữ liệu gửi đi:", submitData);
     onNext(submitData);
   };
   useEffect(() => {
@@ -194,8 +198,6 @@ export const HostFourthStep: FC<FourthStepProps> = ({ onNext, data }) => {
       });
     }
   }, [locationData.address]);
-
-  console.log(data);
 
   return (
     <FormWrap form={form} className="step_fourth">

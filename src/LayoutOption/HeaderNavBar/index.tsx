@@ -107,7 +107,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                   <span>
                     <SolutionOutlined />
                   </span>
-                  <span>Become a Host</span>
+                  <span>Đăng kí địa điểm</span>
                 </Button>
                 <Button
                   className="header__row-account"

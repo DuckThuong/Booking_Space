@@ -29,7 +29,7 @@ export const Space = () => {
       }}
       icon={<PlusOutlined />}
     >
-      Thêm địa điểm
+      Thêm không gian
     </Button>
   );
 
@@ -39,22 +39,22 @@ export const Space = () => {
   }[] = [
     {
       title: "Hoàn thiện thông tin",
-      description: "Hoàn thiện thông tin cho địa điểm của bạn.",
+      description: "Hoàn thiện thông tin cho không gian của bạn.",
     },
     {
       title: "Đăng ký thông tin",
-      description: "Đăng ký thông tin cho địa điểm của bạn.",
+      description: "Đăng ký thông tin cho không gian của bạn.",
     },
     {
       title: "Đăng ký thời gian",
-      description: "Đăng ký thời gian cho thuê địa điểm của bạn.",
+      description: "Đăng ký thời gian cho thuê không gian của bạn.",
     },
   ];
 
   const items: CollapseProps["items"] = [
     {
       key: "1",
-      label: `Địa điểm cho thuê theo ngày ( ${spaceByDayItem.length} )`,
+      label: `Không gian cho thuê theo ngày ( ${spaceByDayItem.length} )`,
       children: (
         <div className="space_detail">
           {spaceByDayItem.map((item, index) => (
@@ -113,7 +113,7 @@ export const Space = () => {
     },
     {
       key: "2",
-      label: `Địa điểm cho thuê theo tháng ( ${spaceByMonthItem.length} )`,
+      label: `Không gian cho thuê theo tháng ( ${spaceByMonthItem.length} )`,
       children: (
         <div className="space_detail">
           {spaceByMonthItem.map((item, index) => (

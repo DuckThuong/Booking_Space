@@ -17,7 +17,7 @@ const items: MenuItem[] = [
         alt="company"
       />
     ),
-    label: "Địa điểm",
+    label: "Không gian",
   },
   {
     key: "2",
@@ -29,7 +29,7 @@ const items: MenuItem[] = [
         alt="company"
       />
     ),
-    label: "Chỉnh sửa địa điểm",
+    label: "Địa điểm",
     children: [
       { key: "11", label: "Thông tin chi tiết" },
       { key: "12", label: "Thông tin khách" },
@@ -62,7 +62,6 @@ export const SidebarContent: React.FC<SideBarHeaderProps> = ({
     }
     if (!["11", "12", "13", "14"].includes(key)) {
       setStateOpenKeys([]);
-      console.log("KKAKA", key);
     }
     setSelectedKeys([key]);
   };
@@ -73,7 +72,7 @@ export const SidebarContent: React.FC<SideBarHeaderProps> = ({
         <Row className="side_bar-form-row">
           <div className="side_bar-venue">
             <div className="side_bar-venue-item">
-              <h2 className="side_bar-venue-name">Tên địa điểm</h2>
+              <h2 className="side_bar-venue-name">Địa điểm</h2>
               <p className="side_bar-venue-address">Địa chỉ của địa điểm</p>
               <Row>
                 <Col span={12}>

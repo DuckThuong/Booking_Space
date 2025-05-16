@@ -8,6 +8,7 @@ import { FormInput } from "../../../Components/Form/FormInput";
 import ColWrap from "../../../Components/ColWrap";
 import { CreateVenueEnum } from "../../../api/itemApi";
 import { useUser } from "../../../api/useHook";
+import { faPray } from "@fortawesome/free-solid-svg-icons";
 
 interface SecondStepProps {
   onNext: (data: Partial<CreateVenueEnum>) => void;
@@ -18,6 +19,14 @@ export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
   const [form] = Form.useForm();
   const [image, setImage] = useState<File>();
   const [preview, setPreview] = useState<string>();
+  const user = useUser();
+
+  useEffect(()=>{
+    if(user){
+      form.setFieldValue("fullName", user.fullName);
+      form.setFieldValue("phone", user.phoneNumber);
+    }
+  }, [user]);
 
   const handleFinish = (formData: any) => {
     onNext({

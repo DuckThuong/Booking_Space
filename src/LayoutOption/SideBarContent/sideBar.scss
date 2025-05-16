@@ -61,6 +61,11 @@
       .ant-menu-item {
         margin-bottom: 16px !important;
       }
+      .ant-menu-submenu {
+        .ant-menu {
+          box-shadow: none !important;
+        }
+      }
       .ant-menu-item-selected {
         .ant-menu-title-content {
           color: #00609c !important;

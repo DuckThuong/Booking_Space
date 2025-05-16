@@ -9,7 +9,6 @@ export const Venue = () => {
   const handleTabChange = (key: string) => {
     setCurrentTab(key);
   };
-  console.log(currentTab);
   return (
     <div className="venue">
       <HeaderNavBar isLogin={true} />

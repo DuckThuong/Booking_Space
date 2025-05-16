@@ -46,24 +46,25 @@ interface SideBarHeaderProps {
 export const SidebarContent: React.FC<SideBarHeaderProps> = ({
   onTabChange,
 }) => {
-  const [stateOpenKeys, setStateOpenKeys] = useState(["2"]);
+  const [stateOpenKeys, setStateOpenKeys] = useState(["1"]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>(["11"]);
 
   const onOpenChange: MenuProps["onOpenChange"] = (openKeys) => {
-    const currentOpenKey = openKeys.find(
-      (key) => stateOpenKeys.indexOf(key) === -1
-    );
-    if (currentOpenKey === "2") {
-      setSelectedKeys(["11"]);
+    if (openKeys.includes("2")) {
+      setSelectedKeys([]);
     }
     setStateOpenKeys(openKeys);
   };
 
   const onSelect: MenuProps["onSelect"] = ({ key }) => {
-    setSelectedKeys([key]);
     if (onTabChange) {
       onTabChange(key);
     }
+    if (!["11", "12", "13", "14"].includes(key)) {
+      setStateOpenKeys([]);
+      console.log("KKAKA", key);
+    }
+    setSelectedKeys([key]);
   };
 
   return (

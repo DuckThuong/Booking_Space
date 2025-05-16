@@ -33,8 +33,7 @@ const items: MenuItem[] = [
     children: [
       { key: "11", label: "Thông tin chi tiết" },
       { key: "12", label: "Thông tin khách" },
-      { key: "13", label: "Chính sách" },
-      { key: "14", label: "Giờ thuê" },
+      { key: "13", label: "Giờ thuê" },
     ],
   },
 ];

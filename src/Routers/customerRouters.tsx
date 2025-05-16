@@ -20,27 +20,24 @@ export const CustomerRouter = () => (
       element={<SuspenseWrapper component={<Login />} />}
     ></Route>
     {/* Register */}
-    <Route
-      path={CUSTOMER_ROUTER_PATH.REGISTER}
-      element={<SuspenseWrapper component={<Register />} />}
-    ></Route>
+    <Route path={CUSTOMER_ROUTER_PATH.REGISTER} element={<Register />}></Route>
     {/* Forgot_Password */}
     <Route>
       <Route
         path={CUSTOMER_ROUTER_PATH.FORGOT_EMAIL_INPUT}
-        element={<SuspenseWrapper component={<ForgotEmailInput />} />}
+        element={<ForgotEmailInput />}
       ></Route>
       <Route
         path={CUSTOMER_ROUTER_PATH.FORGOT_CODE_INPUT}
-        element={<SuspenseWrapper component={<ForgotCodeInput />} />}
+        element={<ForgotCodeInput />}
       ></Route>
       <Route
         path={CUSTOMER_ROUTER_PATH.FORGOT_EDIT_PASSWORD}
-        element={<SuspenseWrapper component={<ForgotEditPassword />} />}
+        element={<ForgotEditPassword />}
       ></Route>
       <Route
         path={CUSTOMER_ROUTER_PATH.FORGOT_SUCCESS}
-        element={<SuspenseWrapper component={<ForgotSuccess />} />}
+        element={<ForgotSuccess />}
       ></Route>
     </Route>
     {/* TrangChu */}

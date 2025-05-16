@@ -26,6 +26,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
   const [showAccount, setShowAccount] = useState<boolean>(false);
   const navigate = useNavigate();
   const user = useUser();
+
   const tabItems = [
     { key: "1", label: "Doanh nghiệp" },
     { key: "2", label: "Giá cả" },

@@ -39,7 +39,13 @@ const items: MenuItem[] = [
   },
 ];
 
-export const SidebarContent = () => {
+interface SideBarHeaderProps {
+  onTabChange?: (key: string) => void | undefined;
+}
+
+export const SidebarContent: React.FC<SideBarHeaderProps> = ({
+  onTabChange,
+}) => {
   const [stateOpenKeys, setStateOpenKeys] = useState(["2"]);
   const [selectedKeys, setSelectedKeys] = useState<string[]>(["11"]);
 
@@ -55,6 +61,9 @@ export const SidebarContent = () => {
 
   const onSelect: MenuProps["onSelect"] = ({ key }) => {
     setSelectedKeys([key]);
+    if (onTabChange) {
+      onTabChange(key);
+    }
   };
 
   return (

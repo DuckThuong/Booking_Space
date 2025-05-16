@@ -16,24 +16,24 @@ interface SecondStepProps {
 
 export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
   const [form] = Form.useForm();
-  const user = useUser();
-
-  useEffect(() => {
-    if (user) {
-      form.setFieldValue("fullName", user?.fullName);
-      form.setFieldValue("phone", user?.phoneNumber);
-    }
-  }, [user]);
+  const [image, setImage] = useState<File>();
+  const [preview, setPreview] = useState<string>();
 
   const handleFinish = (formData: any) => {
     onNext({
       ...data,
-      userAvatar: user?.avatarUrl,
+      userAvatar: image,
       fullName: formData.fullName,
       phoneNumber: form.getFieldValue("phone"),
     });
   };
 
+  const handleUpload: UploadProps['beforeUpload'] = (file) => {
+    setImage(file);
+    setPreview(URL.createObjectURL(file));
+    return false;
+  };
+  console.log(preview, image)
   return (
     <div className="step_second">
       <FormWrap
@@ -59,18 +59,10 @@ export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
               showUploadList={false}
               action="/api/upload"
               maxCount={1}
+              beforeUpload={handleUpload}
             >
-              {user?.avatarUrl ? (
-                <img
-                  src={user?.avatarUrl}
-                  alt="avatar"
-                  style={{
-                    width: "100%",
-                    height: "100%",
-                    borderRadius: "50%",
-                    objectFit: "cover",
-                  }}
-                />
+              {preview ? (
+                <img src={preview} alt="avatar" style={{ width: '100%' }} />
               ) : (
                 <div>
                   <PlusOutlined />

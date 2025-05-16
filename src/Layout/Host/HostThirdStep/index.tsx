@@ -17,45 +17,22 @@ interface ThirdStepProps {
 
 export const HostThirdStep: FC<ThirdStepProps> = ({ onNext, data }) => {
   const [form] = Form.useForm();
-  const [imageUrl, setImageUrl] = useState<string>();
+  const [image, setImage] = useState<File>();
+  const [preview, setPreview] = useState<string>();
 
   const handleFinish = (formData: any) => {
     onNext({
       ...data,
-      venueLogo: imageUrl,
+      venueLogo: image,
       venueName: formData.companyName,
       venueDescription: formData.companyDescription,
     });
   };
-
-  const handleChange: UploadProps["onChange"] = async (info) => {
-    if (info.file.status === "uploading") {
-      return;
-    }
-    if (info.file.status === "done") {
-      const url = info.file.response?.url;
-      if (url) {
-        setImageUrl(url);
-      }
-    }
-  };
-
-  const getBase64 = (file: RcFile): Promise<string> =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = (error) => reject(error);
-    });
-
-  const beforeUpload = async (file: RcFile) => {
-    try {
-      const preview = await getBase64(file);
-      setImageUrl(preview);
-    } catch (error) {
-      console.error("Error creating preview:", error);
-    }
-    return true;
+  
+  const handleUpload: UploadProps['beforeUpload'] = (file) => {
+    setImage(file);
+    setPreview(URL.createObjectURL(file));
+    return false;
   };
 
   return (
@@ -74,21 +51,11 @@ export const HostThirdStep: FC<ThirdStepProps> = ({ onNext, data }) => {
             className="avatar-uploader"
             showUploadList={false}
             action="/api/upload"
-            beforeUpload={beforeUpload}
-            onChange={handleChange}
             maxCount={1}
+            beforeUpload={handleUpload}
           >
-            {imageUrl ? (
-              <img
-                src={imageUrl}
-                alt="avatar"
-                style={{
-                  width: "100%",
-                  height: "100%",
-                  borderRadius: "50%",
-                  objectFit: "cover",
-                }}
-              />
+            {preview ? (
+              <img src={preview} alt="avatar" style={{ width: '100%' }} />
             ) : (
               <div>
                 <PlusOutlined />

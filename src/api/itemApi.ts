@@ -17,11 +17,11 @@ export interface VenuePayload {
 }
 
 export interface CreateVenueEnum {
-  userAvatar?: string;
+  userAvatar?: File;
   venueTypeId?: number;
   fullName?: string;
   phoneNumber?: number;
-  venueLogo?: string;
+  venueLogo?: File;
   venueName?: string;
   venueDescription?: string;
   venueStreet?: string;

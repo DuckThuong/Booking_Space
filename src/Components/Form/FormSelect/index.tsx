@@ -4,6 +4,7 @@ import React, { ReactNode } from "react";
 import "./formSelect.scss";
 import { NamePath } from "antd/es/form/interface";
 import { SvgSelect } from "../../@svg/SvgSelect";
+import { DownOutlined } from "@ant-design/icons";
 
 type Props = {
   name: NamePath;
@@ -27,17 +28,8 @@ export const FormSelect: React.FC<Props> = ({ ...props }) => {
           allowClear
           {...selectProps}
           showSearch={false}
-          suffixIcon={<SvgSelect />}
+          suffixIcon={<DownOutlined />}
           popupClassName={`form__select-popup-select ${selectProps?.popupClassName}`}
-          placeholder={
-            placeholder || (
-              <div className="select-checkbox__placeholder">
-                <div className="select-checkbox__placeholder-hide">
-                  Vui lòng chọn một mục
-                </div>
-              </div>
-            )
-          }
         />
       </Form.Item>
     </div>

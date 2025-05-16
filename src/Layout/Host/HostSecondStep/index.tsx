@@ -1,4 +1,4 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Button, Upload, Form } from "antd";
 import FormWrap from "../../../Components/Form/FormWrap";
 import RowWrap from "../../../Components/RowWrap";
@@ -7,6 +7,7 @@ import { RcFile, UploadProps } from "antd/es/upload";
 import { FormInput } from "../../../Components/Form/FormInput";
 import ColWrap from "../../../Components/ColWrap";
 import { CreateVenueEnum } from "../../../api/itemApi";
+import { useUser } from "../../../api/useHook";
 
 interface SecondStepProps {
   onNext: (data: Partial<CreateVenueEnum>) => void;
@@ -14,44 +15,20 @@ interface SecondStepProps {
 }
 
 export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
-  const [infoState, setInfoState] = useState<number>(0);
-  const [imageUrl, setImageUrl] = useState<string>();
   const [form] = Form.useForm();
+  const user = useUser();
 
-  const handleChange: UploadProps["onChange"] = async (info) => {
-    if (info.file.status === "uploading") {
-      return;
+  useEffect(() => {
+    if (user) {
+      form.setFieldValue("fullName", user?.fullName);
+      form.setFieldValue("phone", user?.phoneNumber);
     }
-    if (info.file.status === "done") {
-      const url = info.file.response?.url;
-      if (url) {
-        setImageUrl(url);
-      }
-    }
-  };
-
-  const getBase64 = (file: RcFile): Promise<string> =>
-    new Promise((resolve, reject) => {
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-      reader.onload = () => resolve(reader.result as string);
-      reader.onerror = (error) => reject(error);
-    });
-
-  const beforeUpload = async (file: RcFile) => {
-    try {
-      const preview = await getBase64(file);
-      setImageUrl(preview);
-    } catch (error) {
-      console.error("Error creating preview:", error);
-    }
-    return true;
-  };
+  }, [user]);
 
   const handleFinish = (formData: any) => {
     onNext({
       ...data,
-      userAvatar: imageUrl,
+      userAvatar: user?.avatarUrl,
       fullName: formData.fullName,
       phoneNumber: form.getFieldValue("phone"),
     });
@@ -73,103 +50,81 @@ export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
           </p>
         </RowWrap>
 
-        <RowWrap className="step_second__form">
-          {infoState > 0 ? (
-            <RowWrap className="step_second__form-row">
-              <ColWrap colProps={{ span: 8 }} className="step_second__form-col">
-                <Upload
-                  name="avatar"
-                  listType="picture-card"
-                  className="avatar-uploader"
-                  showUploadList={false}
-                  action="/api/upload"
-                  beforeUpload={beforeUpload}
-                  onChange={handleChange}
-                  maxCount={1}
-                >
-                  {imageUrl ? (
-                    <img
-                      src={imageUrl}
-                      alt="avatar"
-                      style={{
-                        width: "100%",
-                        height: "100%",
-                        borderRadius: "50%",
-                        objectFit: "cover",
-                      }}
-                    />
-                  ) : (
-                    <div>
-                      <PlusOutlined />
-                      <div style={{ marginTop: 8 }}>Chọn ảnh đại diện</div>
-                    </div>
-                  )}
-                </Upload>
-              </ColWrap>
-              <ColWrap
-                colProps={{ span: 12 }}
-                className="step_second__form-col"
-              >
+        <RowWrap className="step_second__form-row">
+          <ColWrap colProps={{ span: 8 }} className="step_second__form-col">
+            <Upload
+              name="avatar"
+              listType="picture-card"
+              className="avatar-uploader"
+              showUploadList={false}
+              action="/api/upload"
+              maxCount={1}
+            >
+              {user?.avatarUrl ? (
+                <img
+                  src={user?.avatarUrl}
+                  alt="avatar"
+                  style={{
+                    width: "100%",
+                    height: "100%",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                  }}
+                />
+              ) : (
                 <div>
-                  <p className="register_label">Họ và tên</p>
-                  <FormInput
-                    name="fullName"
-                    formItemProps={{
-                      rules: [
-                        {
-                          required: true,
-                          message: "Vui lòng nhập họ tên!",
-                        },
-                      ],
-                    }}
-                    inputProps={{
-                      placeholder: "Họ tên",
-                      maxLength: 255,
-                    }}
-                  />
+                  <PlusOutlined />
+                  <div style={{ marginTop: 8 }}>Chọn ảnh đại diện</div>
                 </div>
-                <div>
-                  <p className="register_label">Số điện thoại</p>
-                  <FormInput
-                    name="phone"
-                    formItemProps={{
-                      rules: [
-                        {
-                          required: true,
-                          message: "Nhập số điện thoại của bạn",
-                        },
-                      ],
-                    }}
-                    inputProps={{
-                      placeholder: "Số điện thoại",
-                      maxLength: 255,
-                    }}
-                  />
-                </div>
-              </ColWrap>
-            </RowWrap>
-          ) : (
-            <>
-              <Button
-                onClick={() => {
-                  setInfoState(1);
+              )}
+            </Upload>
+          </ColWrap>
+          <ColWrap
+            colProps={{ span: 12 }}
+            className="step_second__form-col"
+          >
+            <div>
+              <p className="register_label">Họ và tên</p>
+              <FormInput
+                name="fullName"
+                formItemProps={{
+                  rules: [
+                    {
+                      required: true,
+                      message: "Vui lòng nhập họ tên!",
+                    },
+                  ],
                 }}
-              >
-                Sử dụng thông tin của bạn
-              </Button>
-              <Button
-                onClick={() => {
-                  setInfoState(2);
+                inputProps={{
+                  placeholder: "Họ tên",
+                  maxLength: 255,
                 }}
-              >
-                Thêm thông tin mới
-              </Button>
-            </>
-          )}
+              />
+            </div>
+            <div>
+              <p className="register_label">Số điện thoại</p>
+              <FormInput
+                name="phone"
+                formItemProps={{
+                  rules: [
+                    {
+                      required: true,
+                      message: "Nhập số điện thoại của bạn",
+                    },
+                  ],
+                }}
+                inputProps={{
+                  placeholder: "Số điện thoại",
+                  maxLength: 255,
+                }}
+              />
+            </div>
+          </ColWrap>
         </RowWrap>
 
+
         <RowWrap className="step_second__actions">
-          <Button disabled={infoState === 0} htmlType="submit">
+          <Button htmlType="submit">
             Xác nhận
           </Button>
         </RowWrap>

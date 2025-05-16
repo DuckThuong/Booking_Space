@@ -2,7 +2,7 @@ interface User {
   id: number;
   email: string;
   fullName: string;
-  avatarUrl: boolean;
+  avatarUrl: string;
   userName: string;
   phoneNumber: string;
 }

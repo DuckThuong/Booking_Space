@@ -183,6 +183,7 @@ export const Register = () => {
               className: "register_email-button-submit",
               type: "primary",
               htmlType: "submit",
+              loading: regiterMutation.isPending
             }}
           />
         </div>

@@ -86,6 +86,7 @@ const Login = () => {
         },
       });
     },
+
   });
 
   const handleLoginGoogle = () => {
@@ -159,6 +160,7 @@ const Login = () => {
                 onClick: onFinish,
                 type: "default",
                 icon: <SvgDone />,
+                loading: doLogin.isPending
               }}
             />
             <span className="login_form-login-or">Hoặc</span>
@@ -169,6 +171,7 @@ const Login = () => {
                 onClick: handleLoginGoogle,
                 type: "default",
                 icon: <SvgGoogle />,
+                loading: doLoginGoogle.isPending
               }}
             />
           </div>

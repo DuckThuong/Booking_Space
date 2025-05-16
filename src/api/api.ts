@@ -46,6 +46,7 @@ export const userApi = {
     apiRequest(`${API_KEY.USER}/Login`, "POST", data),
   doCreateUserByUserNameAndPassword: (userData: RegisterPayload) =>
     apiRequest(`${API_KEY.USER}/Register`, "POST", userData),
+  doLogOut: () => apiRequest(`${API_KEY.USER}/LogOut`, "POST"),
   doGoogleLogin: () => apiRequest(`${API_KEY.USER}/GoogleLogin`, "GET"),
 };
 

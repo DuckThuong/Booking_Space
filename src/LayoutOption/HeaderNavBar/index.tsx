@@ -1,17 +1,18 @@
 import { SolutionOutlined } from "@ant-design/icons";
 import { faListUl, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Button, Col, Image, Row, Tabs } from "antd";
+import { Button, Col, Image, notification, Row, Tabs } from "antd";
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { SvgLogo } from "../../@svg/Logo/SvgLogo";
-import { doLogOut } from "../../api/authApi";
 import ColWrap from "../../Components/ColWrap";
 import FormWrap from "../../Components/Form/FormWrap";
 import RowWrap from "../../Components/RowWrap";
 import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
 import "./headerNavBar.scss";
 import { useUser } from "../../api/useHook";
+import { useMutation } from "@tanstack/react-query";
+import { userApi } from "../../api/api";
 
 interface HeaderNavBarProps {
   isLogin: boolean;
@@ -49,11 +50,47 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
     }
   };
 
+  const logOutMutation = useMutation({
+    mutationFn: () => userApi.doLogOut(),
+    onSuccess: (data) => {
+      if (data) {
+        localStorage.removeItem("accessToken");
+        localStorage.removeItem("refreshToken");
+        localStorage.removeItem("user");
+        notification.open({
+          message: "Thông báo!",
+          description: "Đăng xuất thành công.",
+          placement: "topRight",
+          showProgress: true,
+          pauseOnHover: true,
+          style: {
+            backgroundColor: "#ffffff",
+            borderLeft: "4px solid #007bff",
+          },
+        });
+        navigate(CUSTOMER_ROUTER_PATH.LOG_IN);
+      }
+    },
+    onError: (error: any) => {
+      console.log("error", error);
+      notification.open({
+        message: "Thông báo!",
+        description:
+          error?.response?.data?.description || "Đăng xuất thất bại.",
+        placement: "topRight",
+        showProgress: true,
+        pauseOnHover: true,
+        style: {
+          backgroundColor: "#ffffff",
+          borderLeft: "4px solid rgb(255, 0, 0)",
+        },
+      });
+    },
+
+  })
+
   const handleLogOut = async () => {
-    const result = await doLogOut();
-    if (result === true) {
-      navigate(CUSTOMER_ROUTER_PATH.LOG_IN);
-    }
+    logOutMutation.mutate();
     setShowAccount(false);
   };
 
@@ -138,7 +175,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                           preview={false}
                           src={
                             typeof user?.avatarUrl === "string" &&
-                            user.avatarUrl
+                              user.avatarUrl
                               ? user.avatarUrl
                               : "https://static-cse.canva.com/blob/2008403/1600w-vkBvE1d_xYA.jpg"
                           }

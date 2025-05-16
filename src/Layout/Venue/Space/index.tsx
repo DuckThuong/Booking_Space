@@ -52,7 +52,7 @@ export const Space = () => {
   const items: CollapseProps["items"] = [
     {
       key: "1",
-      label: `Địa điểm cho thuê theo ngày (${1})`,
+      label: `Địa điểm cho thuê theo ngày ( ${1} )`,
       children: (
         <div className="space_detail">
           <Row className="space_detail-row">
@@ -109,7 +109,7 @@ export const Space = () => {
     },
     {
       key: "2",
-      label: `Địa điểm cho thuê theo tháng (${1})`,
+      label: `Địa điểm cho thuê theo tháng ( ${1} )`,
       children: (
         <div className="space_detail">
           <Row className="space_detail-row">

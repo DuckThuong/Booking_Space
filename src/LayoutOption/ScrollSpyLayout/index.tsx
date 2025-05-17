@@ -2,6 +2,7 @@
 import { Grid, Layout, Menu, theme, type MenuProps } from "antd";
 import { MenuItemType } from "antd/es/menu/interface";
 import React, { useEffect, useState } from "react";
+import "./scrollSpyLayout.scss";
 
 const { Sider, Content } = Layout;
 const { useBreakpoint } = Grid;
@@ -108,57 +109,33 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
   };
 
   return (
-    <Layout hasSider style={{ minHeight: "100vh" }}>
+    <Layout hasSider className="scroll-spy-layout">
       <Sider
         collapsible
         collapsed={collapsed}
         onCollapse={setCollapsed}
         width={240}
-        style={{
-          background: colorBgContainer,
-          position: "fixed",
-          left: 0,
-          top: 0,
-          bottom: 0,
-          zIndex: 100,
-          boxShadow: "2px 0 8px rgba(0,0,0,0.1)",
-        }}
+        className="scroll-spy-layout__sider"
       >
         <Menu
           mode="inline"
           selectedKeys={[activeKey]}
           onClick={handleMenuClick}
           items={convertToMenuItems(items)}
-          style={{
-            height: "100%",
-            borderRight: 0,
-            paddingTop: "64px",
-          }}
+          className="scroll-spy-layout__menu"
           theme="light"
         />
       </Sider>
 
       <Content
-        style={{
-          marginLeft: collapsed ? 80 : 240,
-          transition: "margin 0.2s",
-          padding: "24px",
-        }}
+        className={`scroll-spy-layout__content ${
+          collapsed
+            ? "scroll-spy-layout__content--collapsed"
+            : "scroll-spy-layout__content--expanded"
+        }`}
       >
         {Object.entries(contentSections).map(([key, content]) => (
-          <section
-            key={key}
-            id={key}
-            style={{
-              minHeight: "100vh",
-              padding: "24px",
-              background: colorBgContainer,
-              marginBottom: "24px",
-              borderRadius: "8px",
-              boxShadow: "0 2px 8px rgba(0,0,0,0.1)",
-              scrollMarginTop: "80px",
-            }}
-          >
+          <section key={key} id={key} className="scroll-spy-layout__section">
             {content}
           </section>
         ))}

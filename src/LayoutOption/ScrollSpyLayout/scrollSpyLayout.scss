@@ -1,0 +1,42 @@
+.scroll-spy-layout {
+  min-height: 100vh;
+
+  &__sider {
+    background: var(--ant-color-bg-container);
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: 100;
+    box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+  }
+
+  &__menu {
+    height: 100%;
+    border-right: 0;
+    padding-top: 64px;
+  }
+
+  &__content {
+    transition: margin 0.2s;
+    padding: 24px;
+
+    &--collapsed {
+      margin-left: 80px;
+    }
+
+    &--expanded {
+      margin-left: 240px;
+    }
+  }
+
+  &__section {
+    min-height: 100vh;
+    padding: 24px;
+    background: var(--ant-color-bg-container);
+    margin-bottom: 24px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    scroll-margin-top: 80px;
+  }
+}

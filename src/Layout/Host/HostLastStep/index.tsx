@@ -4,16 +4,18 @@ import { CreateVenueEnum } from "../../../api/itemApi";
 import RowWrap from "../../../Components/RowWrap";
 import { useMutation } from "@tanstack/react-query";
 import { venueApi } from "../../../api/api";
+import { useNavigate } from "react-router-dom";
+import { CUSTOMER_ROUTER_PATH } from "../../../Routers/Routers";
 interface LastStepProps {
   data: CreateVenueEnum | undefined;
 }
 
 export const HostLastStep: FC<LastStepProps> = ({ data }) => {
+  const navigate = useNavigate();
+
   const createVenueMutate = useMutation({
     mutationFn: (data: CreateVenueEnum) => venueApi.doCreateVenue(data),
     onSuccess: (data) => {
-      console.log(data);
-
       notification.open({
         message: "Thông báo!",
         description: "Đăng ký thành công.",
@@ -25,6 +27,7 @@ export const HostLastStep: FC<LastStepProps> = ({ data }) => {
           borderLeft: "4px solid #007bff",
         },
       });
+      navigate(CUSTOMER_ROUTER_PATH.VENUE);
     },
     onError: (error: any) => {
       notification.open({
@@ -48,7 +51,7 @@ export const HostLastStep: FC<LastStepProps> = ({ data }) => {
       Logo: data?.Logo,
       Name: data?.Name,
       Description: data?.Description,
-      Address: data?.Address
+      Address: data?.Address,
     };
     createVenueMutate.mutate(payload);
   };

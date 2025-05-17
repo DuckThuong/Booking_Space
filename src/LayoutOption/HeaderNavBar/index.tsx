@@ -87,13 +87,12 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
         },
       });
     },
-
-  })
+  });
 
   const { data: venueData } = useQuery({
     queryKey: [QUERY_KEY.GET_VENUE],
     queryFn: () => venueApi.getVenueByUser(),
-  })
+  });
 
   const handleLogOut = async () => {
     logOutMutation.mutate();
@@ -172,10 +171,12 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                             className="header_account-option"
                             onClick={() => {
                               setShowAccount(false);
-                              navigate(CUSTOMER_ROUTER_PATH.VENUE, { state: venue.id });
+                              navigate(CUSTOMER_ROUTER_PATH.VENUE, {
+                                state: venue?.venueId,
+                              });
                             }}
                           >
-                            {venue.address || "Địa điểm chưa có địa chỉ"}
+                            {venue?.name || "Địa điểm chưa có địa chỉ"}
                           </div>
                         ))
                       ) : (
@@ -196,7 +197,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                           preview={false}
                           src={
                             typeof user?.avatarUrl === "string" &&
-                              user.avatarUrl
+                            user.avatarUrl
                               ? user.avatarUrl
                               : "https://static-cse.canva.com/blob/2008403/1600w-vkBvE1d_xYA.jpg"
                           }

@@ -170,9 +170,11 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
         }`}
       >
         {Object.entries(contentSections).map(([key, content]) => (
-          <section key={key} id={key} className="scroll-spy-layout__section">
-            {content}
-          </section>
+          <div key={key} className="scroll-spy-layout__option-container">
+            <section id={key} className="scroll-spy-layout__section">
+              {content}
+            </section>
+          </div>
         ))}
       </Content>
     </Layout>

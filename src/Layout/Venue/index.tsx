@@ -4,6 +4,9 @@ import { HeaderNavBar } from "../../LayoutOption/HeaderNavBar";
 import ScrollSpyLayout from "../../LayoutOption/ScrollSpyLayout";
 import "./style.scss";
 import { Space } from "./Space/SpaceList";
+import Login from "../Login/login";
+import { ForgotEditPassword } from "../ForgotPassword/ForgotEditPassword";
+import { ForgotEmailInput } from "../ForgotPassword/ForgotEmailInput";
 
 const Venue: React.FC = () => {
   const menuItems = [
@@ -33,13 +36,14 @@ const Venue: React.FC = () => {
 
   const contentSections = {
     "1-1": <Space />,
-    "1-2": <Space />,
+    "1-2": <Login />,
+    "2-1": <ForgotEditPassword />,
+    "2-2": <ForgotEmailInput />,
   };
   return (
     <div className="venue-layout">
       <HeaderNavBar isLogin={true} />
       <ScrollSpyLayout items={menuItems} contentSections={contentSections} />
-      <FooterWeb />
     </div>
   );
 };

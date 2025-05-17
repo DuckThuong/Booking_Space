@@ -28,6 +28,7 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
   const [renderedContentKeys, setRenderedContentKeys] = useState<string[]>(
     Object.keys(contentSections)
   );
+  const [lastClickedKey, setLastClickedKey] = useState<string | null>(null);
   const {
     token: { colorBgContainer },
   } = theme.useToken();
@@ -47,16 +48,22 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
       setRenderedContentKeys(Object.keys(contentSections));
     }
 
-    const section = document.getElementById(e.key);
-    if (section) {
-      section.scrollIntoView({
-        behavior: "smooth",
-        block: "start",
-      });
-    }
-
+    setLastClickedKey(e.key);
     setActiveKey(e.key);
   };
+
+  useEffect(() => {
+    if (lastClickedKey && renderedContentKeys.includes(lastClickedKey)) {
+      const section = document.getElementById(lastClickedKey);
+      if (section) {
+        section.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
+        });
+      }
+    }
+    setLastClickedKey(null);
+  }, [lastClickedKey, renderedContentKeys]);
 
   useEffect(() => {
     const observer = new IntersectionObserver(

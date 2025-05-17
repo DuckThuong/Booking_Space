@@ -1,8 +1,3 @@
-import { notification } from "antd";
-import { apiRequest } from "./api";
-import { API_KEY } from "./apiConfig";
-import { LoginPayload } from "./itemApi";
-
 interface LoginResponse {
   accessToken: string;
   refreshToken: string;
@@ -97,5 +92,3 @@ export const convertImagesToBase64 = async (
     throw error;
   }
 };
-
-

@@ -1,11 +1,21 @@
-import { Button, Col, Grid, Layout, Menu, theme, type MenuProps } from "antd";
+import { useQuery } from "@tanstack/react-query";
+import {
+  Button,
+  Col,
+  Grid,
+  Layout,
+  Menu,
+  Modal,
+  Row,
+  theme,
+  type MenuProps,
+} from "antd";
 import { MenuItemType } from "antd/es/menu/interface";
 import React, { useEffect, useState } from "react";
-import "./scrollSpyLayout.scss";
-import { useQuery } from "@tanstack/react-query";
-import { QUERY_KEY } from "../../api/apiConfig";
-import { venueApi } from "../../api/api";
 import { useLocation } from "react-router-dom";
+import { venueApi } from "../../api/api";
+import { QUERY_KEY } from "../../api/apiConfig";
+import "./scrollSpyLayout.scss";
 
 const { Sider, Content } = Layout;
 const { useBreakpoint } = Grid;
@@ -28,6 +38,7 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
 }) => {
   const location = useLocation();
   const venueId = location?.state;
+  const [modal, setModal] = useState<boolean>();
   const [collapsed, setCollapsed] = useState(false);
   const [renderedContentKeys, setRenderedContentKeys] = useState<string[]>(
     Object.keys(contentSections)
@@ -115,11 +126,16 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
       })),
     }));
   };
+
   const { data: venueData } = useQuery({
     queryKey: [QUERY_KEY.GET_VENUE, venueId],
     queryFn: () => venueApi.getVenueById(venueId),
   });
-  console.log(venueId, venueData);
+
+  const { data: venueItem } = useQuery({
+    queryKey: [QUERY_KEY.GET_VENUE],
+    queryFn: () => venueApi.getVenueByUser(),
+  });
   return (
     <Layout hasSider className="scroll-spy-layout">
       <Sider
@@ -140,7 +156,13 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
                 <Button>Xem chi tiết</Button>
               </Col>
               <Col span={12}>
-                <Button>Chọn địa điểm khác</Button>
+                <Button
+                  onClick={() => {
+                    setModal(true);
+                  }}
+                >
+                  Chọn địa điểm khác
+                </Button>
               </Col>
             </div>
           </Col>
@@ -171,6 +193,43 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
               </section>
             </div>
           ))}
+        <Modal
+          onCancel={() => {
+            setModal(false);
+          }}
+          className="modal_venue"
+          open={modal}
+          title={"Địa điểm của bạn"}
+          footer={false}
+        >
+          {Array.isArray(venueItem) && venueItem.length > 0 ? (
+            venueItem.map((venue: any) => (
+              <Row key={venue.id} className="modal_venue-item">
+                <Col className="modal_venue-image" span={4}>
+                  <img
+                    src={venue.logoUrl}
+                    alt="avatar"
+                    style={{ width: "100%" }}
+                  />
+                </Col>
+                <Col span={18} className="modal_venue-info">
+                  <h3 className="modal_venue-info-header">{venue.name}</h3>
+                  <p className="modal_venue-info-title">{venue.description}</p>
+                  <div className="modal_venue-info-button">
+                    <Col className="option_button" span={12}>
+                      <Button>Xem chi tiết</Button>
+                    </Col>
+                    <Col className="option_button" span={12}>
+                      <Button disabled>Thêm mới</Button>
+                    </Col>
+                  </div>
+                </Col>
+              </Row>
+            ))
+          ) : (
+            <div>Không có địa điểm nào</div>
+          )}
+        </Modal>
       </Content>
     </Layout>
   );

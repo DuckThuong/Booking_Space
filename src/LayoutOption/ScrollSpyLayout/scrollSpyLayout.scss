@@ -17,7 +17,7 @@
   &__menu {
     height: 100%;
     border-right: 0;
-    padding-top: 12px;
+    padding: 12px 16px;
     .ant-menu-submenu {
       margin: 12px 0px !important;
       .ant-menu-submenu-title {
@@ -88,7 +88,7 @@
     }
 
     &--expanded {
-      margin-left: 240px;
+      margin-left: 340px;
     }
   }
 
@@ -100,5 +100,97 @@
     border-radius: 8px;
     box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     scroll-margin-top: 80px;
+  }
+}
+.modal_venue {
+  .ant-modal-header {
+    border-bottom: 1px solid $border_color_1;
+    .ant-modal-title {
+      color: #00609c !important;
+      font-family: $font_family_1 !important;
+      font-size: 22px !important;
+      font-weight: 600 !important;
+      font-family: "DM Sans", "system-ui", sans-serif !important;
+    }
+  }
+  .ant-modal-body {
+    min-height: 300px !important;
+    .modal_venue-item {
+      width: 100% !important;
+      column-gap: 18px;
+      height: 120px;
+      display: flex;
+      align-items: center;
+      margin: 12px 0px;
+      padding: 12px;
+      box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+      border-radius: 12px;
+      transition: all 0.3s ease;
+      cursor: pointer;
+
+      &:hover {
+        box-shadow: 4px 0 16px rgba(0, 0, 0, 0.2);
+        transform: translateY(-2px);
+      }
+
+      .modal_venue-image {
+        height: 90px;
+        width: 90px;
+        img {
+          height: 100%;
+          width: 100%;
+          object-fit: cover;
+          border-radius: 8px;
+          aspect-ratio: 1;
+        }
+      }
+      .modal_venue-info {
+        &-header {
+          color: #00609c !important;
+          font-family: $font_family_1 !important;
+          font-size: 18px !important;
+          font-weight: 600 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+        }
+        &-title {
+          color: #00609c !important;
+          font-family: $font_family_1 !important;
+          font-size: 12px !important;
+          font-weight: 600 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+        }
+
+        &-button {
+          width: 100%;
+          display: flex;
+          flex-direction: row;
+          .option_button {
+            width: 120px !important;
+            justify-content: flex-end;
+            &:last-child {
+              display: flex !important;
+            }
+            .ant-btn {
+              width: 142px !important;
+              border: none !important;
+              box-shadow: none !important;
+              background-color: white;
+              span {
+                color: #00609c !important;
+                font-weight: 500 !important;
+                font-family: "DM Sans", "system-ui", sans-serif !important;
+              }
+            }
+            .ant-btn-variant-outlined:disabled {
+              span {
+                color: #616364 !important;
+                font-weight: 500 !important;
+                font-family: "DM Sans", "system-ui", sans-serif !important;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

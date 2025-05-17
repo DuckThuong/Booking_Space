@@ -25,12 +25,27 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
   const [activeKey, setActiveKey] = useState<string>(items[0].key);
   const [openKeys, setOpenKeys] = useState<string[]>([]);
   const [collapsed, setCollapsed] = useState(false);
+  const [renderedContentKeys, setRenderedContentKeys] = useState<string[]>(
+    Object.keys(contentSections)
+  );
   const {
     token: { colorBgContainer },
   } = theme.useToken();
   const { md } = useBreakpoint();
-
+  console.log({ contentSections });
   const handleMenuClick: MenuProps["onClick"] = (e) => {
+    console.log(e.keyPath[1]);
+
+    if (e.keyPath.length > 1) {
+      const parentKey = e.keyPath[1];
+      const filteredKeys = Object.keys(contentSections).filter((key) =>
+        key.startsWith(parentKey + "-")
+      );
+      setRenderedContentKeys(filteredKeys);
+    } else {
+      setRenderedContentKeys(Object.keys(contentSections));
+    }
+
     const section = document.getElementById(e.key);
     if (section) {
       section.scrollIntoView({
@@ -117,6 +132,7 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
       }
     );
 
+    // Observe all sections initially for scroll spy to work correctly
     Object.keys(contentSections).forEach((key) => {
       const element = document.getElementById(key);
       if (element) observer.observe(element);
@@ -169,13 +185,15 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
             : "scroll-spy-layout__content--expanded"
         }`}
       >
-        {Object.entries(contentSections).map(([key, content]) => (
-          <div key={key} className="scroll-spy-layout__option-container">
-            <section id={key} className="scroll-spy-layout__section">
-              {content}
-            </section>
-          </div>
-        ))}
+        {Object.entries(contentSections)
+          .filter(([key]) => renderedContentKeys.includes(key))
+          .map(([key, content]) => (
+            <div key={key} className="scroll-spy-layout__option-container">
+              <section id={key} className="scroll-spy-layout__section">
+                {content}
+              </section>
+            </div>
+          ))}
       </Content>
     </Layout>
   );

@@ -10,7 +10,7 @@ import { Register } from "../Layout/Register";
 import { DefaultUser } from "../Layout/User/DefaultUser";
 import { SuspenseWrapper } from "../SuspenseWrapper";
 import { CUSTOMER_ROUTER_PATH } from "./Routers";
-import { Venue } from "../Layout/Venue";
+import Venue from "../Layout/Venue";
 
 export const CustomerRouter = () => (
   <Routes>

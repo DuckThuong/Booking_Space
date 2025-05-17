@@ -1,4 +1,3 @@
-// ScrollSpyLayout.tsx
 import { Grid, Layout, Menu, theme, type MenuProps } from "antd";
 import { MenuItemType } from "antd/es/menu/interface";
 import React, { useEffect, useState } from "react";

@@ -90,7 +90,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
   });
 
   const { data: venueData } = useQuery({
-    queryKey: [QUERY_KEY.GET_VENUE],
+    queryKey: [QUERY_KEY.GET_VENUE, showAccount],
     queryFn: () => venueApi.getVenueByUser(),
   });
 
@@ -184,10 +184,10 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                           className="header_account-option"
                           onClick={() => {
                             setShowAccount(false);
-                            navigate(CUSTOMER_ROUTER_PATH.VENUE);
+                            navigate(CUSTOMER_ROUTER_PATH.HOST);
                           }}
                         >
-                          360, Giải Phóng
+                          Thêm địa điểm mới
                         </div>
                       )}
                     </Col>

@@ -1,3 +1,6 @@
+@import "../../styles/mixins";
+@import "../../styles/color.scss";
+
 .scroll-spy-layout {
   min-height: 100vh;
 
@@ -14,7 +17,7 @@
   &__menu {
     height: 100%;
     border-right: 0;
-    padding-top: 64px;
+    padding-top: 12px;
     .ant-menu-submenu {
       margin: 12px 0px !important;
       .ant-menu-submenu-title {
@@ -33,6 +36,44 @@
         box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
         border-radius: 6px;
         margin: 0px 4px;
+      }
+    }
+  }
+
+  &_venue {
+    padding: 12px 12px !important;
+    background-color: white;
+    .ant-col-24 {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+      padding: 12px;
+      border-radius: 12px;
+    }
+    &-item {
+      color: #00609c !important;
+      font-weight: 600 !important;
+      font-family: "DM Sans", "system-ui", sans-serif !important;
+    }
+
+    &-option {
+      display: flex;
+      flex-direction: row;
+      border-top: 1px solid $border_color_1;
+      padding-top: 8px;
+      .ant-col {
+        .ant-btn {
+          width: 142px !important;
+          border: none !important;
+          box-shadow: none !important;
+          span {
+            color: red !important;
+            font-weight: 600 !important;
+            font-family: "DM Sans", "system-ui", sans-serif !important;
+          }
+        }
+        &:last-child {
+          border-left: 1px solid black;
+          padding-left: 8px;
+        }
       }
     }
   }

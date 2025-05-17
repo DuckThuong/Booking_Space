@@ -1,7 +1,11 @@
-import { Grid, Layout, Menu, theme, type MenuProps } from "antd";
+import { Button, Col, Grid, Layout, Menu, theme, type MenuProps } from "antd";
 import { MenuItemType } from "antd/es/menu/interface";
 import React, { useEffect, useState } from "react";
 import "./scrollSpyLayout.scss";
+import { useQuery } from "@tanstack/react-query";
+import { QUERY_KEY } from "../../api/apiConfig";
+import { venueApi } from "../../api/api";
+import { useLocation } from "react-router-dom";
 
 const { Sider, Content } = Layout;
 const { useBreakpoint } = Grid;
@@ -22,6 +26,8 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
   items,
   contentSections,
 }) => {
+  const location = useLocation();
+  const venueId = location?.state;
   const [collapsed, setCollapsed] = useState(false);
   const [renderedContentKeys, setRenderedContentKeys] = useState<string[]>(
     Object.keys(contentSections)
@@ -78,7 +84,6 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
             }
             return undefined;
           };
-          const parentKey = findParentKey(items, mostVisibleEntry.target.id);
         }
       },
       {
@@ -110,16 +115,37 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
       })),
     }));
   };
-
+  const { data: venueData } = useQuery({
+    queryKey: [QUERY_KEY.GET_VENUE, venueId],
+    queryFn: () => venueApi.getVenueById(venueId),
+  });
+  console.log(venueId, venueData);
   return (
     <Layout hasSider className="scroll-spy-layout">
       <Sider
         collapsible
         collapsed={collapsed}
         onCollapse={setCollapsed}
-        width={240}
+        width={380}
         className="scroll-spy-layout__sider"
       >
+        <div className="scroll-spy-layout_venue">
+          <Col span={24}>
+            <h2 className="scroll-spy-layout_venue-item">{venueData?.name}</h2>
+            <p className="scroll-spy-layout_venue-item">
+              {venueData?.description}
+            </p>
+            <div className="scroll-spy-layout_venue-option">
+              <Col span={12}>
+                <Button>Xem chi tiết</Button>
+              </Col>
+              <Col span={12}>
+                <Button>Chọn địa điểm khác</Button>
+              </Col>
+            </div>
+          </Col>
+        </div>
+
         <Menu
           mode="inline"
           onClick={handleMenuClick}

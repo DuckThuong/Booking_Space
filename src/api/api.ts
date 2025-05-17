@@ -56,5 +56,6 @@ export const venueApi = {
     apiRequest(`${API_KEY.VENUE}/SignUpVenue`, "POST", venueData),
   getVenueTypes: () => apiRequest(`${API_KEY.VENUE}/GetVenueTypes`, "GET"),
   getVenueByUser: () => apiRequest(`${API_KEY.VENUE}/GetUserVenues`, "GET"),
-  getVenueById: () => apiRequest(`${API_KEY.VENUE}/GetUserVenues`, "GET"),
+  getVenueById: (id: string) =>
+    apiRequest(`${API_KEY.VENUE}/GetVenueTypeById/${id}`, "GET"),
 };

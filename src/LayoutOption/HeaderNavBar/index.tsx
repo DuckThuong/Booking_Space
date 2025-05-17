@@ -3,7 +3,7 @@ import { faListUl, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button, Col, Image, notification, Row, Tabs } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { SvgLogo } from "../../@svg/Logo/SvgLogo";
 import { userApi, venueApi } from "../../api/api";
@@ -28,6 +28,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
   const [showAccount, setShowAccount] = useState<boolean>(false);
   const navigate = useNavigate();
   const user = useUser();
+  const accountRef = useRef<HTMLDivElement>(null);
 
   const tabItems = [
     { key: "1", label: "Doanh nghiệp" },
@@ -42,6 +43,22 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
       setTabKey("1");
     }
   }, [window.location.href]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        accountRef.current &&
+        !accountRef.current.contains(event.target as Node)
+      ) {
+        setShowAccount(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const onTabChangeHandler = (key: string) => {
     setTabKey(key);
@@ -139,7 +156,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                 </RowWrap>
               </div>
             ) : (
-              <div className="right_content">
+              <div className="right_content" ref={accountRef}>
                 <Button
                   className="header__row-contact"
                   onClick={() => {

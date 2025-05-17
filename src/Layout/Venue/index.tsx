@@ -4,6 +4,7 @@ import { HeaderNavBar } from "../../LayoutOption/HeaderNavBar";
 import "./style.scss";
 import { VenueRouter } from "./venueRouter";
 import { useState } from "react";
+import { FooterWeb } from "../../LayoutOption/FooterWeb";
 export const Venue = () => {
   const [currentTab, setCurrentTab] = useState<string>("1");
   const handleTabChange = (key: string) => {
@@ -20,6 +21,7 @@ export const Venue = () => {
           <VenueRouter tabKey={currentTab} />
         </Col>
       </Row>
+      <FooterWeb />
     </div>
   );
 };

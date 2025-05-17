@@ -127,7 +127,7 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
     }));
   };
 
-  const { data: venueData } = useQuery({
+  const { data: venueData, isLoading } = useQuery({
     queryKey: [QUERY_KEY.GET_VENUE, venueId],
     queryFn: () => venueApi.getVenueById(venueId),
   });
@@ -136,6 +136,7 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
     queryKey: [QUERY_KEY.GET_VENUE],
     queryFn: () => venueApi.getVenueByUser(),
   });
+  console.log(isLoading);
   return (
     <Layout hasSider className="scroll-spy-layout">
       <Sider

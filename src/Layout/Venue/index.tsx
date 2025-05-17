@@ -1,26 +1,40 @@
-import { Col, Row } from "antd";
-import { SidebarContent } from "../../LayoutOption/SideBarContent";
+import { FooterWeb } from "../../LayoutOption/FooterWeb";
 import { HeaderNavBar } from "../../LayoutOption/HeaderNavBar";
 import "./style.scss";
-import { VenueRouter } from "./venueRouter";
-import { useState } from "react";
-import { FooterWeb } from "../../LayoutOption/FooterWeb";
+import ScrollSpyLayout from "../../LayoutOption/ScrollSpyLayout";
+import { Space } from "./Space";
 export const Venue = () => {
-  const [currentTab, setCurrentTab] = useState<string>("1");
-  const handleTabChange = (key: string) => {
-    setCurrentTab(key);
+  const menuItems = [
+    {
+      key: "section1",
+      icon: (
+        <img src="https://img.icons8.com/windows/32/company.png" alt="space" />
+      ),
+      label: "Không gian",
+    },
+    {
+      key: "section2",
+      icon: (
+        <img src="https://img.icons8.com/small/32/company.png" alt="venue" />
+      ),
+      label: "Địa điểm",
+      isParent: true,
+      children: [
+        { key: "section2-1", label: "Thông tin chi tiết" },
+        { key: "section2-2", label: "Thông tin khách" },
+      ],
+    },
+  ];
+
+  const contentSections = {
+    section1: <Space />,
+    "section2-1": <Space />,
+    "section2-2": <Space />,
   };
   return (
     <div className="venue">
       <HeaderNavBar isLogin={true} />
-      <Row style={{ height: "100vh" }}>
-        <Col span={6}>
-          <SidebarContent onTabChange={handleTabChange} />
-        </Col>
-        <Col span={18}>
-          <VenueRouter tabKey={currentTab} />
-        </Col>
-      </Row>
+      <ScrollSpyLayout items={menuItems} contentSections={contentSections} />
       <FooterWeb />
     </div>
   );

@@ -22,8 +22,6 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
   items,
   contentSections,
 }) => {
-  const [activeKey, setActiveKey] = useState<string>(items[0].key);
-  const [openKeys, setOpenKeys] = useState<string[]>([]);
   const [collapsed, setCollapsed] = useState(false);
   const [renderedContentKeys, setRenderedContentKeys] = useState<string[]>(
     Object.keys(contentSections)
@@ -33,11 +31,8 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
     token: { colorBgContainer },
   } = theme.useToken();
   const { md } = useBreakpoint();
-  console.log({ contentSections });
 
   const handleMenuClick: MenuProps["onClick"] = (e) => {
-    console.log(e.keyPath[1]);
-
     if (e.keyPath.length > 1) {
       const parentKey = e.keyPath[1];
       const filteredKeys = Object.keys(contentSections).filter((key) =>
@@ -49,7 +44,6 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
     }
 
     setLastClickedKey(e.key);
-    setActiveKey(e.key);
   };
 
   useEffect(() => {
@@ -73,7 +67,6 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
         }, entries[0]);
 
         if (mostVisibleEntry && mostVisibleEntry.target.id) {
-          setActiveKey(mostVisibleEntry.target.id);
           const findParentKey = (
             items: MenuItem[],
             targetKey: string
@@ -86,25 +79,19 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
             return undefined;
           };
           const parentKey = findParentKey(items, mostVisibleEntry.target.id);
-          if (parentKey) {
-            setOpenKeys([parentKey]);
-          }
         }
       },
       {
-        // Options for the observer
         rootMargin: "-20% 0px -20% 0px",
         threshold: [0.5, 0.75],
       }
     );
 
-    // Observe only the currently rendered sections
     renderedContentKeys.forEach((key) => {
       const element = document.getElementById(key);
       if (element) observer.observe(element);
     });
 
-    // Clean up observer on unmount or when dependencies change
     return () => observer.disconnect();
   }, [renderedContentKeys, items]);
 
@@ -135,9 +122,6 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
       >
         <Menu
           mode="inline"
-          selectedKeys={[activeKey]}
-          openKeys={openKeys}
-          onOpenChange={setOpenKeys}
           onClick={handleMenuClick}
           items={convertToMenuItems(items)}
           className="scroll-spy-layout__menu"

@@ -15,6 +15,26 @@
     height: 100%;
     border-right: 0;
     padding-top: 64px;
+    .ant-menu-submenu {
+      margin: 12px 0px !important;
+      .ant-menu-submenu-title {
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+      }
+      .ant-menu-title-content {
+        color: #00609c !important;
+        font-size: 16px !important;
+        font-weight: 600 !important;
+        font-family: "DM Sans", "system-ui", sans-serif !important;
+      }
+    }
+    .ant-menu-submenu {
+      .ant-menu {
+        background-color: white !important;
+        box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1);
+        border-radius: 6px;
+        margin: 0px 4px;
+      }
+    }
   }
 
   &__content {

@@ -33,6 +33,7 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
   } = theme.useToken();
   const { md } = useBreakpoint();
   console.log({ contentSections });
+
   const handleMenuClick: MenuProps["onClick"] = (e) => {
     console.log(e.keyPath[1]);
 
@@ -52,52 +53,9 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
         behavior: "smooth",
         block: "start",
       });
-      const observer = new IntersectionObserver(() => {});
-      observer.disconnect();
-      setActiveKey(e.key);
-      setTimeout(() => {
-        const newObserver = new IntersectionObserver(
-          (entries) => {
-            const mostVisibleEntry = entries.reduce((max, entry) => {
-              return entry.intersectionRatio > max.intersectionRatio
-                ? entry
-                : max;
-            }, entries[0]);
-
-            if (mostVisibleEntry && mostVisibleEntry.target.id) {
-              setActiveKey(mostVisibleEntry.target.id);
-              const findParentKey = (
-                items: MenuItem[],
-                targetKey: string
-              ): string | undefined => {
-                for (const item of items) {
-                  if (item.children?.some((child) => child.key === targetKey)) {
-                    return item.key;
-                  }
-                }
-                return undefined;
-              };
-              const parentKey = findParentKey(
-                items,
-                mostVisibleEntry.target.id
-              );
-              if (parentKey) {
-                setOpenKeys([parentKey]);
-              }
-            }
-          },
-          {
-            rootMargin: "-20% 0px -20% 0px",
-            threshold: [0.5, 0.75],
-          }
-        );
-
-        Object.keys(contentSections).forEach((key) => {
-          const element = document.getElementById(key);
-          if (element) newObserver.observe(element);
-        });
-      }, 1000);
     }
+
+    setActiveKey(e.key);
   };
 
   useEffect(() => {
@@ -127,19 +85,21 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
         }
       },
       {
+        // Options for the observer
         rootMargin: "-20% 0px -20% 0px",
         threshold: [0.5, 0.75],
       }
     );
 
-    // Observe all sections initially for scroll spy to work correctly
-    Object.keys(contentSections).forEach((key) => {
+    // Observe only the currently rendered sections
+    renderedContentKeys.forEach((key) => {
       const element = document.getElementById(key);
       if (element) observer.observe(element);
     });
 
+    // Clean up observer on unmount or when dependencies change
     return () => observer.disconnect();
-  }, [contentSections]);
+  }, [renderedContentKeys, items]);
 
   useEffect(() => {
     setCollapsed(!md);

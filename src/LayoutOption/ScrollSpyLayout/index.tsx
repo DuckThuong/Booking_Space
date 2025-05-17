@@ -36,22 +36,50 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
         behavior: "smooth",
         block: "start",
       });
+      const observer = new IntersectionObserver(() => {});
+      observer.disconnect();
       setActiveKey(e.key);
+      setTimeout(() => {
+        const newObserver = new IntersectionObserver(
+          (entries) => {
+            const mostVisibleEntry = entries.reduce((max, entry) => {
+              return entry.intersectionRatio > max.intersectionRatio
+                ? entry
+                : max;
+            }, entries[0]);
+
+            if (mostVisibleEntry && mostVisibleEntry.target.id) {
+              setActiveKey(mostVisibleEntry.target.id);
+            }
+          },
+          {
+            rootMargin: "-50px 0px -40% 0px",
+            threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
+          }
+        );
+
+        Object.keys(contentSections).forEach((key) => {
+          const element = document.getElementById(key);
+          if (element) newObserver.observe(element);
+        });
+      }, 1000);
     }
   };
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            setActiveKey(entry.target.id);
-          }
-        });
+        const mostVisibleEntry = entries.reduce((max, entry) => {
+          return entry.intersectionRatio > max.intersectionRatio ? entry : max;
+        }, entries[0]);
+
+        if (mostVisibleEntry && mostVisibleEntry.target.id) {
+          setActiveKey(mostVisibleEntry.target.id);
+        }
       },
       {
         rootMargin: "-50px 0px -40% 0px",
-        threshold: 0.1,
+        threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1.0],
       }
     );
 

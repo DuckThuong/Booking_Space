@@ -6,30 +6,36 @@ import { Space } from "./Space";
 export const Venue = () => {
   const menuItems = [
     {
-      key: "section1",
+      key: "1",
       icon: (
         <img src="https://img.icons8.com/windows/32/company.png" alt="space" />
       ),
       label: "Không gian",
+      children: [
+        { key: "1-1", label: "Thông tin chi tiết" },
+        { key: "1-2", label: "Thông tin khách" },
+      ],
     },
     {
-      key: "section2",
+      key: "2",
       icon: (
         <img src="https://img.icons8.com/small/32/company.png" alt="venue" />
       ),
       label: "Địa điểm",
       isParent: true,
       children: [
-        { key: "section2-1", label: "Thông tin chi tiết" },
-        { key: "section2-2", label: "Thông tin khách" },
+        { key: "2-1", label: "Thông tin chi tiết" },
+        { key: "2-2", label: "Thông tin khách" },
       ],
     },
   ];
 
   const contentSections = {
-    section1: <Space />,
-    "section2-1": <Space />,
-    "section2-2": <Space />,
+    "1": <Space />,
+    "1-1": <Space />,
+    "1-2": <Space />,
+    "2-1": <Space />,
+    "2-2": <Space />,
   };
   return (
     <div className="venue">

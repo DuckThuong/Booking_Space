@@ -1,13 +1,9 @@
-import {
-  EllipsisOutlined,
-  PlusOutlined,
-  SettingOutlined,
-} from "@ant-design/icons";
+import { EllipsisOutlined, PlusOutlined } from "@ant-design/icons";
 import { Button, Col, Collapse, CollapseProps, Image, Row, Steps } from "antd";
 import { useState } from "react";
-import FormWrap from "../../../Components/Form/FormWrap";
+import { FormSelect } from "../../../../Components/Form/FormSelect";
+import FormWrap from "../../../../Components/Form/FormWrap";
 import "./space.scss";
-import { FormSelect } from "../../../Components/Form/FormSelect";
 
 export const Space = () => {
   const [current, setCurrent] = useState(0);

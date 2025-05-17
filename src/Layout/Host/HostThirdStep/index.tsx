@@ -9,6 +9,7 @@ import { FormInput } from "../../../Components/Form/FormInput";
 import { UploadProps } from "antd/lib";
 import { RcFile } from "antd/es/upload";
 import TextArea from "antd/es/input/TextArea";
+import { convertImagesToBase64 } from "../../../api/authApi";
 
 interface ThirdStepProps {
   onNext: (data: Partial<CreateVenueEnum>) => void;
@@ -20,16 +21,18 @@ export const HostThirdStep: FC<ThirdStepProps> = ({ onNext, data }) => {
   const [image, setImage] = useState<File>();
   const [preview, setPreview] = useState<string>();
 
-  const handleFinish = (formData: any) => {
+  const handleFinish = async (formData: any) => {
+    if (!image) return;
+    const base64Image = await convertImagesToBase64([image]);
     onNext({
       ...data,
-      Logo: image,
+      Logo: base64Image[0],
       Name: formData.companyName,
       Description: formData.companyDescription,
     });
   };
 
-  const handleUpload: UploadProps['beforeUpload'] = (file) => {
+  const handleUpload: UploadProps["beforeUpload"] = (file) => {
     setImage(file);
     setPreview(URL.createObjectURL(file));
     return false;
@@ -55,7 +58,7 @@ export const HostThirdStep: FC<ThirdStepProps> = ({ onNext, data }) => {
             beforeUpload={handleUpload}
           >
             {preview ? (
-              <img src={preview} alt="avatar" style={{ width: '100%' }} />
+              <img src={preview} alt="avatar" style={{ width: "100%" }} />
             ) : (
               <div>
                 <PlusOutlined />

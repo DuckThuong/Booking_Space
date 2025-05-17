@@ -17,10 +17,10 @@ export interface VenuePayload {
 }
 
 export interface CreateVenueEnum {
-  UserAvatar?: File;
+  UserAvatar?: string;
   VenueTypeId?: number;
   PhoneNumber?: number;
-  Logo?: File;
+  Logo?: string;
   Name?: string;
   Description?: string;
   Address?: VenueAddress;
@@ -34,4 +34,3 @@ export interface VenueAddress {
   Latitude?: string;
   Longitude?: string;
 }
-

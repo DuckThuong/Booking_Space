@@ -1,19 +1,19 @@
 import { SolutionOutlined } from "@ant-design/icons";
 import { faListUl, faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useMutation, useQuery } from "@tanstack/react-query";
 import { Button, Col, Image, notification, Row, Tabs } from "antd";
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 import { SvgLogo } from "../../@svg/Logo/SvgLogo";
+import { userApi, venueApi } from "../../api/api";
+import { QUERY_KEY } from "../../api/apiConfig";
+import { useUser } from "../../api/useHook";
 import ColWrap from "../../Components/ColWrap";
 import FormWrap from "../../Components/Form/FormWrap";
 import RowWrap from "../../Components/RowWrap";
 import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
 import "./headerNavBar.scss";
-import { useUser } from "../../api/useHook";
-import { useMutation, useQuery } from "@tanstack/react-query";
-import { userApi, venueApi } from "../../api/api";
-import { QUERY_KEY } from "../../api/apiConfig";
 
 interface HeaderNavBarProps {
   isLogin: boolean;
@@ -28,6 +28,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
   const [showAccount, setShowAccount] = useState<boolean>(false);
   const navigate = useNavigate();
   const user = useUser();
+  const accountRef = useRef<HTMLDivElement>(null);
 
   const tabItems = [
     { key: "1", label: "Doanh nghiệp" },
@@ -42,6 +43,22 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
       setTabKey("1");
     }
   }, [window.location.href]);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        accountRef.current &&
+        !accountRef.current.contains(event.target as Node)
+      ) {
+        setShowAccount(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClickOutside);
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, []);
 
   const onTabChangeHandler = (key: string) => {
     setTabKey(key);
@@ -87,13 +104,12 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
         },
       });
     },
-
-  })
+  });
 
   const { data: venueData } = useQuery({
-    queryKey: [QUERY_KEY.GET_VENUE],
+    queryKey: [QUERY_KEY.GET_VENUE, showAccount],
     queryFn: () => venueApi.getVenueByUser(),
-  })
+  });
 
   const handleLogOut = async () => {
     logOutMutation.mutate();
@@ -140,7 +156,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                 </RowWrap>
               </div>
             ) : (
-              <div className="right_content">
+              <div className="right_content" ref={accountRef}>
                 <Button
                   className="header__row-contact"
                   onClick={() => {
@@ -172,10 +188,12 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                             className="header_account-option"
                             onClick={() => {
                               setShowAccount(false);
-                              navigate(CUSTOMER_ROUTER_PATH.VENUE, { state: venue.id });
+                              navigate(CUSTOMER_ROUTER_PATH.VENUE, {
+                                state: venue?.venueId,
+                              });
                             }}
                           >
-                            {venue.address || "Địa điểm chưa có địa chỉ"}
+                            {venue?.name || "Địa điểm chưa có địa chỉ"}
                           </div>
                         ))
                       ) : (
@@ -183,10 +201,10 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                           className="header_account-option"
                           onClick={() => {
                             setShowAccount(false);
-                            navigate(CUSTOMER_ROUTER_PATH.VENUE);
+                            navigate(CUSTOMER_ROUTER_PATH.HOST);
                           }}
                         >
-                          360, Giải Phóng
+                          Thêm địa điểm mới
                         </div>
                       )}
                     </Col>
@@ -196,7 +214,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                           preview={false}
                           src={
                             typeof user?.avatarUrl === "string" &&
-                              user.avatarUrl
+                            user.avatarUrl
                               ? user.avatarUrl
                               : "https://static-cse.canva.com/blob/2008403/1600w-vkBvE1d_xYA.jpg"
                           }

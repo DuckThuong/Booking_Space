@@ -9,6 +9,7 @@ import ColWrap from "../../../Components/ColWrap";
 import { CreateVenueEnum } from "../../../api/itemApi";
 import { useUser } from "../../../api/useHook";
 import { faPray } from "@fortawesome/free-solid-svg-icons";
+import { convertImagesToBase64 } from "../../../api/authApi";
 
 interface SecondStepProps {
   onNext: (data: Partial<CreateVenueEnum>) => void;
@@ -21,22 +22,24 @@ export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
   const [preview, setPreview] = useState<string>();
   const user = useUser();
 
-  useEffect(()=>{
-    if(user){
+  useEffect(() => {
+    if (user) {
       form.setFieldValue("fullName", user.fullName);
       form.setFieldValue("phone", user.phoneNumber);
     }
   }, [user]);
 
-  const handleFinish = (formData: any) => {
+  const handleFinish = async (formData: any) => {
+    if (!image) return;
+    const base64Image = await convertImagesToBase64([image]);
     onNext({
       ...data,
-      UserAvatar: image,
+      UserAvatar: base64Image[0],
       PhoneNumber: form.getFieldValue("phone"),
     });
   };
 
-  const handleUpload: UploadProps['beforeUpload'] = (file) => {
+  const handleUpload: UploadProps["beforeUpload"] = (file) => {
     setImage(file);
     setPreview(URL.createObjectURL(file));
     return false;
@@ -69,7 +72,7 @@ export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
               beforeUpload={handleUpload}
             >
               {preview ? (
-                <img src={preview} alt="avatar" style={{ width: '100%' }} />
+                <img src={preview} alt="avatar" style={{ width: "100%" }} />
               ) : (
                 <div>
                   <PlusOutlined />
@@ -78,10 +81,7 @@ export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
               )}
             </Upload>
           </ColWrap>
-          <ColWrap
-            colProps={{ span: 12 }}
-            className="step_second__form-col"
-          >
+          <ColWrap colProps={{ span: 12 }} className="step_second__form-col">
             <div>
               <p className="register_label">Họ và tên</p>
               <FormInput
@@ -121,11 +121,8 @@ export const HostSecondStep: FC<SecondStepProps> = ({ onNext, data }) => {
           </ColWrap>
         </RowWrap>
 
-
         <RowWrap className="step_second__actions">
-          <Button htmlType="submit">
-            Xác nhận
-          </Button>
+          <Button htmlType="submit">Xác nhận</Button>
         </RowWrap>
       </FormWrap>
     </div>

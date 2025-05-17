@@ -1,43 +1,44 @@
-import { Menu } from "antd";
-import { MenuProps } from "antd/lib";
 import React from "react";
 import { FooterWeb } from "../../LayoutOption/FooterWeb";
 import { HeaderNavBar } from "../../LayoutOption/HeaderNavBar";
+import ScrollSpyLayout from "../../LayoutOption/ScrollSpyLayout";
 import "./style.scss";
+import { Space } from "./Space/SpaceList";
 
-type MenuItem = Required<MenuProps>["items"][number];
 const Venue: React.FC = () => {
-  const items: MenuItem[] = [
+  const menuItems = [
     {
       key: "1",
       icon: (
         <img src="https://img.icons8.com/windows/32/company.png" alt="space" />
       ),
-      label: "Tổng quan",
+      label: "Không gian",
+      children: [
+        { key: "1-1", label: "Chi tiết" },
+        { key: "1-2", label: "Khác" },
+      ],
     },
     {
       key: "2",
       icon: (
         <img src="https://img.icons8.com/small/32/company.png" alt="venue" />
       ),
-      label: "Giới thiệu",
+      label: "Địa điểm",
+      children: [
+        { key: "2-1", label: "Thông tin chi tiết" },
+        { key: "2-2", label: "Thông tin khách" },
+      ],
     },
   ];
-  const onClick: MenuProps["onClick"] = (e) => {
-    console.log("click ", e);
-  };
 
+  const contentSections = {
+    "1-1": <Space />,
+    "1-2": <Space />,
+  };
   return (
     <div className="venue-layout">
       <HeaderNavBar isLogin={true} />
-      <Menu
-        onClick={onClick}
-        style={{ width: 256 }}
-        defaultSelectedKeys={["1"]}
-        defaultOpenKeys={["1"]}
-        mode="inline"
-        items={items}
-      />
+      <ScrollSpyLayout items={menuItems} contentSections={contentSections} />
       <FooterWeb />
     </div>
   );

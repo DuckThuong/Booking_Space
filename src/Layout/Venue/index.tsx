@@ -31,7 +31,6 @@ export const Venue = () => {
   ];
 
   const contentSections = {
-    "1": <Space />,
     "1-1": <Space />,
     "1-2": <Space />,
     "2-1": <Space />,

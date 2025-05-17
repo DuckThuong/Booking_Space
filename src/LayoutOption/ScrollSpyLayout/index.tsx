@@ -24,6 +24,7 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
   contentSections,
 }) => {
   const [activeKey, setActiveKey] = useState<string>(items[0].key);
+  const [openKeys, setOpenKeys] = useState<string[]>([]);
   const [collapsed, setCollapsed] = useState(false);
   const {
     token: { colorBgContainer },
@@ -51,6 +52,24 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
 
             if (mostVisibleEntry && mostVisibleEntry.target.id) {
               setActiveKey(mostVisibleEntry.target.id);
+              const findParentKey = (
+                items: MenuItem[],
+                targetKey: string
+              ): string | undefined => {
+                for (const item of items) {
+                  if (item.children?.some((child) => child.key === targetKey)) {
+                    return item.key;
+                  }
+                }
+                return undefined;
+              };
+              const parentKey = findParentKey(
+                items,
+                mostVisibleEntry.target.id
+              );
+              if (parentKey) {
+                setOpenKeys([parentKey]);
+              }
             }
           },
           {
@@ -76,6 +95,22 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
 
         if (mostVisibleEntry && mostVisibleEntry.target.id) {
           setActiveKey(mostVisibleEntry.target.id);
+          // Find parent menu item and open it
+          const findParentKey = (
+            items: MenuItem[],
+            targetKey: string
+          ): string | undefined => {
+            for (const item of items) {
+              if (item.children?.some((child) => child.key === targetKey)) {
+                return item.key;
+              }
+            }
+            return undefined;
+          };
+          const parentKey = findParentKey(items, mostVisibleEntry.target.id);
+          if (parentKey) {
+            setOpenKeys([parentKey]);
+          }
         }
       },
       {
@@ -120,6 +155,8 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
         <Menu
           mode="inline"
           selectedKeys={[activeKey]}
+          openKeys={openKeys}
+          onOpenChange={setOpenKeys}
           onClick={handleMenuClick}
           items={convertToMenuItems(items)}
           className="scroll-spy-layout__menu"

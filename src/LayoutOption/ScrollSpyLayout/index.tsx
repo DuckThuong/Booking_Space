@@ -95,7 +95,6 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
 
         if (mostVisibleEntry && mostVisibleEntry.target.id) {
           setActiveKey(mostVisibleEntry.target.id);
-          // Find parent menu item and open it
           const findParentKey = (
             items: MenuItem[],
             targetKey: string

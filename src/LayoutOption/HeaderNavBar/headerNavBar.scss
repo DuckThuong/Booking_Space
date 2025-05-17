@@ -2,6 +2,11 @@
 @import "../../styles/color.scss";
 
 .header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   font-family: $font_family_1 !important;
   width: 100% !important;
   height: fit-content !important;
@@ -10,6 +15,7 @@
   align-items: center;
   flex-direction: row !important;
   padding: 0px 40px !important;
+  background-color: white !important;
   &__form {
     width: 100%;
   }

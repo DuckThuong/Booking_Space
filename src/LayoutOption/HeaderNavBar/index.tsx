@@ -180,7 +180,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                 {showAccount && (
                   <Row className="header_account">
                     <Col span={12} className="header_account-venue">
-                      <p className="header_account-title">Địa điểm của tôi</p>
+                      <p className="header_account-title ">Địa điểm của tôi</p>
                       {Array.isArray(venueData) && venueData.length > 0 ? (
                         venueData.map((venue: any) => (
                           <div

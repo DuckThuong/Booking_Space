@@ -98,7 +98,7 @@ export const SpaceRound = () => {
             <Image
               className="main-image"
               preview={false}
-              src="https://www.jaspersoft.com/content/dam/jaspersoft/images/graphics/infographics/column-chart-example.svg"
+              src="https://res.cloudinary.com/mobilecloud/image/upload/v1747799566/section1_diz6tt.png"
             />
           </Col>
         </Row>
@@ -108,7 +108,7 @@ export const SpaceRound = () => {
             <Image
               className="main-image"
               preview={false}
-              src="https://www.jaspersoft.com/content/dam/jaspersoft/images/graphics/infographics/column-chart-example.svg"
+              src="https://res.cloudinary.com/mobilecloud/image/upload/v1747799566/section2_ihtycc.png"
             />
           </Col>
           <Col span={12} className="section-3-col">
@@ -161,7 +161,7 @@ export const SpaceRound = () => {
             <Image
               className="main-image"
               preview={false}
-              src="https://www.jaspersoft.com/content/dam/jaspersoft/images/graphics/infographics/column-chart-example.svg"
+              src="https://res.cloudinary.com/mobilecloud/image/upload/v1747799567/section3_krnz7o.png"
             />
           </Col>
         </Row>

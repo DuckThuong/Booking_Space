@@ -75,6 +75,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: slideInLeft 1s ease-out forwards;
     .ant-image {
       img {
         width: 100%;
@@ -98,6 +99,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    animation: slideInRight 1s ease-out forwards;
     .ant-image {
       img {
         width: 100%;
@@ -105,5 +107,27 @@
         object-fit: contain;
       }
     }
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(-50%);
+    opacity: 1;
   }
 }

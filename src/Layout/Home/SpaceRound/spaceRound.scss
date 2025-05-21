@@ -4,13 +4,12 @@
 .space {
   width: 100% !important;
   height: 100vh;
-  padding: 32px 80px !important;
   &_form {
-    padding: 24px !important;
-    border-radius: 24px;
+    width: 100%;
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
     &-row {
       margin: 24px 0px !important;
+      padding: 32px 80px !important;
     }
   }
   &_col {
@@ -67,6 +66,131 @@
               }
             }
           }
+        }
+      }
+    }
+  }
+  .section {
+    &-1 {
+      background-color: #f7f8f9;
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px;
+      margin: 32px 0px !important;
+      &-left {
+        &-title {
+          color: black !important;
+          font-size: 40px !important;
+          font-weight: 600 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+          margin-bottom: 20px;
+        }
+        &-description {
+          color: #c7c7c7 !important;
+          font-size: 16px !important;
+          font-weight: 600 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+        }
+      }
+      &_video {
+        min-width: 80% !important;
+        margin-top: 24px !important;
+        iframe {
+          border-radius: 24px !important;
+        }
+      }
+    }
+    &-2 {
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 24px 120px;
+      margin: 32px 0px !important;
+      &-left {
+        span {
+          color: #00609c !important;
+          font-size: 20px !important;
+          font-weight: 600 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+        }
+        &-title {
+          color: black !important;
+          font-size: 40px !important;
+          font-weight: 600 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+          margin-bottom: 20px;
+        }
+        &-description {
+          color: #c7c7c7 !important;
+          font-size: 16px !important;
+          font-weight: 600 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+        }
+      }
+    }
+    &-3 {
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 24px 120px;
+      margin: 32px 0px !important;
+      &-left {
+        span {
+          color: #00609c !important;
+          font-size: 20px !important;
+          font-weight: 600 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+        }
+        &-title {
+          color: black !important;
+          font-size: 40px !important;
+          font-weight: 600 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+          margin-bottom: 20px;
+        }
+        &-description {
+          color: #c7c7c7 !important;
+          font-size: 16px !important;
+          font-weight: 600 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+        }
+      }
+    }
+
+    &-4 {
+      width: 100%;
+      height: fit-content;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      padding: 24px 120px;
+      margin: 32px 0px !important;
+      &-left {
+        span {
+          color: #00609c !important;
+          font-size: 20px !important;
+          font-weight: 600 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+        }
+        &-title {
+          color: black !important;
+          font-size: 40px !important;
+          font-weight: 600 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+          margin-bottom: 20px;
+        }
+        &-description {
+          color: #c7c7c7 !important;
+          font-size: 16px !important;
+          font-weight: 600 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
         }
       }
     }

@@ -25,6 +25,8 @@ export const CUSTOMER_ROUTE_NAME = {
   DEFAULT_USER: "default-user",
   //Venue
   VENUE: "venue",
+
+  VENUE_SPACE_DETAIL: "venue/:id",
 };
 export const CUSTOMER_ROUTER_PATH = {
   //Log_In
@@ -45,4 +47,6 @@ export const CUSTOMER_ROUTER_PATH = {
   DEFAULT_USER: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.DEFAULT_USER}`,
   //Venue
   VENUE: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.VENUE}`,
+
+  VENUE_SPACE_DETAIL: `${CUSTOMER}/${CUSTOMER_ROUTE_NAME.VENUE_SPACE_DETAIL}`,
 };

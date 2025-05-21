@@ -11,6 +11,7 @@ import { DefaultUser } from "../Layout/User/DefaultUser";
 import { SuspenseWrapper } from "../SuspenseWrapper";
 import { CUSTOMER_ROUTER_PATH } from "./Routers";
 import Venue from "../Layout/Venue";
+import { SpaceDetail } from "../Layout/Venue/Space/SpaceDetail";
 
 export const CustomerRouter = () => (
   <Routes>
@@ -70,6 +71,10 @@ export const CustomerRouter = () => (
       <Route
         path={CUSTOMER_ROUTER_PATH.VENUE}
         element={<SuspenseWrapper component={<Venue />} />}
+      />
+      <Route
+        path={CUSTOMER_ROUTER_PATH.VENUE_SPACE_DETAIL}
+        element={<SuspenseWrapper component={<SpaceDetail />} />}
       />
     </Route>
   </Routes>

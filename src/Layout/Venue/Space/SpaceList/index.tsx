@@ -4,11 +4,17 @@ import { useState } from "react";
 import { FormSelect } from "../../../../Components/Form/FormSelect";
 import FormWrap from "../../../../Components/Form/FormWrap";
 import "./space.scss";
+import { useNavigate } from "react-router-dom";
+import {
+  CUSTOMER_ROUTE_NAME,
+  CUSTOMER_ROUTER_PATH,
+} from "../../../../Routers/Routers";
 
 export const Space = () => {
   const [current, setCurrent] = useState(0);
   const spaceByDayItem = [1, 2, 3];
   const spaceByMonthItem = [1, 2, 3];
+  const navigate = useNavigate();
 
   const onChange = (value: number) => {
     setCurrent(value);
@@ -18,8 +24,8 @@ export const Space = () => {
     console.log(key);
   };
 
-  const onClickItemSpace = (key: number) => {
-    console.log(key);
+  const onClickItemSpace = (id: number) => {
+    navigate("/" + CUSTOMER_ROUTE_NAME.VENUE + `/${id}`);
   };
 
   const genExtra = () => (

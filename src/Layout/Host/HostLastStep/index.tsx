@@ -65,7 +65,9 @@ export const HostLastStep: FC<LastStepProps> = ({ data }) => {
         </p>
       </RowWrap>
       <RowWrap className="step_last__actions">
-        <Button onClick={handleSubmit}>Xác nhận</Button>
+        <Button loading={createVenueMutate.isPending} onClick={handleSubmit}>
+          Xác nhận
+        </Button>
       </RowWrap>
     </div>
   );

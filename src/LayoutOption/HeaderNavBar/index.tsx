@@ -68,6 +68,14 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
     }
   };
 
+  const onLogoClick = (key: string) => {
+    setTabKey(key);
+    navigate(CUSTOMER_ROUTER_PATH.HOME);
+    if (onTabChange) {
+      onTabChange(key);
+    }
+  };
+
   const logOutMutation = useMutation({
     mutationFn: () => userApi.doLogOut(),
     onSuccess: (data) => {
@@ -123,7 +131,9 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
           <ColWrap className="row-first-left" colProps={{ span: 18 }}>
             <div
               className="header__row-logo"
-              onClick={() => navigate(CUSTOMER_ROUTER_PATH.HOME)}
+              onClick={() => {
+                onLogoClick("1");
+              }}
             >
               <SvgLogo />
             </div>
@@ -180,7 +190,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                 {showAccount && (
                   <Row className="header_account">
                     <Col span={12} className="header_account-venue">
-                      <p className="header_account-title">Địa điểm của tôi</p>
+                      <p className="header_account-title ">Địa điểm của tôi</p>
                       {Array.isArray(venueData) && venueData.length > 0 ? (
                         venueData.map((venue: any) => (
                           <div

@@ -27,7 +27,8 @@ export const HostLastStep: FC<LastStepProps> = ({ data }) => {
           borderLeft: "4px solid #007bff",
         },
       });
-      navigate(CUSTOMER_ROUTER_PATH.VENUE);
+      console.log(data);
+      navigate(CUSTOMER_ROUTER_PATH.HOME);
     },
     onError: (error: any) => {
       notification.open({

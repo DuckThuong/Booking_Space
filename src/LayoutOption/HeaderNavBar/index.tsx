@@ -63,6 +63,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
   const onTabChangeHandler = (key: string) => {
     setTabKey(key);
     navigate(CUSTOMER_ROUTER_PATH.HOME);
+    localStorage.removeItem("spaceId");
     if (onTabChange) {
       onTabChange(key);
     }
@@ -71,6 +72,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
   const onLogoClick = (key: string) => {
     setTabKey(key);
     navigate(CUSTOMER_ROUTER_PATH.HOME);
+    localStorage.removeItem("spaceId");
     if (onTabChange) {
       onTabChange(key);
     }
@@ -83,6 +85,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
         localStorage.removeItem("accessToken");
         localStorage.removeItem("refreshToken");
         localStorage.removeItem("user");
+        localStorage.removeItem("spaceId");
         notification.open({
           message: "Thông báo!",
           description: "Đăng xuất thành công.",

@@ -1,14 +1,25 @@
-import React from "react";
-import { FooterWeb } from "../../LayoutOption/FooterWeb";
+import React, { useEffect, useState } from "react";
 import { HeaderNavBar } from "../../LayoutOption/HeaderNavBar";
 import ScrollSpyLayout from "../../LayoutOption/ScrollSpyLayout";
-import "./style.scss";
-import { Space } from "./Space/SpaceList";
-import Login from "../Login/login";
 import { ForgotEditPassword } from "../ForgotPassword/ForgotEditPassword";
 import { ForgotEmailInput } from "../ForgotPassword/ForgotEmailInput";
+import Login from "../Login/login";
+import { SpaceDetail } from "./Space/SpaceDetail";
+import { Space } from "./Space/SpaceList";
+import "./style.scss";
 
 const Venue: React.FC = () => {
+  const [spaceId, setSpaceId] = useState<string | null>(
+    localStorage.getItem("spaceId")
+  );
+  const [isDetail, setIsDetail] = useState<boolean>(
+    !!localStorage.getItem("spaceId")
+  );
+
+  useEffect(() => {
+    setIsDetail(!!spaceId);
+  }, [spaceId]);
+
   const menuItems = [
     {
       key: "1",
@@ -17,11 +28,15 @@ const Venue: React.FC = () => {
       ),
       label: "Không gian",
       children: [
-        { key: "1-1", label: "Cài đặt" },
-        { key: "1-2", label: "Thông tin" },
-        { key: "1-3", label: "Ảnh" },
-        { key: "1-4", label: "Giá" },
-        { key: "1-5", label: "Dịch vụ" },
+        ...(isDetail
+          ? [
+              { key: "1-1", label: "Cài đặt" },
+              { key: "1-2", label: "Thông tin" },
+              { key: "1-3", label: "Ảnh" },
+              { key: "1-4", label: "Giá" },
+              { key: "1-5", label: "Dịch vụ" },
+            ]
+          : []),
       ],
     },
     {
@@ -40,8 +55,13 @@ const Venue: React.FC = () => {
   ];
 
   const contentSections = {
-    "1-1": <Space />,
-    "1-2": <Login />,
+    "1": <Space setSpaceId={setSpaceId} />,
+    ...(isDetail
+      ? {
+          "1-1": <SpaceDetail />,
+          "1-2": <Login />,
+        }
+      : {}),
     "2-1": <ForgotEditPassword />,
     "2-2": <ForgotEmailInput />,
   };

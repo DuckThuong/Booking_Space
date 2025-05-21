@@ -18,6 +18,10 @@ export const Space = () => {
     console.log(key);
   };
 
+  const onClickItemSpace = (key: number) => {
+    console.log(key);
+  };
+
   const genExtra = () => (
     <Button
       onClick={(event) => {
@@ -54,7 +58,13 @@ export const Space = () => {
       children: (
         <div className="space_detail">
           {spaceByDayItem.map((item, index) => (
-            <Row className="space_detail-row">
+            <Row
+              className="space_detail-row"
+              onClick={() => {
+                onClickItemSpace(index);
+              }}
+              style={{ cursor: "pointer" }}
+            >
               <Col span={4} className="space_detail-col">
                 <Image
                   className="space_detail-item-image"

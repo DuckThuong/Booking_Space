@@ -49,6 +49,8 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
   } = theme.useToken();
   const { md } = useBreakpoint();
 
+  const itemLength = items[0].children?.length ?? 0;
+
   const handleMenuClick: MenuProps["onClick"] = (e) => {
     if (e.keyPath.length > 1) {
       const parentKey = e.keyPath[1];
@@ -56,11 +58,20 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
         key.startsWith(parentKey + "-")
       );
       setRenderedContentKeys(filteredKeys);
+      setLastClickedKey(e.key);
     } else {
-      setRenderedContentKeys(Object.keys(contentSections));
+      const filteredKeys = Object.keys(contentSections).filter((key) =>
+        key.startsWith(e.key + "-")
+      );
+      if (filteredKeys.length > 0) {
+        setRenderedContentKeys(filteredKeys);
+        setLastClickedKey(filteredKeys[0]);
+      } else {
+        setRenderedContentKeys(Object.keys(contentSections));
+        setLastClickedKey(e.key);
+      }
     }
-
-    setLastClickedKey(e.key);
+    console.log(e);
   };
 
   useEffect(() => {

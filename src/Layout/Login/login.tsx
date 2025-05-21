@@ -33,7 +33,21 @@ const Login = () => {
   const doLoginGoogle = useMutation({
     mutationFn: () => userApi.doGoogleLogin(),
     onSuccess: (data) => {
-      console.log(data);
+      if (data && typeof data === "string") {
+        window.location.href = data;
+      } else {
+        notification.open({
+          message: "Thông báo!",
+          description: "Đăng nhập không thành công.",
+          placement: "topRight",
+          showProgress: true,
+          pauseOnHover: true,
+          style: {
+            backgroundColor: "#ffffff",
+            borderLeft: "4px solid #007bff",
+          },
+        });
+      }
     },
     onError: (error) => {
       console.log(error);

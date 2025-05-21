@@ -17,8 +17,11 @@ const Venue: React.FC = () => {
       ),
       label: "Không gian",
       children: [
-        { key: "1-1", label: "Chi tiết" },
-        { key: "1-2", label: "Khác" },
+        { key: "1-1", label: "Cài đặt" },
+        { key: "1-2", label: "Thông tin" },
+        { key: "1-3", label: "Ảnh" },
+        { key: "1-4", label: "Giá" },
+        { key: "1-5", label: "Dịch vụ" },
       ],
     },
     {
@@ -28,8 +31,10 @@ const Venue: React.FC = () => {
       ),
       label: "Địa điểm",
       children: [
-        { key: "2-1", label: "Thông tin chi tiết" },
-        { key: "2-2", label: "Thông tin khách" },
+        { key: "2-1", label: "Thông tin" },
+        { key: "2-2", label: "Ghi chú" },
+        { key: "2-3", label: "Giờ thuê" },
+        { key: "2-4", label: "Thanh toán" },
       ],
     },
   ];

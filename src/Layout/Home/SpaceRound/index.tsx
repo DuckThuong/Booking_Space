@@ -1,4 +1,4 @@
-import { Col, Image, Row } from "antd";
+import { Button, Col, Image, Row } from "antd";
 import { FormInputSearch } from "../../../Components/Form/FormInputSearch";
 import FormWrap from "../../../Components/Form/FormWrap";
 import "./spaceRound.scss";
@@ -80,6 +80,18 @@ export const SpaceRound = () => {
                 tức cho trụ sở chính, trung tâm chuyên dụng và chi nhánh từ một
                 nền tảng thống nhất.
               </p>
+              <div className="section-2-button">
+                <Col span={12}>
+                  <Button className="section-2-button-find">
+                    Tìm không gian
+                  </Button>
+                </Col>
+                <Col span={12}>
+                  <Button className="section-2-button-detail">
+                    Tìm hiểu thêm
+                  </Button>
+                </Col>
+              </div>
             </div>
           </Col>
           <Col span={12} className="section-2-col">
@@ -112,6 +124,18 @@ export const SpaceRound = () => {
                 chi phí. Tối ưu hóa từng mét vuông không gian — với độ chính xác
                 và khách quan tuyệt đối.
               </p>
+              <div className="section-2-button">
+                <Col span={12}>
+                  <Button className="section-2-button-find">
+                    Quản lý không gian của tôi
+                  </Button>
+                </Col>
+                <Col span={12}>
+                  <Button className="section-2-button-detail">
+                    Tìm hiểu thêm
+                  </Button>
+                </Col>
+              </div>
             </div>
           </Col>
         </Row>

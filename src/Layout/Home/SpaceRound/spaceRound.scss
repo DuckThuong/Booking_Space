@@ -111,9 +111,45 @@
       align-items: center;
       padding: 24px 120px;
       margin: 32px 0px !important;
+      &-button {
+        display: flex;
+        flex-direction: row;
+        column-gap: 24px;
+        .ant-col-12 {
+          max-width: fit-content !important;
+          .ant-btn {
+            height: 42px;
+          }
+        }
+        &-find {
+          background-color: #00293a;
+          transition: all 0.3s ease;
+          span {
+            color: white !important;
+          }
+          &:hover {
+            background-color: #004d6d !important;
+            box-shadow: 0 4px 12px rgba(0, 41, 58, 0.2) !important;
+          }
+        }
+        &-detail {
+          border: 2px solid #00293a !important;
+          transition: all 0.3s ease;
+          span {
+            color: #00293a !important;
+          }
+          &:hover {
+            border-color: #004d6d !important;
+            box-shadow: 0 4px 12px rgba(0, 41, 58, 0.2) !important;
+            span {
+              color: #004d6d !important;
+            }
+          }
+        }
+      }
       &-left {
         span {
-          color: #00609c !important;
+          color: #00609c;
           font-size: 20px !important;
           font-weight: 600 !important;
           font-family: "DM Sans", "system-ui", sans-serif !important;
@@ -143,7 +179,7 @@
       margin: 32px 0px !important;
       &-left {
         span {
-          color: #00609c !important;
+          color: #00609c;
           font-size: 20px !important;
           font-weight: 600 !important;
           font-family: "DM Sans", "system-ui", sans-serif !important;
@@ -174,7 +210,7 @@
       margin: 32px 0px !important;
       &-left {
         span {
-          color: #00609c !important;
+          color: #00609c;
           font-size: 20px !important;
           font-weight: 600 !important;
           font-family: "DM Sans", "system-ui", sans-serif !important;

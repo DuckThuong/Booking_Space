@@ -1,0 +1,12 @@
+.space {
+  width: 100% !important;
+  height: 100vh;
+  padding: 32px 80px !important;
+  &_form {
+    &-row {
+      margin: 24px 0px !important;
+    }
+    &-col {
+    }
+  }
+}

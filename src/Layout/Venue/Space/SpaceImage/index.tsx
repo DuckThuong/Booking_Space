@@ -33,7 +33,6 @@ export const SpaceImage = () => {
   const [workspaceImages, setWorkspaceImages] = useState<string[]>([]);
   const [surroundingImages, setSurroundingImages] = useState<string[]>([]);
   const [videoUrl, setVideoUrl] = useState<string>("");
-  const [referenceVideoUrl, setReferenceVideoUrl] = useState<string>("");
   const [pdfFile, setPdfFile] = useState<string | null>(null);
   const [numPages, setNumPages] = useState<number | null>(null);
 
@@ -340,9 +339,9 @@ export const SpaceImage = () => {
           </Row>
           <Row className="space_image-section-6-item">
             <Col span={8}>
-              {referenceVideoUrl ? (
+              {videoUrl ? (
                 <ReactPlayer
-                  url={referenceVideoUrl}
+                  url={videoUrl}
                   width="250px"
                   height="150px"
                   controls
@@ -369,7 +368,7 @@ export const SpaceImage = () => {
                 inputProps={{
                   placeholder:
                     "Nhập đường dẫn video tham khảo của không gian vào đây.",
-                  onChange: (e) => setReferenceVideoUrl(e.target.value),
+                  onChange: (e) => setVideoUrl(e.target.value),
                 }}
               />
             </Col>

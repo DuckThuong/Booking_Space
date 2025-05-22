@@ -6,7 +6,7 @@ export const SpacePrice = () => {
   return (
     <div className="space_price">
       <FormWrap className="space_price-form">
-        <h1 className="space_price-header">Hình ảnh</h1>
+        <h1 className="space_price-header">Giá thành</h1>
         <Row className="space_price-section">
           <p className="space_price-section-title">
             Bạn muốn tính bao nhiêu cho việc sử dụng không gian này?

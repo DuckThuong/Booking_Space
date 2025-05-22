@@ -59,11 +59,11 @@ export const SpacePrice = () => {
               nhất 24 giờ trước khi bắt đầu đặt phòng.
             </li>
             <li>
-              Thanh toán – LiquidSpace thu tiền từ khách khi đặt phòng, chúng
+              Thanh toán – BookingSpace thu tiền từ khách khi đặt phòng, chúng
               tôi sẽ gửi thanh toán cho bạn hàng tháng bằng séc hoặc ACH.
             </li>
             <li>
-              Phí – LiquidSpace thu phí 20% cho các lần đặt phòng của khách.{" "}
+              Phí – BookingSpace thu phí 20% cho các lần đặt phòng của khách.{" "}
               <a href="#">Tìm hiểu thêm</a>
             </li>
           </ul>

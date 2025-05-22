@@ -160,6 +160,7 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
           items={convertToMenuItems(items)}
           className="scroll-spy-layout__menu"
           theme="light"
+          defaultOpenKeys={["1"]}
         />
       </Sider>
 

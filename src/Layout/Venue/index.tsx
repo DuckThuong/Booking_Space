@@ -7,6 +7,7 @@ import Login from "../Login/login";
 import { SpaceDetail } from "./Space/SpaceDetail";
 import { Space } from "./Space/SpaceList";
 import "./style.scss";
+import { SpaceImage } from "./Space/SpaceImage";
 
 const Venue: React.FC = () => {
   const [spaceId, setSpaceId] = useState<string | null>(
@@ -30,13 +31,12 @@ const Venue: React.FC = () => {
       children: [
         ...(isDetail
           ? [
-              { key: "1-1", label: "Cài đặt" },
               { key: "1-2", label: "Thông tin" },
               { key: "1-3", label: "Ảnh" },
               { key: "1-4", label: "Giá" },
               { key: "1-5", label: "Dịch vụ" },
             ]
-          : []),
+          : [{ key: "1-1", label: "Cài đặt" }]),
       ],
     },
     {
@@ -57,8 +57,8 @@ const Venue: React.FC = () => {
   const contentSections = {
     ...(isDetail
       ? {
-          "1-1": <SpaceDetail />,
-          "1-2": <Login />,
+          "1-2": <SpaceDetail />,
+          "1-3": <SpaceImage />,
         }
       : { "1-1": <Space setSpaceId={setSpaceId} /> }),
     "2-1": <ForgotEditPassword />,

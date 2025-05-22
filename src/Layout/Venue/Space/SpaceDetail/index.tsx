@@ -61,7 +61,7 @@ export const SpaceDetail = () => {
               <Col span={6}>
                 <p className="space_detail-section-title">Thời gian thuê</p>
                 <FormSelect
-                  name={"state"}
+                  name={"time"}
                   selectProps={{
                     options: [
                       {

@@ -1,0 +1,147 @@
+.space_detail {
+  &-section {
+    &-col {
+      padding: 17px 19px;
+    }
+    &-title {
+      color: #00293a !important;
+      font-size: 20px !important;
+      font-weight: 600 !important;
+      font-family: "DM Sans", "system-ui", sans-serif !important;
+    }
+    &-1 {
+      position: fixed;
+      top: 120px;
+      left: 430px;
+      right: 50px;
+      border: 1px solid #c7c7c7;
+      background-color: white;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      border-radius: 18px;
+      z-index: 2000;
+      .form__select {
+        .ant-form-item {
+          margin-bottom: 0px !important;
+          width: fit-content;
+          .ant-select-selector {
+            border: none !important;
+            background-color: white;
+            .ant-select-selection-item {
+              color: #00293a !important;
+              font-size: 18px !important;
+              font-weight: 600 !important;
+              font-family: "DM Sans", "system-ui", sans-serif !important;
+            }
+          }
+        }
+      }
+      &-title {
+        color: #c7c7c7 !important;
+        font-size: 12px !important;
+        font-weight: 600 !important;
+        font-family: "DM Sans", "system-ui", sans-serif !important;
+        padding-inline-end: 12px;
+      }
+      &-preview {
+        border: none !important;
+        box-shadow: none !important;
+        background-color: white !important;
+        color: #007bff !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        font-family: "DM Sans", "system-ui", sans-serif !important;
+      }
+      &-save {
+        border: none !important;
+        box-shadow: none !important;
+        background-color: #00293a !important;
+        color: white !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        font-family: "DM Sans", "system-ui", sans-serif !important;
+      }
+    }
+    &-2 {
+      margin-top: 90px !important;
+      border: 1px solid #c7c7c7;
+      background-color: white;
+      display: flex;
+      flex-direction: row;
+      border-radius: 18px;
+      height: 100% !important;
+
+      .ant-col {
+        .ant-col-14 {
+          max-width: 100% !important;
+        }
+      }
+
+      &-wrapRow {
+        display: flex;
+        flex-direction: row;
+        column-gap: 24px;
+        &-item {
+          .ant-select-selector {
+            border: 3px solid #00293a !important;
+            .ant-select-selection-item {
+              color: #00293a !important;
+              font-size: 18px !important;
+              font-weight: 600 !important;
+              font-family: "DM Sans", "system-ui", sans-serif !important;
+            }
+          }
+
+          input {
+            border: 3px solid #00293a !important;
+          }
+        }
+      }
+
+      &-detail {
+        border: 3px solid #00293a !important;
+        max-width: 100% !important;
+        min-height: 160px !important;
+      }
+
+      &-header {
+        width: 100% !important;
+        padding: 17px 19px !important;
+        border-bottom: 1px solid #c7c7c7;
+        color: #00293a !important;
+        font-size: 24px !important;
+        font-weight: 700 !important;
+        font-family: "DM Sans", "system-ui", sans-serif !important;
+      }
+
+      &-text {
+        color: #00293a !important;
+        font-size: 16px !important;
+        font-weight: 400 !important;
+        font-family: "DM Sans", "system-ui", sans-serif !important;
+      }
+
+      &-title {
+        color: #00293a !important;
+        font-size: 20px !important;
+        font-weight: 600 !important;
+        font-family: "DM Sans", "system-ui", sans-serif !important;
+      }
+
+      &-name {
+        input {
+          border: 3px solid #00293a !important;
+        }
+      }
+    }
+  }
+}
+.ant-select-dropdown {
+  .ant-select-item-option-content {
+    color: #00293a !important;
+    font-size: 14px !important;
+    font-weight: 600 !important;
+    font-family: "DM Sans", "system-ui", sans-serif !important;
+  }
+}

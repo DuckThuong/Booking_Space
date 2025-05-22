@@ -55,13 +55,12 @@ const Venue: React.FC = () => {
   ];
 
   const contentSections = {
-    "1": <Space setSpaceId={setSpaceId} />,
     ...(isDetail
       ? {
           "1-1": <SpaceDetail />,
           "1-2": <Login />,
         }
-      : {}),
+      : { "1-1": <Space setSpaceId={setSpaceId} /> }),
     "2-1": <ForgotEditPassword />,
     "2-2": <ForgotEmailInput />,
   };

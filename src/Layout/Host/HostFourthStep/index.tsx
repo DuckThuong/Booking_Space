@@ -152,7 +152,8 @@ export const HostFourthStep: FC<FourthStepProps> = ({ onNext, data }) => {
         (error) => {
           notification.open({
             message: "Thông báo!",
-            description: "Không thể lấy vị trí hiện tại của bạn. Vui lòng kiểm tra lại quyền truy cập vị trí.",
+            description:
+              "Không thể lấy vị trí hiện tại của bạn. Vui lòng kiểm tra lại quyền truy cập vị trí.",
             placement: "topRight",
             showProgress: true,
             pauseOnHover: true,

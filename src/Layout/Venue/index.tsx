@@ -9,6 +9,7 @@ import { Space } from "./Space/SpaceList";
 import { SpacePrice } from "./Space/SpacePrice";
 import { SpaceService } from "./Space/SpaceService";
 import "./style.scss";
+import { VenueDetail } from "./Venue/VenueDetail";
 
 const useLocalStorage = (key: string) => {
   const [value, setValue] = useState<string | null>(localStorage.getItem(key));
@@ -95,7 +96,7 @@ const Venue: React.FC = () => {
             />
           ),
         }),
-    "2-1": <ForgotEditPassword />,
+    "2-1": <VenueDetail />,
     "2-2": <ForgotEmailInput />,
   };
   return (

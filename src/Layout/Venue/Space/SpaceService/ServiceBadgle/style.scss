@@ -1,0 +1,75 @@
+.amenities-container {
+  font-family: Arial, sans-serif;
+  width: 100%;
+}
+
+.amenities-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.amenity-item {
+  display: flex;
+  align-items: center;
+  padding: 8px;
+  border-radius: 4px;
+  .ant-checkbox-wrapper-checked {
+    background-color: #00293a !important;
+    border: 1px solid #00293a !important;
+    .ant-checkbox {
+      .ant-checkbox-inner {
+        background-color: #00293a !important;
+        border: 1px solid #00293a !important;
+      }
+      .ant-checkbox-inner::after {
+        width: 10px !important;
+        height: 15px !important;
+      }
+    }
+    .ant-checkbox-label {
+      svg {
+        path {
+          fill: white !important;
+        }
+      }
+      color: white !important;
+      font-size: 18px !important;
+      font-weight: 500 !important;
+      font-family: "DM Sans", "system-ui", sans-serif !important;
+    }
+  }
+  .ant-checkbox-wrapper {
+    width: fit-content !important;
+    height: fit-content;
+    border: 1px solid #00293a;
+    flex-direction: row-reverse !important;
+    border-radius: 8px;
+    align-items: center;
+    padding: 8px 8px;
+    .ant-checkbox {
+      .ant-checkbox-inner {
+        border: none !important;
+      }
+      .ant-checkbox-inner::after {
+        width: 10px !important;
+        height: 15px !important;
+      }
+    }
+    .ant-checkbox-label {
+      svg {
+        path {
+          fill: #00293a;
+        }
+      }
+      color: #00293a;
+      font-size: 18px !important;
+      font-weight: 500 !important;
+      font-family: "DM Sans", "system-ui", sans-serif !important;
+    }
+  }
+}
+
+.amenity-item input {
+  margin-right: 10px;
+}

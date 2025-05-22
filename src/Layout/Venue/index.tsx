@@ -9,6 +9,7 @@ import { Space } from "./Space/SpaceList";
 import "./style.scss";
 import { SpaceImage } from "./Space/SpaceImage";
 import { SpacePrice } from "./Space/SpacePrice";
+import { SpaceService } from "./Space/SpaceService";
 
 const Venue: React.FC = () => {
   const [spaceId, setSpaceId] = useState<string | null>(
@@ -61,6 +62,7 @@ const Venue: React.FC = () => {
           "1-2": <SpaceDetail />,
           "1-3": <SpaceImage />,
           "1-4": <SpacePrice />,
+          "1-5": <SpaceService />,
         }
       : { "1-1": <Space setSpaceId={setSpaceId} /> }),
     "2-1": <ForgotEditPassword />,

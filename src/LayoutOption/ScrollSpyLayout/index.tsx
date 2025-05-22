@@ -7,7 +7,6 @@ import {
   Menu,
   Modal,
   Row,
-  theme,
   type MenuProps,
 } from "antd";
 import { MenuItemType } from "antd/es/menu/interface";
@@ -44,12 +43,7 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
     Object.keys(contentSections)
   );
   const [lastClickedKey, setLastClickedKey] = useState<string | null>(null);
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
   const { md } = useBreakpoint();
-
-  const itemLength = items[0].children?.length ?? 0;
 
   const handleMenuClick: MenuProps["onClick"] = (e) => {
     if (e.keyPath.length > 1) {
@@ -71,7 +65,9 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
         setLastClickedKey(e.key);
       }
     }
-    console.log(e);
+    if (e.keyPath[1] === "2") {
+      localStorage.removeItem("spaceId");
+    }
   };
 
   useEffect(() => {
@@ -88,31 +84,10 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
   }, [lastClickedKey, renderedContentKeys]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const mostVisibleEntry = entries.reduce((max, entry) => {
-          return entry.intersectionRatio > max.intersectionRatio ? entry : max;
-        }, entries[0]);
-
-        if (mostVisibleEntry && mostVisibleEntry.target.id) {
-          const findParentKey = (
-            items: MenuItem[],
-            targetKey: string
-          ): string | undefined => {
-            for (const item of items) {
-              if (item.children?.some((child) => child.key === targetKey)) {
-                return item.key;
-              }
-            }
-            return undefined;
-          };
-        }
-      },
-      {
-        rootMargin: "-20% 0px -20% 0px",
-        threshold: [0.5, 0.75],
-      }
-    );
+    const observer = new IntersectionObserver((entries) => {}, {
+      rootMargin: "-20% 0px -20% 0px",
+      threshold: [0.5, 0.75],
+    });
 
     renderedContentKeys.forEach((key) => {
       const element = document.getElementById(key);

@@ -6,7 +6,6 @@ import "./spaceDetail.scss";
 import TextArea from "antd/es/input/TextArea";
 export const SpaceDetail = () => {
   const id = localStorage.getItem("spaceId");
-  console.log(id);
   return (
     <div className="space_detail">
       <FormWrap className="space_detail-form">

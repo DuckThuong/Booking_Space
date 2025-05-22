@@ -3,21 +3,45 @@ import { HeaderNavBar } from "../../LayoutOption/HeaderNavBar";
 import ScrollSpyLayout from "../../LayoutOption/ScrollSpyLayout";
 import { ForgotEditPassword } from "../ForgotPassword/ForgotEditPassword";
 import { ForgotEmailInput } from "../ForgotPassword/ForgotEmailInput";
-import Login from "../Login/login";
 import { SpaceDetail } from "./Space/SpaceDetail";
-import { Space } from "./Space/SpaceList";
-import "./style.scss";
 import { SpaceImage } from "./Space/SpaceImage";
+import { Space } from "./Space/SpaceList";
 import { SpacePrice } from "./Space/SpacePrice";
 import { SpaceService } from "./Space/SpaceService";
+import "./style.scss";
+
+const useLocalStorage = (key: string) => {
+  const [value, setValue] = useState<string | null>(localStorage.getItem(key));
+
+  useEffect(() => {
+    const handleStorageChange = (e: StorageEvent) => {
+      if (e.key === key) {
+        setValue(e.newValue);
+      }
+    };
+
+    const checkStorage = () => {
+      const newValue = localStorage.getItem(key);
+      if (newValue !== value) {
+        setValue(newValue);
+      }
+    };
+
+    const interval = setInterval(checkStorage, 100);
+    window.addEventListener("storage", handleStorageChange);
+
+    return () => {
+      clearInterval(interval);
+      window.removeEventListener("storage", handleStorageChange);
+    };
+  }, [key, value]);
+
+  return value;
+};
 
 const Venue: React.FC = () => {
-  const [spaceId, setSpaceId] = useState<string | null>(
-    localStorage.getItem("spaceId")
-  );
-  const [isDetail, setIsDetail] = useState<boolean>(
-    !!localStorage.getItem("spaceId")
-  );
+  const spaceId = useLocalStorage("spaceId");
+  const [isDetail, setIsDetail] = useState<boolean>(!!spaceId);
 
   useEffect(() => {
     setIsDetail(!!spaceId);
@@ -38,7 +62,7 @@ const Venue: React.FC = () => {
               { key: "1-4", label: "Giá" },
               { key: "1-5", label: "Dịch vụ" },
             ]
-          : [{ key: "1-1", label: "Cài đặt" }]),
+          : [{ key: "1-1", label: "Không gian" }]),
       ],
     },
     {
@@ -64,7 +88,13 @@ const Venue: React.FC = () => {
           "1-4": <SpacePrice />,
           "1-5": <SpaceService />,
         }
-      : { "1-1": <Space setSpaceId={setSpaceId} /> }),
+      : {
+          "1-1": (
+            <Space
+              setSpaceId={(id: string) => localStorage.setItem("spaceId", id)}
+            />
+          ),
+        }),
     "2-1": <ForgotEditPassword />,
     "2-2": <ForgotEmailInput />,
   };

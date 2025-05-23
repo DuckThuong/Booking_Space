@@ -59,6 +59,12 @@ const mapContainerStyle = {
   height: "400px",
 };
 
+function FitBounds({ bounds }) {
+  const map = useMap();
+  map.fitBounds(bounds);
+  return null;
+}
+
 export const VenueView = () => {
   const user = useUser();
   const navigate = useNavigate();
@@ -113,10 +119,32 @@ export const VenueView = () => {
     },
     {
       id: 2,
-      lat: 24.028511,
-      lng: 106.804817,
-      name: "TSOFT",
+      lat: 20.984068,
+      lng: 105.862511,
+      name: "Hoàng Mai",
     },
+    {
+      id: 3,
+      lat: 21.027256,
+      lng: 105.832703,
+      name: "Văn Miếu",
+    },
+  ];
+
+  const center = {
+    lat: locations.reduce((sum, loc) => sum + loc.lat, 0) / locations.length,
+    lng: locations.reduce((sum, loc) => sum + loc.lng, 0) / locations.length,
+  };
+
+  const bounds = [
+    [
+      Math.min(...locations.map((loc) => loc.lat)),
+      Math.min(...locations.map((loc) => loc.lng)),
+    ],
+    [
+      Math.max(...locations.map((loc) => loc.lat)),
+      Math.max(...locations.map((loc) => loc.lng)),
+    ],
   ];
 
   const { data: venueData } = useQuery({
@@ -292,9 +320,9 @@ export const VenueView = () => {
           <div className="venue_view-row-3-map">
             <p className="venue_view-row-3-map-title">Các địa điểm gần đây.</p>
             <MapContainer
-              center={[21.028511, 105.804817]}
-              zoom={13}
-              style={{ height: "400px", width: "100%" }}
+              center={[center.lat, center.lng]}
+              zoom={7}
+              style={{ height: "600px", width: "100%" }}
             >
               <TileLayer
                 attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
@@ -308,6 +336,7 @@ export const VenueView = () => {
                   <Popup>{location.name}</Popup>
                 </Marker>
               ))}
+              <FitBounds bounds={bounds} />
             </MapContainer>
           </div>
         </Row>

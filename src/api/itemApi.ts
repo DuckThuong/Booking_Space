@@ -34,3 +34,10 @@ export interface VenueAddress {
   Latitude?: string;
   Longitude?: string;
 }
+
+export interface Amenities {
+  id: number;
+  name: string;
+  selected: boolean;
+  icon: JSX.Element;
+}

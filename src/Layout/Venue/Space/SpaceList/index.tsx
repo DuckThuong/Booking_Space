@@ -4,12 +4,17 @@ import { useState } from "react";
 import { FormSelect } from "../../../../Components/Form/FormSelect";
 import FormWrap from "../../../../Components/Form/FormWrap";
 import "./space.scss";
+import { SpaceDetail } from "../SpaceDetail";
 
-export const Space = () => {
+export const Space = ({
+  setSpaceId,
+}: {
+  setSpaceId?: (id: string) => void;
+}) => {
   const [current, setCurrent] = useState(0);
+  const [isDetail, setIsDetail] = useState<boolean>(false);
   const spaceByDayItem = [1, 2, 3];
   const spaceByMonthItem = [1, 2, 3];
-
   const onChange = (value: number) => {
     setCurrent(value);
   };
@@ -18,8 +23,14 @@ export const Space = () => {
     console.log(key);
   };
 
-  const onClickItemSpace = (key: number) => {
-    console.log(key);
+  const onClickItemSpace = (id: number) => {
+    if (id) {
+      localStorage.setItem("spaceId", id.toString());
+      if (setSpaceId) setSpaceId(id.toString());
+      setIsDetail(true);
+    } else {
+      setIsDetail(false);
+    }
   };
 
   const genExtra = () => (
@@ -61,7 +72,7 @@ export const Space = () => {
             <Row
               className="space_detail-row"
               onClick={() => {
-                onClickItemSpace(index);
+                onClickItemSpace(item);
               }}
               style={{ cursor: "pointer" }}
             >
@@ -179,41 +190,47 @@ export const Space = () => {
   ];
 
   return (
-    <div className="space">
-      <FormWrap className="space-form">
-        <Row className="space-row">
-          <div className="space-step">
-            <Steps
-              type="navigation"
-              size="small"
-              current={current}
-              onChange={onChange}
-              className="space-step_navigation"
-              items={spaceStep}
-            />
-            <div className="space-step_detail">
-              <Col span={20} className="space-step_detail-title">
-                <h3>{spaceStep[current].title}</h3>
-                <span>{spaceStep[current].description}</span>
-              </Col>
-              <Col span={4} className="space-step_detail-action">
-                <Button>Tiến hành</Button>
-              </Col>
-            </div>
-          </div>
-        </Row>
+    <>
+      {!isDetail ? (
+        <div className="space">
+          <FormWrap className="space-form">
+            <Row className="space-row">
+              <div className="space-step">
+                <Steps
+                  type="navigation"
+                  size="small"
+                  current={current}
+                  onChange={onChange}
+                  className="space-step_navigation"
+                  items={spaceStep}
+                />
+                <div className="space-step_detail">
+                  <Col span={20} className="space-step_detail-title">
+                    <h3>{spaceStep[current].title}</h3>
+                    <span>{spaceStep[current].description}</span>
+                  </Col>
+                  <Col span={4} className="space-step_detail-action">
+                    <Button>Tiến hành</Button>
+                  </Col>
+                </div>
+              </div>
+            </Row>
 
-        <Row className="space-row">
-          <div className="space-row_item">
-            <Collapse
-              defaultActiveKey={["1"]}
-              onChange={onClickSpaceDetail}
-              expandIconPosition={"end"}
-              items={items}
-            />
-          </div>
-        </Row>
-      </FormWrap>
-    </div>
+            <Row className="space-row">
+              <div className="space-row_item">
+                <Collapse
+                  defaultActiveKey={["1"]}
+                  onChange={onClickSpaceDetail}
+                  expandIconPosition={"end"}
+                  items={items}
+                />
+              </div>
+            </Row>
+          </FormWrap>
+        </div>
+      ) : (
+        <SpaceDetail />
+      )}
+    </>
   );
 };

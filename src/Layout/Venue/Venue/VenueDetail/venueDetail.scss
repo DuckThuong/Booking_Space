@@ -1,0 +1,71 @@
+.venue_detail {
+  border: 1px solid #c7c7c7;
+  background-color: white;
+  display: flex;
+  flex-direction: row;
+  border-radius: 18px;
+  height: 100% !important;
+  padding: 24px 32px;
+
+  &-form {
+    width: 100% !important;
+  }
+
+  &-section {
+    &-1 {
+      display: flex;
+      flex-direction: column;
+      &-title {
+        color: #00293a !important;
+        font-size: 28px !important;
+        font-weight: 700 !important;
+        font-family: "DM Sans", "system-ui", sans-serif !important;
+      }
+      p {
+        color: #00293a !important;
+        font-size: 16px !important;
+        font-weight: 400 !important;
+        font-family: "DM Sans", "system-ui", sans-serif !important;
+      }
+    }
+
+    &-2 {
+      column-gap: 18px !important;
+      &-title {
+        color: #00293a !important;
+        font-size: 18px !important;
+        font-weight: 700 !important;
+        font-family: "DM Sans", "system-ui", sans-serif !important;
+        margin-bottom: 0px !important;
+      }
+      .form__input {
+        .ant-col-14 {
+          max-width: 100% !important;
+          input {
+            border: 3px solid #00293a !important;
+            margin-top: 12px;
+          }
+        }
+      }
+
+      &-logo {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        padding: 0px 32px;
+        img {
+          border-radius: 12px;
+          box-shadow: -2px 2px 20px 0px #0000001f;
+        }
+        p {
+          color: #00293a !important;
+          font-size: 14px !important;
+          font-weight: 400 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+          width: 230px;
+          padding-inline-start: 12px;
+        }
+      }
+    }
+  }
+}

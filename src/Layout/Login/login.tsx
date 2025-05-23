@@ -41,7 +41,6 @@ const Login = () => {
           description: "Đăng nhập không thành công.",
           placement: "topRight",
           showProgress: true,
-          pauseOnHover: true,
           style: {
             backgroundColor: "#ffffff",
             borderLeft: "4px solid #007bff",
@@ -77,7 +76,6 @@ const Login = () => {
           description: "Đăng nhập thành công.",
           placement: "topRight",
           showProgress: true,
-          pauseOnHover: true,
           style: {
             backgroundColor: "#ffffff",
             borderLeft: "4px solid #007bff",
@@ -94,7 +92,6 @@ const Login = () => {
           error?.response?.data?.description || "Đăng nhập thất bại.",
         placement: "topRight",
         showProgress: true,
-        pauseOnHover: true,
         style: {
           backgroundColor: "#ffffff",
           borderLeft: "4px solid #007bff",

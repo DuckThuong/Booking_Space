@@ -1,5 +1,5 @@
-@import '../../../styles/variables.scss';
-@import '../../../styles/mixins';
+@import "../../../styles/variables.scss";
+@import "../../../styles/mixins";
 
 .form__input {
   margin-bottom: 20px;
@@ -8,7 +8,7 @@
     height: 48px;
     padding: 10px 20px !important;
     border-radius: 8px;
-    border: 1px solid $gray-color !important;
+    border: 1px solid $gray-color;
     font-size: 16px;
     color: $text_title_color !important;
     @include sm {
@@ -25,7 +25,7 @@
     }
 
     &::placeholder {
-      color: $gray-color  !important;
+      color: $gray-color !important;
       font-size: 16px;
       font-style: normal;
       font-weight: 400;
@@ -68,7 +68,7 @@
 
     &::after {
       position: unset !important;
-      content: '' !important;
+      content: "" !important;
     }
   }
 
@@ -89,14 +89,14 @@
     &:hover {
       border-color: #4096ff;
     }
-     input {
+    input {
       border: none !important;
-     }
+    }
 
     .ant-input {
       height: 100% !important;
       border-radius: 8px;
-      color: $gray-color ;
+      color: $gray-color;
       font-size: 16px;
 
       &:focus,
@@ -106,7 +106,7 @@
       }
 
       &::placeholder {
-        color: $gray-color  !important;
+        color: $gray-color !important;
         font-size: 16px;
         font-style: normal;
         font-weight: 400;
@@ -120,19 +120,19 @@
 
   &-read-only {
     .ant-input {
-      color: $gray-color  !important;
+      color: $gray-color !important;
 
       &::placeholder {
-        color: $gray-color  !important;
+        color: $gray-color !important;
       }
     }
 
     .ant-input-password {
-      color: $gray-color  !important;
-      border-color: $gray-color  !important;
+      color: $gray-color !important;
+      border-color: $gray-color !important;
 
       &::placeholder {
-        color: $gray-color  !important;
+        color: $gray-color !important;
       }
     }
 

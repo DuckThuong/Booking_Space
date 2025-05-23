@@ -7,7 +7,6 @@ import {
   Menu,
   Modal,
   Row,
-  theme,
   type MenuProps,
 } from "antd";
 import { MenuItemType } from "antd/es/menu/interface";
@@ -44,9 +43,6 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
     Object.keys(contentSections)
   );
   const [lastClickedKey, setLastClickedKey] = useState<string | null>(null);
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
   const { md } = useBreakpoint();
 
   const handleMenuClick: MenuProps["onClick"] = (e) => {
@@ -56,11 +52,22 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
         key.startsWith(parentKey + "-")
       );
       setRenderedContentKeys(filteredKeys);
+      setLastClickedKey(e.key);
     } else {
-      setRenderedContentKeys(Object.keys(contentSections));
+      const filteredKeys = Object.keys(contentSections).filter((key) =>
+        key.startsWith(e.key + "-")
+      );
+      if (filteredKeys.length > 0) {
+        setRenderedContentKeys(filteredKeys);
+        setLastClickedKey(filteredKeys[0]);
+      } else {
+        setRenderedContentKeys(Object.keys(contentSections));
+        setLastClickedKey(e.key);
+      }
     }
-
-    setLastClickedKey(e.key);
+    if (e.keyPath[1] === "2") {
+      localStorage.removeItem("spaceId");
+    }
   };
 
   useEffect(() => {
@@ -77,31 +84,10 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
   }, [lastClickedKey, renderedContentKeys]);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        const mostVisibleEntry = entries.reduce((max, entry) => {
-          return entry.intersectionRatio > max.intersectionRatio ? entry : max;
-        }, entries[0]);
-
-        if (mostVisibleEntry && mostVisibleEntry.target.id) {
-          const findParentKey = (
-            items: MenuItem[],
-            targetKey: string
-          ): string | undefined => {
-            for (const item of items) {
-              if (item.children?.some((child) => child.key === targetKey)) {
-                return item.key;
-              }
-            }
-            return undefined;
-          };
-        }
-      },
-      {
-        rootMargin: "-20% 0px -20% 0px",
-        threshold: [0.5, 0.75],
-      }
-    );
+    const observer = new IntersectionObserver((entries) => {}, {
+      rootMargin: "-20% 0px -20% 0px",
+      threshold: [0.5, 0.75],
+    });
 
     renderedContentKeys.forEach((key) => {
       const element = document.getElementById(key);
@@ -127,7 +113,7 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
     }));
   };
 
-  const { data: venueData, isLoading } = useQuery({
+  const { data: venueData } = useQuery({
     queryKey: [QUERY_KEY.GET_VENUE, venueId],
     queryFn: () => venueApi.getVenueById(venueId),
   });
@@ -136,7 +122,6 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
     queryKey: [QUERY_KEY.GET_VENUE],
     queryFn: () => venueApi.getVenueByUser(),
   });
-  console.log(isLoading);
   return (
     <Layout hasSider className="scroll-spy-layout">
       <Sider
@@ -175,6 +160,7 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
           items={convertToMenuItems(items)}
           className="scroll-spy-layout__menu"
           theme="light"
+          defaultOpenKeys={["1"]}
         />
       </Sider>
 

@@ -16,6 +16,7 @@ import { venueApi } from "../../api/api";
 import { QUERY_KEY } from "../../api/apiConfig";
 import "./scrollSpyLayout.scss";
 import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
+import { FooterWeb } from "../FooterWeb";
 
 const { Sider, Content } = Layout;
 const { useBreakpoint } = Grid;

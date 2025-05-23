@@ -24,6 +24,7 @@ import TextArea from "antd/es/input/TextArea";
 import AmenitiesList from "../Venue/Space/SpaceService/ServiceBadgle";
 import { Amenities } from "../../api/itemApi";
 import { WifiOutlined } from "@ant-design/icons";
+import { FooterWeb } from "../../LayoutOption/FooterWeb";
 
 const LocationMarker: FC<{
   position: { lat: number; lng: number };
@@ -112,9 +113,9 @@ export const VenueView = () => {
     },
     {
       id: 2,
-      lat: 21.028511,
-      lng: 105.804817,
-      name: "TCOM",
+      lat: 24.028511,
+      lng: 106.804817,
+      name: "TSOFT",
     },
   ];
 
@@ -311,6 +312,7 @@ export const VenueView = () => {
           </div>
         </Row>
       </FormWrap>
+      <FooterWeb />
     </div>
   );
 };

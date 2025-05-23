@@ -13,6 +13,7 @@ import { VenuePayment } from "./Venue/VenuePayment";
 import { VenueService } from "./Venue/VenueService";
 import { VenueTerm } from "./Venue/VenueTerm";
 import { useLocation } from "react-router-dom";
+import { FooterWeb } from "../../LayoutOption/FooterWeb";
 
 const useLocalStorage = (key: string) => {
   const [value, setValue] = useState<string | null>(localStorage.getItem(key));

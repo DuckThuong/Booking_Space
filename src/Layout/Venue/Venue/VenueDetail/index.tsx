@@ -163,7 +163,16 @@ export const VenueDetail = () => {
         }}
       >
         <Row className="venue_detail-section-1">
-          <h1 className="venue_detail-section-1-title">Chi tiết địa điểm</h1>
+          <h1 className="venue_detail-section-1-title">
+            Chi tiết địa điểm
+            <img
+              width="25"
+              height="25"
+              src="https://img.icons8.com/pastel-glyph/64/information--v1.png"
+              alt="information--v1"
+              style={{ marginInlineStart: 8 }}
+            />
+          </h1>
           <p>
             Thêm thông tin chi tiết về địa điểm của bạn. Thông tin này sẽ xuất
             hiện trên Hồ sơ địa điểm của bạn.

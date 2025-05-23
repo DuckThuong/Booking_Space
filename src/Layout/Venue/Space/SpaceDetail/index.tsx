@@ -41,7 +41,16 @@ export const SpaceDetail = () => {
           </Col>
         </Row>
         <Row className="space_detail-section-2">
-          <h1 className="space_detail-section-2-header">Thông tin cơ bản</h1>
+          <h1 className="space_detail-section-2-header">
+            Thông tin cơ bản
+            <img
+              width="25"
+              height="25"
+              src="https://img.icons8.com/pastel-glyph/64/information--v1.png"
+              alt="information--v1"
+              style={{ marginInlineStart: 8 }}
+            />
+          </h1>
           <Col span={12} className="space_detail-section-col">
             <p className="space_detail-section-2-text">
               Hãy cho mọi người biết về không gian đang cho thuê của bạn.

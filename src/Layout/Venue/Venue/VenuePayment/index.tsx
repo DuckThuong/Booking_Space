@@ -9,6 +9,13 @@ export const VenuePayment = () => {
         <Row className="venue_payment-section-1">
           <h1 className="venue_payment-section-1-title">
             Thông tin thanh toán
+            <img
+              width="25"
+              height="25"
+              src="https://img.icons8.com/pastel-glyph/64/information--v1.png"
+              alt="information--v1"
+              style={{ marginInlineStart: 8 }}
+            />
           </h1>
           <p>
             Vui lòng cung cấp thông tin thanh toán để chúng tôi có thể xử lý các

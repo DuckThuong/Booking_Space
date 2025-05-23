@@ -30,7 +30,16 @@ export const VenueHour = () => {
     <div className="venue_hour">
       <FormWrap className="venue_hour-form">
         <Row className="venue_hour-section-1">
-          <h1 className="venue_hour-section-1-title">Thời gian thuê</h1>
+          <h1 className="venue_hour-section-1-title">
+            Thời gian thuê
+            <img
+              width="25"
+              height="25"
+              src="https://img.icons8.com/pastel-glyph/64/information--v1.png"
+              alt="information--v1"
+              style={{ marginInlineStart: 8 }}
+            />
+          </h1>
           <p>
             Thiết lập thời gian thuê để bạn có thể chấp nhận thời đặt chỗ của
             khách.

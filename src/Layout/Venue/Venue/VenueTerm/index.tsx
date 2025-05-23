@@ -9,6 +9,13 @@ export const VenueTerm = () => {
       <Row className="venue_term-section">
         <Title level={2} className="venue_term-title">
           Điều khoản
+          <img
+            width="25"
+            height="25"
+            src="https://img.icons8.com/pastel-glyph/64/information--v1.png"
+            alt="information--v1"
+            style={{ marginInlineStart: 8 }}
+          />
         </Title>
         <Text className="venue_term-desc">
           BookingSpace mang đến cho bạn sự linh hoạt hơn khi chia sẻ không gian.

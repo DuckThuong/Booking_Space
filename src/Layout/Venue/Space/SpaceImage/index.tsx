@@ -157,7 +157,16 @@ export const SpaceImage = () => {
   return (
     <div className="space_image">
       <FormWrap className="space_image-form">
-        <h1 className="space_image-header">Hình ảnh</h1>
+        <h1 className="space_image-header">
+          Hình ảnh{" "}
+          <img
+            width="25"
+            height="25"
+            src="https://img.icons8.com/pastel-glyph/64/information--v1.png"
+            alt="information--v1"
+            style={{ marginInlineStart: 8 }}
+          />
+        </h1>
         <Row className="space_image-section-1">
           <p className="space_image-section-1-text">
             Mọi người đều thích ảnh. Hãy khoe không gian của bạn bằng những bức

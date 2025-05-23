@@ -13,6 +13,11 @@ import FormWrap from "../../../../Components/Form/FormWrap";
 import "./venueDetail.scss";
 import L from "leaflet";
 import { FormSelect } from "../../../../Components/Form/FormSelect";
+import { useQuery } from "@tanstack/react-query";
+import { QUERY_KEY } from "../../../../api/apiConfig";
+import { venueApi } from "../../../../api/api";
+import { useLocation } from "react-router-dom";
+import TextArea from "antd/es/input/TextArea";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -64,6 +69,8 @@ export const VenueDetail = () => {
     lng: 106.660172,
   });
   const [form] = Form.useForm();
+  const location = useLocation();
+  const venueId = location?.state;
 
   const [locationData, setLocationData] = useState<LocationData>({
     address: "",
@@ -151,15 +158,21 @@ export const VenueDetail = () => {
     }
   };
 
+  const { data: venueData } = useQuery({
+    queryKey: [QUERY_KEY.GET_VENUE, venueId],
+    queryFn: () => venueApi.getVenueById(venueId),
+  });
+
+  useEffect(() => {
+    if (venueData) {
+      form.setFieldValue("venue_name", venueData?.name);
+      form.setFieldValue("venue_detail", venueData?.description);
+    }
+  }, [venueData]);
+
   return (
     <div className="venue_detail">
-      <FormWrap
-        form={form}
-        className="venue_detail-form"
-        onValuesChange={(changedValues, allValues) => {
-          console.log("Form values changed:", allValues);
-        }}
-      >
+      <FormWrap form={form} className="venue_detail-form">
         <Row className="venue_detail-section-head">
           <Col span={16} className="venue_detail-section-col">
             <FormSelect
@@ -216,13 +229,12 @@ export const VenueDetail = () => {
               }}
             />
             <p className="venue_detail-section-2-title">Chi tiết địa điểm</p>
-            <FormInput
+            <Form.Item
               name={"venue_detail"}
-              formItemProps={{
-                className: "venue_detail-section-2-detail",
-                required: true,
-              }}
-            />
+              className="venue_detail-section-2-detail"
+            >
+              <TextArea />
+            </Form.Item>
             <p className="venue_detail-section-2-title">Hotline</p>
             <FormInput
               name={"venue_phone"}
@@ -237,7 +249,11 @@ export const VenueDetail = () => {
                 width={140}
                 height={140}
                 preview={false}
-                src="https://maisonoffice.vn/wp-content/uploads/2023/06/Booking.com-Offices-New-York-City-9.jpg"
+                src={
+                  venueData?.venueTypePictureUrl
+                    ? venueData?.venueTypePictureUrl
+                    : "https://maisonoffice.vn/wp-content/uploads/2023/06/Booking.com-Offices-New-York-City-9.jpg"
+                }
               />
               <p>Cá nhân hóa danh sách của bạn bằng cách thêm logo công ty.</p>
             </div>

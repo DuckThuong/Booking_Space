@@ -4,9 +4,14 @@ import { Amenities } from "../../../../../api/itemApi";
 interface AmenitiesListProps {
   amenities: Amenities[];
   onAmenityChange: (updatedAmenities: AmenitiesListProps["amenities"]) => void;
+  isDisable?: boolean;
 }
 
-const AmenitiesList = ({ amenities, onAmenityChange }: AmenitiesListProps) => {
+const AmenitiesList = ({
+  amenities,
+  onAmenityChange,
+  isDisable,
+}: AmenitiesListProps) => {
   const toggleAmenity = (id) => {
     onAmenityChange(
       amenities.map((item) =>
@@ -22,6 +27,7 @@ const AmenitiesList = ({ amenities, onAmenityChange }: AmenitiesListProps) => {
           <div key={item.id} className="amenity-item">
             <Checkbox
               checked={item.selected}
+              disabled={isDisable}
               onChange={() => toggleAmenity(item.id)}
             >
               {item.icon} {item.name}

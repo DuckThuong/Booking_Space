@@ -49,8 +49,8 @@ const Venue: React.FC = () => {
   const [isDetail, setIsDetail] = useState<boolean>(!!spaceId);
 
   useEffect(() => {
-    setIsDetail(!!spaceId || !!location.state?.itemPlace);
-  }, [spaceId, location.state?.itemPlace]);
+    setIsDetail(!!spaceId);
+  }, [spaceId]);
 
   const menuItems = [
     {

@@ -41,9 +41,21 @@
       .form__input {
         .ant-col-14 {
           max-width: 100% !important;
-          input {
-            border: 3px solid #00293a !important;
-            margin-top: 12px;
+          .ant-form-item-control-input-content {
+            border: 1px solid #f7f8f9;
+            input {
+              height: 52px;
+              border-radius: 8px !important;
+              border: none !important;
+              background-color: #f7f8f9;
+              border: 1px solid #00293a !important;
+              &::placeholder {
+                color: #8c8c8c !important;
+                font-size: 16px;
+                font-weight: 400;
+                font-family: "DM Sans", "system-ui", sans-serif;
+              }
+            }
           }
         }
       }

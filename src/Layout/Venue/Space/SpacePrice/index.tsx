@@ -1,7 +1,7 @@
 import { Checkbox, Row } from "antd";
+import { FormInput } from "../../../../Components/Form/FormInput";
 import FormWrap from "../../../../Components/Form/FormWrap";
 import "./spacePrice.scss";
-import { FormInput } from "../../../../Components/Form/FormInput";
 export const SpacePrice = () => {
   return (
     <div className="space_price">

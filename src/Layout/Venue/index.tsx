@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { HeaderNavBar } from "../../LayoutOption/HeaderNavBar";
 import ScrollSpyLayout from "../../LayoutOption/ScrollSpyLayout";
-import { ForgotEditPassword } from "../ForgotPassword/ForgotEditPassword";
-import { ForgotEmailInput } from "../ForgotPassword/ForgotEmailInput";
 import { SpaceDetail } from "./Space/SpaceDetail";
 import { SpaceImage } from "./Space/SpaceImage";
 import { Space } from "./Space/SpaceList";
@@ -10,6 +8,7 @@ import { SpacePrice } from "./Space/SpacePrice";
 import { SpaceService } from "./Space/SpaceService";
 import "./style.scss";
 import { VenueDetail } from "./Venue/VenueDetail";
+import { VenueService } from "./Venue/VenueService";
 
 const useLocalStorage = (key: string) => {
   const [value, setValue] = useState<string | null>(localStorage.getItem(key));
@@ -97,7 +96,7 @@ const Venue: React.FC = () => {
           ),
         }),
     "2-1": <VenueDetail />,
-    "2-2": <ForgotEmailInput />,
+    "2-2": <VenueService />,
   };
   return (
     <div className="venue-layout">

@@ -255,7 +255,7 @@ export const VenueDetail = () => {
                 onClick={getCurrentLocation}
                 style={{
                   position: "absolute",
-                  top: "10px",
+                  top: "0px",
                   right: "10px",
                   zIndex: 1000,
                 }}

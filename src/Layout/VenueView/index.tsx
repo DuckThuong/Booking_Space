@@ -5,6 +5,7 @@ import { FC, useEffect, useState } from "react";
 import {
   MapContainer,
   Marker,
+  Popup,
   TileLayer,
   useMap,
   useMapEvents,
@@ -68,8 +69,8 @@ export const VenueView = () => {
     lat: number;
     lng: number;
   }>({
-    lat: 10.762622,
-    lng: 106.660172,
+    lat: 21.028511,
+    lng: 105.804817,
   });
 
   const [amenities, setAmenities] = useState<Amenities[]>([
@@ -101,6 +102,21 @@ export const VenueView = () => {
       ),
     },
   ]);
+
+  const locations = [
+    {
+      id: 1,
+      lat: 21.028511,
+      lng: 105.804817,
+      name: "TCOM",
+    },
+    {
+      id: 2,
+      lat: 21.028511,
+      lng: 105.804817,
+      name: "TCOM",
+    },
+  ];
 
   const { data: venueData } = useQuery({
     queryKey: [QUERY_KEY.GET_VENUE, venueId],
@@ -274,6 +290,24 @@ export const VenueView = () => {
           </div>
           <div className="venue_view-row-3-map">
             <p className="venue_view-row-3-map-title">Các địa điểm gần đây.</p>
+            <MapContainer
+              center={[21.028511, 105.804817]}
+              zoom={13}
+              style={{ height: "400px", width: "100%" }}
+            >
+              <TileLayer
+                attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+              />
+              {locations.map((location) => (
+                <Marker
+                  key={location.id}
+                  position={[location.lat, location.lng]}
+                >
+                  <Popup>{location.name}</Popup>
+                </Marker>
+              ))}
+            </MapContainer>
           </div>
         </Row>
       </FormWrap>

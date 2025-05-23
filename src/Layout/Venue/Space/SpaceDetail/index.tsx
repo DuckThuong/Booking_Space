@@ -14,6 +14,7 @@ export const SpaceDetail = () => {
             <FormSelect
               name={"state"}
               selectProps={{
+                value: "2",
                 options: [
                   {
                     key: 1,

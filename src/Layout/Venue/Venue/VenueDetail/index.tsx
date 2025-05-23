@@ -12,6 +12,7 @@ import { FormInput } from "../../../../Components/Form/FormInput";
 import FormWrap from "../../../../Components/Form/FormWrap";
 import "./venueDetail.scss";
 import L from "leaflet";
+import { FormSelect } from "../../../../Components/Form/FormSelect";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -120,16 +121,13 @@ export const VenueDetail = () => {
             lng: position.coords.longitude,
           };
           setSelectedLocation(newPosition);
-          // Force immediate form update
           form.setFieldsValue({
             venue_address: "Đang tải địa chỉ...",
           });
-          // Verify initial form update
           console.log(
             "Form values after initial update:",
             form.getFieldsValue()
           );
-          // Call API to get address
           updateLocationData(newPosition.lat, newPosition.lng);
         },
         (error) => {
@@ -162,6 +160,35 @@ export const VenueDetail = () => {
           console.log("Form values changed:", allValues);
         }}
       >
+        <Row className="venue_detail-section-head">
+          <Col span={16} className="venue_detail-section-col">
+            <FormSelect
+              name={"state"}
+              selectProps={{
+                value: "2",
+                options: [
+                  {
+                    key: 1,
+                    value: "Ẩn | Không hoạt động.",
+                  },
+                  {
+                    key: 2,
+                    value: "Hiện | Sẵn sàng.",
+                  },
+                ],
+              }}
+              formItemProps={{
+                require: true,
+              }}
+            />
+          </Col>
+          <Col span={7} className="venue_detail-section-col">
+            <span className="venue_detail-section-head-title">
+              Cập nhật lần cuối vào: May 16, 2:45 PM
+            </span>
+            <Button className="venue_detail-section-head-save">Lưu</Button>
+          </Col>
+        </Row>
         <Row className="venue_detail-section-1">
           <h1 className="venue_detail-section-1-title">
             Chi tiết địa điểm
@@ -264,7 +291,7 @@ export const VenueDetail = () => {
                 onClick={getCurrentLocation}
                 style={{
                   position: "absolute",
-                  top: "0px",
+                  top: "-10px",
                   right: "10px",
                   zIndex: 1000,
                 }}

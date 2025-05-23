@@ -1,5 +1,8 @@
-import { EditOutlined, EnvironmentOutlined } from "@ant-design/icons";
+import { EnvironmentOutlined } from "@ant-design/icons";
+import { useQuery } from "@tanstack/react-query";
 import { Button, Col, Form, Image, notification, Row } from "antd";
+import TextArea from "antd/es/input/TextArea";
+import L from "leaflet";
 import { FC, useEffect, useState } from "react";
 import {
   MapContainer,
@@ -8,16 +11,13 @@ import {
   useMap,
   useMapEvents,
 } from "react-leaflet";
+import { useLocation } from "react-router-dom";
+import { venueApi } from "../../../../api/api";
+import { QUERY_KEY } from "../../../../api/apiConfig";
 import { FormInput } from "../../../../Components/Form/FormInput";
+import { FormSelect } from "../../../../Components/Form/FormSelect";
 import FormWrap from "../../../../Components/Form/FormWrap";
 import "./venueDetail.scss";
-import L from "leaflet";
-import { FormSelect } from "../../../../Components/Form/FormSelect";
-import { useQuery } from "@tanstack/react-query";
-import { QUERY_KEY } from "../../../../api/apiConfig";
-import { venueApi } from "../../../../api/api";
-import { useLocation } from "react-router-dom";
-import TextArea from "antd/es/input/TextArea";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({

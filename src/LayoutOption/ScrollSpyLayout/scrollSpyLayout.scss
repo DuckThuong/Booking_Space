@@ -101,6 +101,7 @@
   }
 }
 .modal_venue {
+  z-index: 9999 !important;
   .ant-modal-header {
     border-bottom: 1px solid $border_color_1;
     .ant-modal-title {

@@ -12,6 +12,7 @@ import { VenueHour } from "./Venue/VenueHour";
 import { VenuePayment } from "./Venue/VenuePayment";
 import { VenueService } from "./Venue/VenueService";
 import { VenueTerm } from "./Venue/VenueTerm";
+import { useLocation } from "react-router-dom";
 
 const useLocalStorage = (key: string) => {
   const [value, setValue] = useState<string | null>(localStorage.getItem(key));
@@ -44,11 +45,12 @@ const useLocalStorage = (key: string) => {
 
 const Venue: React.FC = () => {
   const spaceId = useLocalStorage("spaceId");
+  const location = useLocation();
   const [isDetail, setIsDetail] = useState<boolean>(!!spaceId);
 
   useEffect(() => {
-    setIsDetail(!!spaceId);
-  }, [spaceId]);
+    setIsDetail(!!spaceId || !!location.state?.itemPlace);
+  }, [spaceId, location.state?.itemPlace]);
 
   const menuItems = [
     {

@@ -202,7 +202,7 @@ export const HeaderNavBar: React.FC<HeaderNavBarProps> = ({
                             onClick={() => {
                               setShowAccount(false);
                               navigate(CUSTOMER_ROUTER_PATH.VENUE, {
-                                state: venue?.venueId,
+                                state: { venueId: venue?.venueId },
                               });
                             }}
                           >

@@ -1,8 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { HeaderNavBar } from "../../LayoutOption/HeaderNavBar";
 import ScrollSpyLayout from "../../LayoutOption/ScrollSpyLayout";
-import { ForgotEditPassword } from "../ForgotPassword/ForgotEditPassword";
-import { ForgotEmailInput } from "../ForgotPassword/ForgotEmailInput";
 import { SpaceDetail } from "./Space/SpaceDetail";
 import { SpaceImage } from "./Space/SpaceImage";
 import { Space } from "./Space/SpaceList";
@@ -10,6 +8,12 @@ import { SpacePrice } from "./Space/SpacePrice";
 import { SpaceService } from "./Space/SpaceService";
 import "./style.scss";
 import { VenueDetail } from "./Venue/VenueDetail";
+import { VenueHour } from "./Venue/VenueHour";
+import { VenuePayment } from "./Venue/VenuePayment";
+import { VenueService } from "./Venue/VenueService";
+import { VenueTerm } from "./Venue/VenueTerm";
+import { useLocation } from "react-router-dom";
+import { FooterWeb } from "../../LayoutOption/FooterWeb";
 
 const useLocalStorage = (key: string) => {
   const [value, setValue] = useState<string | null>(localStorage.getItem(key));
@@ -42,11 +46,12 @@ const useLocalStorage = (key: string) => {
 
 const Venue: React.FC = () => {
   const spaceId = useLocalStorage("spaceId");
+  const location = useLocation();
   const [isDetail, setIsDetail] = useState<boolean>(!!spaceId);
 
   useEffect(() => {
-    setIsDetail(!!spaceId);
-  }, [spaceId]);
+    setIsDetail(!!spaceId || !!location?.state?.itemPlace);
+  }, [spaceId, location?.state?.itemPlace]);
 
   const menuItems = [
     {
@@ -77,6 +82,7 @@ const Venue: React.FC = () => {
         { key: "2-2", label: "Ghi chú" },
         { key: "2-3", label: "Giờ thuê" },
         { key: "2-4", label: "Thanh toán" },
+        { key: "2-5", label: "Điều khoản" },
       ],
     },
   ];
@@ -97,7 +103,10 @@ const Venue: React.FC = () => {
           ),
         }),
     "2-1": <VenueDetail />,
-    "2-2": <ForgotEmailInput />,
+    "2-2": <VenueService />,
+    "2-3": <VenueHour />,
+    "2-4": <VenuePayment />,
+    "2-5": <VenueTerm />,
   };
   return (
     <div className="venue-layout">

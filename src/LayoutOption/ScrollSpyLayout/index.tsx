@@ -11,10 +11,12 @@ import {
 } from "antd";
 import { MenuItemType } from "antd/es/menu/interface";
 import React, { useEffect, useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { venueApi } from "../../api/api";
 import { QUERY_KEY } from "../../api/apiConfig";
 import "./scrollSpyLayout.scss";
+import { CUSTOMER_ROUTER_PATH } from "../../Routers/Routers";
+import { FooterWeb } from "../FooterWeb";
 
 const { Sider, Content } = Layout;
 const { useBreakpoint } = Grid;
@@ -36,7 +38,8 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
   contentSections,
 }) => {
   const location = useLocation();
-  const venueId = location?.state;
+  const navigate = useNavigate();
+  const venueId = location?.state?.venueId;
   const [modal, setModal] = useState<boolean>();
   const [collapsed, setCollapsed] = useState(false);
   const [renderedContentKeys, setRenderedContentKeys] = useState<string[]>(
@@ -122,6 +125,7 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
     queryKey: [QUERY_KEY.GET_VENUE],
     queryFn: () => venueApi.getVenueByUser(),
   });
+
   return (
     <Layout hasSider className="scroll-spy-layout">
       <Sider
@@ -139,7 +143,15 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
             </p>
             <div className="scroll-spy-layout_venue-option">
               <Col span={12}>
-                <Button>Xem chi tiết</Button>
+                <Button
+                  onClick={() => {
+                    navigate(CUSTOMER_ROUTER_PATH.VENUE_VIEW, {
+                      state: venueData?.venueTypeId,
+                    });
+                  }}
+                >
+                  Xem chi tiết
+                </Button>
               </Col>
               <Col span={12}>
                 <Button
@@ -160,7 +172,16 @@ const ScrollSpyLayout: React.FC<ScrollSpyLayoutProps> = ({
           items={convertToMenuItems(items)}
           className="scroll-spy-layout__menu"
           theme="light"
-          defaultOpenKeys={["1"]}
+          defaultOpenKeys={
+            location?.state?.defaultOpen
+              ? [location?.state?.defaultOpen]
+              : ["1"]
+          }
+          selectedKeys={
+            location?.state?.defaultOpen
+              ? [location?.state?.defaultOpen + "-1"]
+              : ["1-1"]
+          }
         />
       </Sider>
 

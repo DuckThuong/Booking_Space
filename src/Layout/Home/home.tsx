@@ -5,6 +5,7 @@ import FormWrap from "../../Components/Form/FormWrap";
 import { HeaderNavBar } from "../../LayoutOption/HeaderNavBar";
 import "./home.scss";
 import { ContentRouter } from "./contentRoter";
+import { FooterWeb } from "../../LayoutOption/FooterWeb";
 
 export const Home = () => {
   const [form] = useForm();
@@ -47,6 +48,7 @@ export const Home = () => {
           <ContentRouter tabKey={currentTab} />
         </div>
       </FormWrap>
+      <FooterWeb />
     </div>
   );
 };

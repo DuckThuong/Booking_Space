@@ -300,7 +300,16 @@ export const SpaceService = () => {
   return (
     <div className="space_service">
       <FormWrap className="space_service-form">
-        <h1 className="space_service-header">Quản lý dịch vụ và tiện ích</h1>
+        <h1 className="space_service-header">
+          Quản lý dịch vụ và tiện ích
+          <img
+            width="25"
+            height="25"
+            src="https://img.icons8.com/pastel-glyph/64/information--v1.png"
+            alt="information--v1"
+            style={{ marginInlineStart: 8 }}
+          />
+        </h1>
         <Row className="space_service-section-1">
           <p className="space_service-section-title">
             Vui lòng chọn các tiện ích có sẵn cho không gian của bạn

@@ -1,12 +1,21 @@
 import { Checkbox, Row } from "antd";
+import { FormInput } from "../../../../Components/Form/FormInput";
 import FormWrap from "../../../../Components/Form/FormWrap";
 import "./spacePrice.scss";
-import { FormInput } from "../../../../Components/Form/FormInput";
 export const SpacePrice = () => {
   return (
     <div className="space_price">
       <FormWrap className="space_price-form">
-        <h1 className="space_price-header">Giá thành</h1>
+        <h1 className="space_price-header">
+          Giá thành{" "}
+          <img
+            width="25"
+            height="25"
+            src="https://img.icons8.com/pastel-glyph/64/information--v1.png"
+            alt="information--v1"
+            style={{ marginInlineStart: 8 }}
+          />
+        </h1>
         <Row className="space_price-section">
           <p className="space_price-section-title">
             Bạn muốn tính bao nhiêu cho việc sử dụng không gian này?

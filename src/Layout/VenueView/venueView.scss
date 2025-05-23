@@ -1,0 +1,165 @@
+.venue_view {
+  width: 100%;
+  &-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 200vh;
+  }
+  &-row {
+    &-1 {
+      position: fixed;
+      top: 80px;
+      z-index: 9999;
+      height: 60px;
+      background-color: #00293a;
+      width: 100%;
+      display: flex;
+      flex-direction: row;
+      align-items: center;
+      justify-content: center;
+      p {
+        color: #fff !important;
+        font-size: 18px !important;
+        font-weight: 600 !important;
+        font-family: "DM Sans", "system-ui", sans-serif !important;
+        margin-bottom: 0px !important;
+      }
+      span {
+        text-decoration: underline;
+        transition: opacity 0.3s ease;
+        cursor: pointer;
+      }
+      span:hover {
+        opacity: 0.7;
+      }
+    }
+    &-2 {
+      padding-top: 150px;
+      width: 50%;
+      display: flex;
+      flex-direction: column;
+      &-address {
+        color: #c7c7c7 !important;
+        font-size: 16px !important;
+        font-weight: 400 !important;
+        font-family: "DM Sans", "system-ui", sans-serif !important;
+        margin-bottom: 18px;
+      }
+      .leaflet-container {
+        margin-bottom: 18px;
+      }
+      &-item {
+        column-gap: 12px;
+        row-gap: 12px;
+      }
+
+      &-info {
+        &-header {
+          color: #00293a !important;
+          font-size: 18px !important;
+          font-weight: 600 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+        }
+
+        &-title {
+          color: #c7c7c7 !important;
+          font-size: 14px !important;
+          font-weight: 400 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+        }
+        &-hotline {
+          color: #00293a !important;
+          font-size: 14px !important;
+          font-weight: 400 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+        }
+      }
+
+      &-service {
+        &-title {
+          color: #00293a !important;
+          font-size: 18px !important;
+          font-weight: 600 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+        }
+      }
+    }
+    &-3 {
+      display: flex;
+      flex-direction: column;
+      width: 50%;
+      row-gap: 12px;
+      margin-top: 32px;
+      &-header {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        column-gap: 12px;
+        .ant-col-2 {
+          max-width: fit-content;
+        }
+        .ant-col-20 {
+          color: #00293a !important;
+          font-size: 18px !important;
+          font-weight: 600 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+        }
+      }
+      &-body {
+        display: flex;
+        flex-direction: row;
+        column-gap: 18px;
+        .ant-col {
+          max-width: 100%;
+          .ant-select-selector {
+            border: 2px solid #00293a !important;
+            .ant-select-selection-item {
+              color: #00293a !important;
+              font-size: 18px !important;
+              font-weight: 600 !important;
+              font-family: "DM Sans", "system-ui", sans-serif !important;
+            }
+            .ant-select-selection-placeholder {
+              color: #00293a !important;
+              font-size: 14px !important;
+              font-weight: 600 !important;
+              font-family: "DM Sans", "system-ui", sans-serif !important;
+            }
+          }
+          .ant-form-item {
+            textarea {
+              margin-top: 8px;
+              border: 2px solid #00293a !important;
+            }
+            input {
+              border: 2px solid #00293a !important;
+            }
+            input::placeholder {
+              color: #00293a !important;
+              font-size: 14px !important;
+              font-weight: 600 !important;
+              font-family: "DM Sans", "system-ui", sans-serif !important;
+            }
+            textarea::placeholder {
+              color: #00293a !important;
+              font-size: 14px !important;
+              font-weight: 600 !important;
+              font-family: "DM Sans", "system-ui", sans-serif !important;
+            }
+          }
+        }
+      }
+      &-map {
+        height: fit-content;
+        &-title {
+          color: #00293a !important;
+          font-size: 18px !important;
+          font-weight: 600 !important;
+          font-family: "DM Sans", "system-ui", sans-serif !important;
+        }
+      }
+    }
+  }
+}

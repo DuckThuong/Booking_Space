@@ -1,5 +1,8 @@
-import { EditOutlined, EnvironmentOutlined } from "@ant-design/icons";
+import { EnvironmentOutlined } from "@ant-design/icons";
+import { useQuery } from "@tanstack/react-query";
 import { Button, Col, Form, Image, notification, Row } from "antd";
+import TextArea from "antd/es/input/TextArea";
+import L from "leaflet";
 import { FC, useEffect, useState } from "react";
 import {
   MapContainer,
@@ -8,10 +11,13 @@ import {
   useMap,
   useMapEvents,
 } from "react-leaflet";
+import { useLocation } from "react-router-dom";
+import { venueApi } from "../../../../api/api";
+import { QUERY_KEY } from "../../../../api/apiConfig";
 import { FormInput } from "../../../../Components/Form/FormInput";
+import { FormSelect } from "../../../../Components/Form/FormSelect";
 import FormWrap from "../../../../Components/Form/FormWrap";
 import "./venueDetail.scss";
-import L from "leaflet";
 
 delete (L.Icon.Default.prototype as any)._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -63,6 +69,8 @@ export const VenueDetail = () => {
     lng: 106.660172,
   });
   const [form] = Form.useForm();
+  const location = useLocation();
+  const venueId = location?.state;
 
   const [locationData, setLocationData] = useState<LocationData>({
     address: "",
@@ -120,16 +128,13 @@ export const VenueDetail = () => {
             lng: position.coords.longitude,
           };
           setSelectedLocation(newPosition);
-          // Force immediate form update
           form.setFieldsValue({
             venue_address: "Đang tải địa chỉ...",
           });
-          // Verify initial form update
           console.log(
             "Form values after initial update:",
             form.getFieldsValue()
           );
-          // Call API to get address
           updateLocationData(newPosition.lat, newPosition.lng);
         },
         (error) => {
@@ -153,17 +158,61 @@ export const VenueDetail = () => {
     }
   };
 
+  const { data: venueData } = useQuery({
+    queryKey: [QUERY_KEY.GET_VENUE, venueId],
+    queryFn: () => venueApi.getVenueById(venueId),
+  });
+
+  useEffect(() => {
+    if (venueData) {
+      form.setFieldValue("venue_name", venueData?.name);
+      form.setFieldValue("venue_detail", venueData?.description);
+    }
+  }, [venueData]);
+
   return (
     <div className="venue_detail">
-      <FormWrap
-        form={form}
-        className="venue_detail-form"
-        onValuesChange={(changedValues, allValues) => {
-          console.log("Form values changed:", allValues);
-        }}
-      >
+      <FormWrap form={form} className="venue_detail-form">
+        <Row className="venue_detail-section-head">
+          <Col span={16} className="venue_detail-section-col">
+            <FormSelect
+              name={"state"}
+              selectProps={{
+                value: "2",
+                options: [
+                  {
+                    key: 1,
+                    value: "Ẩn | Không hoạt động.",
+                  },
+                  {
+                    key: 2,
+                    value: "Hiện | Sẵn sàng.",
+                  },
+                ],
+              }}
+              formItemProps={{
+                require: true,
+              }}
+            />
+          </Col>
+          <Col span={7} className="venue_detail-section-col">
+            <span className="venue_detail-section-head-title">
+              Cập nhật lần cuối vào: May 16, 2:45 PM
+            </span>
+            <Button className="venue_detail-section-head-save">Lưu</Button>
+          </Col>
+        </Row>
         <Row className="venue_detail-section-1">
-          <h1 className="venue_detail-section-1-title">Chi tiết địa điểm</h1>
+          <h1 className="venue_detail-section-1-title">
+            Chi tiết địa điểm
+            <img
+              width="25"
+              height="25"
+              src="https://img.icons8.com/pastel-glyph/64/information--v1.png"
+              alt="information--v1"
+              style={{ marginInlineStart: 8 }}
+            />
+          </h1>
           <p>
             Thêm thông tin chi tiết về địa điểm của bạn. Thông tin này sẽ xuất
             hiện trên Hồ sơ địa điểm của bạn.
@@ -180,13 +229,12 @@ export const VenueDetail = () => {
               }}
             />
             <p className="venue_detail-section-2-title">Chi tiết địa điểm</p>
-            <FormInput
+            <Form.Item
               name={"venue_detail"}
-              formItemProps={{
-                className: "venue_detail-section-2-detail",
-                required: true,
-              }}
-            />
+              className="venue_detail-section-2-detail"
+            >
+              <TextArea />
+            </Form.Item>
             <p className="venue_detail-section-2-title">Hotline</p>
             <FormInput
               name={"venue_phone"}
@@ -201,7 +249,11 @@ export const VenueDetail = () => {
                 width={140}
                 height={140}
                 preview={false}
-                src="https://maisonoffice.vn/wp-content/uploads/2023/06/Booking.com-Offices-New-York-City-9.jpg"
+                src={
+                  venueData?.venueTypePictureUrl
+                    ? venueData?.venueTypePictureUrl
+                    : "https://maisonoffice.vn/wp-content/uploads/2023/06/Booking.com-Offices-New-York-City-9.jpg"
+                }
               />
               <p>Cá nhân hóa danh sách của bạn bằng cách thêm logo công ty.</p>
             </div>
@@ -255,7 +307,7 @@ export const VenueDetail = () => {
                 onClick={getCurrentLocation}
                 style={{
                   position: "absolute",
-                  top: "10px",
+                  top: "-10px",
                   right: "10px",
                   zIndex: 1000,
                 }}

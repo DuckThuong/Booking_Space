@@ -66,15 +66,15 @@ export const HostFourthStep: FC<FourthStepProps> = ({ onNext, data }) => {
     lat: number;
     lng: number;
   }>({
-    lat: 10.762622,
-    lng: 106.660172,
+    lat: 21.028511,
+    lng: 105.804817,
   });
   const [form] = Form.useForm();
 
   const [locationData, setLocationData] = useState<LocationData>({
     address: "",
-    latitude: 10.762622,
-    longitude: 106.660172,
+    latitude: 21.028511,
+    longitude: 105.804817,
   });
 
   const mapContainerStyle = {
